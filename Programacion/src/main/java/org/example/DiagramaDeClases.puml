@@ -1,0 +1,57 @@
+@startuml
+package "Roomie" {
+
+    Class Inquilino {
+        - String nombre
+        - String apellidos
+        - String dni
+        - Habitacion habitacion
+
+        + void alquilarHabitacion (Habitacion habitacion)
+        + void salirHabitacion (Habitacion habitacion)
+    }
+
+    Class Habitacion {
+        - double tamanyo
+        - String tipo
+        - ArrayList<Mueble> listaMuebles
+        - int numeroHabitacion
+
+        + void crearMueble ()
+        + void borrarMueble ()
+    }
+
+    Class Mueble {
+        - String nombre
+        - String tipo
+        - int numeroMueble
+    }
+
+    Class Arrendador {
+        - String nombre
+        - String apellidos
+        - String dni
+        - ArrayList<Piso> listaPisos
+
+        + void anyadirPiso (Piso piso)
+        + void borrarPiso (Piso piso)
+    }
+
+    Class Piso {
+        - String direccion
+        - double tamanyo
+        - ArrayList<Habitacion> listaHabitaciones
+
+        + void crearHabitacion ()
+        + void borrarHabitacion ()
+        + void mostrarZonasComunes ()
+        + void mostrarElectrodomesticos ()
+        + void mostrarDormitorios ()
+    }
+
+    Inquilino o--> Habitacion
+    Habitacion *--> Mueble
+    Arrendador o--> Piso
+    Piso *--> Habitacion
+}
+@enduml
