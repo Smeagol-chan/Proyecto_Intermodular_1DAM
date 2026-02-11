@@ -1,52 +1,64 @@
 @startuml
-package "Roomie" {
+package "Roomie"
+{
+    package "usuarios"
+    {
+        Class Usuario
+        {
+            - nombre: String
+            - apellidos: String
+            - dni: String
+        }
 
-    Class Inquilino {
-        - String nombre
-        - String apellidos
-        - String dni
-        - Habitacion habitacion
+        Class Arrendador extends Usuario
+        {
+            - listaPisos: ArrayList<Piso>
 
-        + void alquilarHabitacion (Habitacion habitacion)
-        + void salirHabitacion (Habitacion habitacion)
+            + anyadirPiso(Piso piso): void
+            + borrarPiso(Piso piso): void
+        }
+
+        Class Inquilino extends Usuario
+        {
+            - habitacion: Habitacion
+
+            + alquilarHabitacion(habitacion: Habitacion): void
+            + salirHabitacion(habitacion: Habitacion): void
+        }
     }
 
-    Class Habitacion {
-        - double tamanyo
-        - String tipo
-        - ArrayList<Mueble> listaMuebles
-        - int numeroHabitacion
+    package "inmuebles"
+    {
+        Class Habitacion
+        {
+            - tamanyo: double
+            - tipo: String
+            - listaMuebles: ArrayList<Mueble>
+            - numeroHabitacion: int
 
-        + void crearMueble ()
-        + void borrarMueble ()
-    }
+            + crearMueble(): void
+            + borrarMueble(): void
+        }
 
-    Class Mueble {
-        - String nombre
-        - String tipo
-        - int numeroMueble
-    }
+        Class Mueble
+        {
+            - nombre: String
+            - tipo: String
+            - numeroMueble: int
+        }
 
-    Class Arrendador {
-        - String nombre
-        - String apellidos
-        - String dni
-        - ArrayList<Piso> listaPisos
+        Class Piso
+        {
+            - direccion: String
+            - tamanyo: double
+            - listaHabitaciones: ArrayList<Habitacion>
 
-        + void anyadirPiso (Piso piso)
-        + void borrarPiso (Piso piso)
-    }
-
-    Class Piso {
-        - String direccion
-        - double tamanyo
-        - ArrayList<Habitacion> listaHabitaciones
-
-        + void crearHabitacion ()
-        + void borrarHabitacion ()
-        + void mostrarZonasComunes ()
-        + void mostrarElectrodomesticos ()
-        + void mostrarDormitorios ()
+            + crearHabitacion(): void
+            + borrarHabitacion(): void
+            + mostrarZonasComunes(): void
+            + mostrarElectrodomesticos(): void
+            + mostrarDormitorios(): void
+        }
     }
 
     Inquilino o--> Habitacion
