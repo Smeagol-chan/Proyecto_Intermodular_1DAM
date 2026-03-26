@@ -1,7 +1,3 @@
-/*
-	- Para el Type de FURNITURE deberiamos de hacer que su CHECK mire una lista sonde podamos meter todos los tipos que hay (enum / json / etc).
-	- Para el Issue de REPORT deberiamos de hacer que su CHECK mire una lista sonde podamos meter todos los tipos que hay (enum / json / etc).
-*/
 CREATE DATABASE ROOMIE
 GO
 
@@ -67,14 +63,22 @@ RoomNumber INT IDENTITY
 );
 GO
 
+CREATE TABLE FURNITURE_CATEGORY(
+CategoryID INT IDENTITY PRIMARY KEY
+, CategoryName CHAR(15) UNIQUE NOT NULL
+);
+GO
+
 CREATE TABLE FURNITURE(
 FurnitureNumber INT IDENTITY
 , PropertyAddress VARCHAR(150) UNIQUE NOT NULL
 , RoomNumber INT NOT NULL
-, Type CHAR(15) NOT NULL
+, Name VARCHAR(30) NOT NULL
+, Category INT NOT NULL
 , Quantity TINYINT NOT NULL
 , PRIMARY KEY (FurnitureNumber, PropertyAddress, RoomNumber)
 , FOREIGN KEY (RoomNumber,PropertyAddress) REFERENCES ROOM(RoomNumber,PropertyAddress)
+, FOREIGN KEY (Category) REFERENCES FURNITURE_CATEGORY (CategoryID)
 );
 GO
 
