@@ -1,18 +1,15 @@
 .contenedor{
     display: flex;
     flex-direction: column;
-
     justify-self: center;
     justify-content: center;
-
     align-items: center;
-
     border-radius: 10px;
     border: solid black 1px;
     width: 700px;
     background-color: white;
     font-family: 'Outfit',sans-serif;
-    
+    padding: 20px 0px 20px 0px;
 }
 
 .contenedor img{
@@ -94,4 +91,10 @@
 #crear:hover{
     background-color: #d2ebe2;
     color: #3C7160;
+}
+
+.enlace {
+    color: #3C7160;
+    font-weight: bold;
+    text-decoration: none;
 }

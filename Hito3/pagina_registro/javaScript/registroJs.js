@@ -1,6 +1,7 @@
 //Cambio color cuando se pulsan los botones
 const botonInquilino = document.getElementById("botonInquilino")
 const botonArrendador = document.getElementById("botonArrendador")
+const crear1 = document.getElementById("crear");
 
 let soyInquilino = true;
 let soyArrendador = false;
@@ -19,11 +20,6 @@ botonArrendador.addEventListener("click", () => {
     botonInquilino.classList.toggle('botonPulsado')
     botonArrendador.classList.toggle('botonPulsado')
 })
-
-//Listas de usuarios
-let listaArrendador = []
-let listaInquilino = []
-
 
 //Valores formulario
 const crear = document.getElementById("crear")
@@ -49,12 +45,6 @@ crear.addEventListener("click",(e) => {
 
     }else{
 
-        if(soyInquilino === true){
-            tipo = "Inquilino"
-        }else if(soyArrendador === true){
-            tipo = "Arrendador"
-        }
-
         let usuario = {
             nombre: nombre,
             apellidos: apellidos,
@@ -64,11 +54,11 @@ crear.addEventListener("click",(e) => {
             tipo: tipo
         }
 
-        if(usuario.tipo === "Inquilino"){
-            listaInquilino.push(usuario);
-        }else{
-            listaArrendador.push(usuario)
-        }
+        let nombreLista = (usuario.tipo === "Inquilino") ? "listaInquilinos" : "listaArrendadores";
+        let listaExistente = JSON.parse(localStorage.getItem(nombreLista)) || [];
+    
+        listaExistente.push(usuario);
+        localStorage.setItem(nombreLista, JSON.stringify(listaExistente));
 
         localStorage.setItem('usuario',JSON.stringify(usuario))
         window.location.href = "inicio.html"

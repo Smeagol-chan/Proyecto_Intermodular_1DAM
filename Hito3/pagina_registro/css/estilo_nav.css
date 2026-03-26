@@ -45,7 +45,7 @@ body{
 }
 
 
-.btn_inicio{
+.navegador li .btn_inicio {
    font-family: inherit;
     font-weight: bold;
     margin: 10px;
@@ -56,12 +56,12 @@ body{
    border-radius: 20px;
 }
 
-.btn_inicio:hover{
+.navegador li .btn_inicio:hover{
     color: white;
     background-color: #3C7160;
 }
 
-.btn_registro{
+.navegador li .btn_registro {
     font-family: inherit;
     font-weight: bold;
     margin: 10px;
@@ -73,7 +73,7 @@ body{
     border-radius: 20px;
 }
 
-.btn_registro:hover{
+.navegador li .btn_registro:hover{
     color: #3C7160;
     background-color: white;
 }

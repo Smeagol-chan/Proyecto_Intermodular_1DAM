@@ -1,25 +1,24 @@
-//Recoger localStorage
+let datosGuardados = localStorage.getItem('usuario');
+let usuario = JSON.parse(datosGuardados);
 
-let datosGuardados = localStorage.getItem('usuario')
-let usuario = JSON.parse(datosGuardados)
+if (!usuario) {
+    window.location.href = "login.html";
+} else {
+    let perfil = document.getElementById("perfil");
+    perfil.innerHTML = `${usuario.nombre}`;
 
-document.getElementById("registro").addEventListener("click",() => {
-    window.location.href = "registro.html"
-})
+    let contenedor = document.querySelector('.contenedor');
+    contenedor.innerHTML = `
+        <div style="padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <h3>Mis Datos</h3>
+            <p><strong>Nombre:</strong> ${usuario.nombre} ${usuario.apellidos}</p>
+            <p><strong>Correo:</strong> ${usuario.correo}</p>
+            <p><strong>Teléfono:</strong> ${usuario.telefono}</p>
+        </div>
+    `;
+}
 
-
-//
-let perfil = document.getElementById("perfil")
-perfil.innerHTML = `${usuario.nombre}`
-
-//hacer tabla
-let contenedor = document.querySelector('.contenedor')
-contenedor.innerHTML = `
-                        Nombre: ${usuario.nombre} <br>
-                        Apellidos: ${usuario.apellidos}<br>
-                        Correo: ${usuario.correo}<br>
-                        Teléfono: ${usuario.telefono}<br>
-                        Contraseña: ${usuario.contrasenya}<br>
-                        Tipo: ${usuario.tipo}<br>
-
-                            `
+document.getElementById("registro").addEventListener("click", () => {
+    localStorage.removeItem('usuario');
+    window.location.href = "login.html";
+});
