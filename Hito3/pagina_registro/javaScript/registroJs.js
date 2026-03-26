@@ -45,6 +45,12 @@ crear.addEventListener("click",(e) => {
 
     }else{
 
+        if(soyInquilino === true){
+            tipo = "Inquilino"
+        }else if(soyArrendador === true){
+            tipo = "Arrendador"
+        }
+
         let usuario = {
             nombre: nombre,
             apellidos: apellidos,
@@ -55,6 +61,8 @@ crear.addEventListener("click",(e) => {
         }
 
         let nombreLista = (usuario.tipo === "Inquilino") ? "listaInquilinos" : "listaArrendadores";
+
+
         let listaExistente = JSON.parse(localStorage.getItem(nombreLista)) || [];
     
         listaExistente.push(usuario);
