@@ -83,4 +83,5 @@ body{
     max-height: 100%;
     width: 250px;
     margin-left: 50px;
+    cursor: pointer;
 }
