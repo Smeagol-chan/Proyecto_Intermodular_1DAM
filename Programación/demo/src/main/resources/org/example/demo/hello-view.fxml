@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="653.0" prefWidth="636.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Label fx:id="actionLabel" />
+    <TableView fx:id="estudiantesTableView" prefHeight="328.0" prefWidth="596.0">
+        <columns>
+            <TableColumn fx:id="niaTableColumn" prefWidth="118.0" text="NIA" />
+            <TableColumn fx:id="nombreTableColumn" prefWidth="130.0" text="Nombre" />
+            <TableColumn fx:id="fechaTableColumn" prefWidth="146.0" text="Fecha nacimiento" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+    <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0">
+        <children>
+            <Button fx:id="editarButton" mnemonicParsing="false" onAction="#editarClickButton" text="Editar" />
+            <Button fx:id="eliminarButton" mnemonicParsing="false" onAction="#eliminarClickButton" text="Eliminar" />
+        </children>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+    </HBox>
+    <TextField fx:id="niaTextField" promptText="Introduce NIA..." />
+    <TextField fx:id="nombreTextField" promptText="Introduce un nombre..." />
+    <DatePicker fx:id="fechaPicker" promptText="Fecha de nacimiento" />
+    <HBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="150.0">
+        <children>
+            <Button fx:id="insertarButton" mnemonicParsing="false" onAction="#insertarButtonClick" text="Insertar" />
+            <Button fx:id="guardarButton" disable="true" mnemonicParsing="false" onAction="#guardarButtonClick" text="Guardar" />
+        </children>
+    </HBox>
+</VBox>
