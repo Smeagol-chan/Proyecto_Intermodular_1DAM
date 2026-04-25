@@ -1,0 +1,4 @@
+
+sql server configuration manager -> puerto 1433, habilitar tcp/ip
+sql -> propiedades del servidor, modo de autenticación de Windows y sqlserver
+sql -> securiry/logins -> contraseña roomie1234, estado conceder y habilitada
