@@ -11,7 +11,6 @@ Dni CHAR(9) PRIMARY KEY
 , Birthday DATE NOT NULL
 , PhoneNumber CHAR(9) UNIQUE NOT NULL
 , Email VARCHAR(60) UNIQUE NOT NULL
-, UserName VARCHAR(30) UNIQUE NOT NULL
 , Password VARCHAR(30) NOT NULL
 , CHECK (Dni LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]')
 , CHECK (Password LIKE '%[A-Z]%'
