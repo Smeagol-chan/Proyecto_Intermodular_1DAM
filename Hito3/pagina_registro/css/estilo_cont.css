@@ -1,4 +1,4 @@
-.contenedor{
+.contenedor {
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -7,35 +7,59 @@
     border-radius: 25px;
     width: 700px;
     background-color: white;
-    font-family: 'Outfit',sans-serif;
+    font-family: 'Outfit', sans-serif;
     padding: 20px 0px 20px 0px;
     box-shadow: 0px 0px 10px 2px gray;
+    margin: auto;
 }
 
-.contenedor img{
+.contenedor_busqueda {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 25px;
+    width: 85%;
+    background-color: white;
+    font-family: 'Outfit', sans-serif;
+    padding: 20px 0px 20px 0px;
+    box-shadow: 0px 0px 10px 2px gray;
+    margin: auto;
+}
+
+.contenedor_busqueda h1 {
+    margin-left: 50px;
+    font-size: 40px;
+    max-width: 60%;
+}
+
+.contenedor_busqueda p {
+    margin-left: 50px;
+}
+
+.contenedor img {
     margin: 15px;
     max-width: 40%;
-    
+
 }
 
-.contenedor h1{
+.contenedor h1 {
     font-size: 45px;
     max-width: 60%;
     text-align: center;
     margin: 5px;
 }
 
-.gris{
+.gris {
     color: grey;
     font-size: 15px
 }
 
-.opcion{
+.opcion {
     display: flex;
     justify-content: space-between;
 }
 
-.botonNormal{
+.botonNormal {
     font-family: inherit;
     color: #3C7160;
     font-weight: bold;
@@ -46,39 +70,81 @@
     margin: 10px;
     width: 250px;
     border-radius: 12px;
-    border: solid #3C7160 2px ;
+    border: solid #3C7160 2px;
 
     cursor: pointer;
 }
 
-.opcion button:hover{
+.opcion button:hover {
     background-color: #d2ebe2;
 }
 
-.botonPulsado{
+.botonPulsado {
     background-color: #d2ebe2;
 }
 
-.formu{
+.formu_busqueda {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 50px;
+}
+
+.formu {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-.formu form input{
+form input {
     border: solid rgb(184, 184, 184) 1px;
-    border-radius: 16px;
-
-    padding: 10px;
+    border-radius: 10px;
+    padding: 13px;
     margin: 5px;
-
     width: 450px;
-
     font-size: 15px;
 }
 
-#crear{
+form input:focus {
+    border: solid #3C7160 2px;
+    box-shadow: #3C7160 0px 0px 5px 2px;
+}
+
+.filtro_precio {
+    background-color: #3C7160;
+    color: white;
+    padding: 6px;
+    width: 210px;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 26px;
+    border-radius: 30px;
+    border: solid #3C7160 2px;
+    cursor: pointer;
+}
+
+.but_buscar {
+    font-size: 23px;
+    margin-left: 10px;
+    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-right: 6px;
+    padding-left: 6px;
+    border-radius: 7px;
+    border: solid #3C7160 2px;
+    color: white;
+    background-color: #3C7160;
+}
+
+.but_buscar:hover {
+    background-color: #d2ebe2;
+    color: #3C7160;
+    cursor: pointer;
+}
+
+#crear {
     width: 90%;
     background-color: #3C7160;
     color: white;
@@ -90,7 +156,7 @@
     font-size: 20px;
 }
 
-#crear:hover{
+#crear:hover {
     background-color: #d2ebe2;
     color: #3C7160;
 }
