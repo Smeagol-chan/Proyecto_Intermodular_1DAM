@@ -60,17 +60,14 @@ crear.addEventListener("click",(e) => {
             tipo: tipo
         }
 
-        let nombreLista = (usuario.tipo === "Inquilino") ? "listaInquilinos" : "listaArrendadores";
 
-
-        let listaExistente = JSON.parse(localStorage.getItem(nombreLista)) || [];
+        let listaExistente = JSON.parse(localStorage.getItem('listaUsuarios')) || [];
     
         listaExistente.push(usuario);
-        localStorage.setItem(nombreLista, JSON.stringify(listaExistente));
+        localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
 
         localStorage.setItem('usuario',JSON.stringify(usuario))
         window.location.href = "inicio.html"
-
     }
 
 
