@@ -16,7 +16,7 @@
 .contenedor_busqueda {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start !important;
     border-radius: 25px;
     width: 85%;
     background-color: white;
@@ -115,11 +115,11 @@ form input:focus {
 .filtro_precio {
     background-color: #3C7160;
     color: white;
-    padding: 6px;
+    padding: 10px;
     width: 210px;
     text-align: center;
     margin-left: 10px;
-    font-size: 26px;
+    font-size: 23px;
     border-radius: 30px;
     border: solid #3C7160 2px;
     cursor: pointer;
