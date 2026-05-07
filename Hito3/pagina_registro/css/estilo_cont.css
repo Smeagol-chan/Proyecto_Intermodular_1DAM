@@ -13,29 +13,6 @@
     margin: auto;
 }
 
-.contenedor_busqueda {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start !important;
-    border-radius: 25px;
-    width: 85%;
-    background-color: white;
-    font-family: 'Outfit', sans-serif;
-    padding: 20px 0px 20px 0px;
-    box-shadow: 0px 0px 10px 2px gray;
-    margin: auto;
-}
-
-.contenedor_busqueda h1 {
-    margin-left: 50px;
-    font-size: 40px;
-    max-width: 60%;
-}
-
-.contenedor_busqueda p {
-    margin-left: 50px;
-}
-
 .contenedor img {
     margin: 15px;
     max-width: 40%;
@@ -79,16 +56,8 @@
     background-color: #d2ebe2;
 }
 
-.botonPulsado {
+∫ .botonPulsado {
     background-color: #d2ebe2;
-}
-
-.formu_busqueda {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    margin-left: 50px;
 }
 
 .formu {
@@ -102,6 +71,7 @@ form input {
     border: solid rgb(184, 184, 184) 1px;
     border-radius: 10px;
     padding: 13px;
+    padding-left: 11px;
     margin: 5px;
     width: 450px;
     font-size: 15px;
@@ -110,19 +80,6 @@ form input {
 form input:focus {
     border: solid #3C7160 2px;
     box-shadow: #3C7160 0px 0px 5px 2px;
-}
-
-.filtro_precio {
-    background-color: #3C7160;
-    color: white;
-    padding: 10px;
-    width: 210px;
-    text-align: center;
-    margin-left: 10px;
-    font-size: 23px;
-    border-radius: 30px;
-    border: solid #3C7160 2px;
-    cursor: pointer;
 }
 
 .but_buscar {

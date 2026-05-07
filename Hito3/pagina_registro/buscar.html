@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilo_nav.css">
     <link rel="stylesheet" href="css/estilo_cont.css">
+    <link rel="stylesheet" href="css/estilos_busqueda.css">
     <script src="javaScript/busquedaJs.js" defer></script>
     <title>roomie</title>
 </head>
@@ -20,7 +21,7 @@
             <li><button class="btn_registro" id="registro">Cerrar Sesión</button></li>
         </ul>
     </div>
-    <div class="contenedor_busqueda contenedor">
+    <div class="contenedor_busqueda">
 
         <h1>Encuentra tu lugar ideal</h1>
         <br>
@@ -37,9 +38,105 @@
                     <option value="700">Hasta 700€</option>
                     <option value="1000">Hasta 1000€</option>
                 </select>
+                <select name="opciones" id="opciones" class="filtro_precio filtro_opciones">
+                    <option value="">Opciones</option>
+                    <option value="wifi">Wifi</option>
+                    <option value="empadronamiento">Empadronamiento</option>
+                    <option value="amueblada">Amueblada</option>
+                    <option value="animales">Animales permitidos</option>
+                </select>
+                <select name="tipo" id="tipo" class="filtro_precio filtro_tipo">
+                    <option value="">Tipo</option>
+                    <option value="individual">Individual</option>
+                    <option value="compartida">Compartida</option>
+                </select>
 
                 <button type="submit" class="but_buscar">Buscar</button>
             </form>
+        </div>
+        <div id="habitacion_1" class="habitaciones">
+            <div class="contenedor_habitacion">
+                <img src="" alt="Es una imagen de una abitacion">
+                <div class="info">
+                    <h2>Habitación individual luminosa</h2>
+                    <br>
+                    <p id="ubicacion" value="Madrid">Centro de Madrid</p>
+                    <br>
+                    <p>12m2, 1 ventana, cama de 90cm, armario empotrado.</p>
+                    <br>
+                    <p id="precio" value="450">450€/mes</p>
+                    <br>
+                    <div class="extras">
+                        <p id="servicios" value="Wifi">Wifi</p>
+                        <p id="servicios" value="Empadronamiento">Empadronamiento</p>
+                        <p id="caracteristicas" value="Individual">Individual</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="habitacion_2" class="habitaciones">
+            <div class="contenedor_habitacion">
+                <img src="" alt="Es una imagen de una abitacion">
+                <div class="info">
+                    <h2>Habitación individual luminosa</h2>
+                    <br>
+                    <p id="ubicacion" value="Madrid">Centro de Madrid</p>
+                    <br>
+                    <p>12m2, 1 ventana, cama de 90cm, armario empotrado.</p>
+                    <br>
+                    <p id="precio" value="450">450€/mes</p>
+                    <br>
+                    <div class="extras">
+                        <p id="servicios" value="Wifi">Wifi</p>
+                        <p id="servicios" value="Empadronamiento">Empadronamiento</p>
+                        <p id="caracteristicas" value="Individual">Individual</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="habitacion_3" class="habitaciones">
+            <div class="contenedor_habitacion">
+                <img src="" alt="Es una imagen de una abitacion">
+                <div class="info">
+                    <h2>Habitación individual luminosa</h2>
+                    <br>
+                    <p id="ubicacion" value="Madrid">Centro de Madrid</p>
+                    <br>
+                    <p>12m2, 1 ventana, cama de 90cm, armario empotrado.</p>
+                    <br>
+                    <p id="precio" value="450">450€/mes</p>
+                    <br>
+                    <div class="extras">
+                        <p id="servicios" value="Wifi">Wifi</p>
+                        <p id="servicios" value="Empadronamiento">Empadronamiento</p>
+                        <p id="caracteristicas" value="Individual">Individual</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="habitacion_4" class="habitaciones">
+            <div class="contenedor_habitacion">
+                <img src="" alt="Es una imagen de una abitacion">
+                <div class="info">
+                    <h2>Habitación individual luminosa</h2>
+                    <br>
+                    <p id="ubicacion" value="Madrid">Centro de Madrid</p>
+                    <br>
+                    <p>12m2, 1 ventana, cama de 90cm, armario empotrado.</p>
+                    <br>
+                    <p id="precio" value="450">450€/mes</p>
+                    <br>
+                    <div class="extras">
+                        <p id="servicios" value="Wifi">Wifi</p>
+                        <p id="servicios" value="Empadronamiento">Empadronamiento</p>
+                        <p id="caracteristicas" value="Individual">Individual</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
