@@ -81,3 +81,8 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.habitaciones:hover {
+    border: solid #3C7160 4px;
+    cursor: pointer;
+}
