@@ -51,15 +51,15 @@
 }
 
 .habitaciones {
-    background-color: grey;
+    background-color: rgb(222, 248, 233);
+    align-items: center;
     display: flex;
     flex-direction: column;
     width: 75%;
     padding-top: 40px;
-    margin-left: 20px;
     border-radius: 25px;
-    margin-left: 50px;
     margin-top: 35px;
+    align-self: center;
 }
 
 .contenedor_habitacion {
