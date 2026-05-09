@@ -10,9 +10,10 @@ botonLogin.addEventListener("click", (e) => {
 
     // Buscar coincidencia
     const encontrado = todos.find(u => u.correo === correoInput && u.contrasenya === pwdInput);
-    const inq = encontrado.tipo;
+    
 
     if (encontrado) {
+        const inq = encontrado.tipo;
         localStorage.setItem('usuario', JSON.stringify(encontrado));
         if(inq === "Inquilino"){
             window.location.href = "perfil-inquilino.html";
