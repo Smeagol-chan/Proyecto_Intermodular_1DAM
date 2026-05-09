@@ -1,9 +1,11 @@
 let datosGuardados = localStorage.getItem('usuario');
 let usuario = JSON.parse(datosGuardados);
 
+
 if (!usuario) {
     window.location.href = "login.html";
 } else {
+    let inq = usuario.tipo;
     let perfil = document.getElementById("perfil");
     perfil.innerHTML = `${usuario.nombre}`;
 
@@ -16,9 +18,18 @@ if (!usuario) {
             <p><strong>Teléfono:</strong> ${usuario.telefono}</p>
         </div>
     `;
+
+    perfil.addEventListener("click", () => {
+        if(inq === "Inquilino"){
+            window.location.href = "perfil-inquilino.html";
+        }else if(inq === "Arrendador"){
+            window.location.href = "perfil-arrendador.html";
+        }
+    })
 }
 
 document.getElementById("registro").addEventListener("click", () => {
     localStorage.removeItem('usuario');
     window.location.href = "login.html";
 });
+

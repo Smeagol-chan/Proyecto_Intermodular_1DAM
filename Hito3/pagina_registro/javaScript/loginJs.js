@@ -10,10 +10,16 @@ botonLogin.addEventListener("click", (e) => {
 
     // Buscar coincidencia
     const encontrado = todos.find(u => u.correo === correoInput && u.contrasenya === pwdInput);
+    const inq = encontrado.tipo;
 
     if (encontrado) {
         localStorage.setItem('usuario', JSON.stringify(encontrado));
-        window.location.href = "perfil.html";
+        if(inq === "Inquilino"){
+            window.location.href = "perfil-inquilino.html";
+        }else if(inq === "Arrendador"){
+            window.location.href = "perfil-arrendador.html";
+        }
+        
     } else {
         alert("Usuario no encontrado o datos incorrectos");
     }

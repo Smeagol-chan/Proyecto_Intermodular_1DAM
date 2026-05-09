@@ -67,7 +67,14 @@ crear.addEventListener("click",(e) => {
         localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
 
         localStorage.setItem('usuario',JSON.stringify(usuario))
-        window.location.href = "perfil.html"
+
+        if(soyInquilino === true){
+            window.location.href = "perfil-inquilino.html"
+        }else if(soyArrendador === true){
+            window.location.href = "perfil-arrendador.html"
+        }
+
+        
     }
 
 
