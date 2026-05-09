@@ -1,6 +1,9 @@
 package org.example.demo.roomie.users;
 
+import org.example.demo.roomie.properties.Room;
+
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class User
 {
@@ -22,6 +25,8 @@ public abstract class User
         this.email = email;
         this.password = password;
     }
+
+    public abstract void createReport(Room room, String issue, String details);
 
     public String getDni() {
         return dni;
@@ -69,5 +74,17 @@ public abstract class User
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(dni, user.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(dni);
     }
 }

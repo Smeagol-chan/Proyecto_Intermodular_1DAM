@@ -1,0 +1,29 @@
+USE ROOMIE
+GO
+
+INSERT INTO FURNITURE_CATEGORY
+VALUES ('Bedroom desk')
+	, ('Bed')
+	, ('Armchair')
+	, ('Nightstand')
+	, ('Desktop')
+	, ('Simple shelf')
+	, ('Display shelf')
+	, ('Standing lamp')
+	, ('Office chair')
+	, ('Rolling cart')
+	, ('Coffee table')
+	, ('Dining room table')
+	, ('Sofa')
+	, ('Television')
+	, ('Wardrobe')
+	, ('Dining Room Chair')
+	, ('Rug')
+	, ('Cabinet')
+	, ('Ceiling lamp')
+	, ('Display case')
+	, ('Cupboard')
+	, ('Pillow')
+	, ('Ceiling fan')
+	, ('Cabinet')
+GO

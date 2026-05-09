@@ -1,6 +1,6 @@
 package org.example.demo.roomie.locations;
 
-import org.example.demo.roomie.expections.IllegalProvinceNameException;
+import org.example.demo.roomie.shared_usage.expections.IllegalProvinceNameException;
 
 public enum SpainProvince
 {
@@ -56,21 +56,21 @@ public enum SpainProvince
     ZA("Zamora"),
     Z("Zaragoza");
 
-    private String name;
+    private final String provinceName;
 
-    SpainProvince(String name)
+    SpainProvince(String provinceName)
     {
-        this.name = name;
+        this.provinceName = provinceName;
     }
 
-    public String getName() {
-        return name;
+    public String getProvinceName() {
+        return provinceName;
     }
 
-    public static SpainProvince getIdByName(String name)
+    public static SpainProvince getProvinceByName(String name)
     {
         for(SpainProvince province : values())
-            if(province.getName().equals(name))
+            if(province.getProvinceName().equals(name))
                 return province;
 
         throw new IllegalProvinceNameException();

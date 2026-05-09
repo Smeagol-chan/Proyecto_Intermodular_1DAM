@@ -89,7 +89,7 @@ RoomNumber INT IDENTITY
 , PRIMARY KEY (RoomNumber, PropertyAddress)
 , FOREIGN KEY (PropertyAddress) REFERENCES PROPERTY(Address)
 , CHECK (Status IN ('Available', 'Rented', 'Shared Space'))
-, CHECK (Type IN ('Kitchen', 'Living Room', 'Balcony', 'Bathroom', 'Hall', 'Bedroom', 'Dinning Room'))
+, CHECK (Type IN ('Kitchen', 'Living Room', 'Balcony', 'Bathroom', 'Hall', 'Bedroom', 'Dinning Room', 'Storage Room'))
 );
 GO
 
@@ -136,7 +136,7 @@ ReportDate DATE NOT NULL
 , PropertyAddress VARCHAR(150) NOT NULL
 , Issue CHAR(20) NOT NULL
 , Details VARCHAR(300) NOT NULL
-, Status CHAR(7) DEFAULT 'Pending' NOT NULL
+, Status CHAR(7) DEFAULT 'Pending'
 , PRIMARY KEY (ReportDate, UserDni, RoomNumber, PropertyAddress)
 , FOREIGN KEY (UserDni) REFERENCES [USER](Dni)
 , FOREIGN KEY (RoomNumber,PropertyAddress) REFERENCES ROOM(RoomNumber,PropertyAddress)

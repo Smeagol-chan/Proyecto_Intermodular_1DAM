@@ -1,28 +1,16 @@
 package org.example.demo.roomie.properties;
 
+import java.util.Objects;
+
 public class Furniture
 {
-    private int number;
-    private Room room;
     private String name;
     private FurnitureCategory category;
-    private int quantity;
 
-    public Furniture(int number, Room room, String name, FurnitureCategory category, int quantity)
+    public Furniture(String name, FurnitureCategory category)
     {
-        this.number = number;
-        this.room = room;
         this.name = name;
         this.category = category;
-        this.quantity = quantity;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public Room getRoom() {
-        return room;
     }
 
     public String getName() {
@@ -33,11 +21,15 @@ public class Furniture
         return category;
     }
 
-    public int getQuantity() {
-        return quantity;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Furniture furniture = (Furniture) o;
+        return Objects.equals(name, furniture.name) && Objects.equals(category, furniture.category);
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category);
     }
 }

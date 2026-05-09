@@ -1,5 +1,7 @@
 package org.example.demo.roomie.locations;
 
+import java.util.Objects;
+
 public class City
 {
     private int id;
@@ -10,7 +12,7 @@ public class City
     {
         this.id = id;
         this.name = name;
-        province = SpainProvince.getIdByName(provinceName);
+        setProvince(provinceName);
     }
 
     public int getId() {
@@ -29,7 +31,20 @@ public class City
         return province;
     }
 
-    public void setProvince(SpainProvince province) {
-        this.province = province;
+    public void setProvince(String provinceName)
+    {
+        province = SpainProvince.getProvinceByName(provinceName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return id == city.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

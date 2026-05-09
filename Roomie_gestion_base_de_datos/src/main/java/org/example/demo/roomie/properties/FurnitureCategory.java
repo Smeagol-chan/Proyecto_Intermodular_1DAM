@@ -1,5 +1,7 @@
 package org.example.demo.roomie.properties;
 
+import java.util.Objects;
+
 public class FurnitureCategory
 {
     private int id;
@@ -21,5 +23,17 @@ public class FurnitureCategory
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        FurnitureCategory that = (FurnitureCategory) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

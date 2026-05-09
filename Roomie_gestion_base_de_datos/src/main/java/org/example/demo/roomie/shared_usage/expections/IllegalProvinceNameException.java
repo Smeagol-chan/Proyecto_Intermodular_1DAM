@@ -1,4 +1,4 @@
-package org.example.demo.roomie.expections;
+package org.example.demo.roomie.shared_usage.expections;
 
 public class IllegalProvinceNameException extends RuntimeException {
     public IllegalProvinceNameException() {
