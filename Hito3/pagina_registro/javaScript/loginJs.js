@@ -13,7 +13,7 @@ botonLogin.addEventListener("click", (e) => {
 
     if (encontrado) {
         localStorage.setItem('usuario', JSON.stringify(encontrado));
-        window.location.href = "inicio.html";
+        window.location.href = "perfil.html";
     } else {
         alert("Usuario no encontrado o datos incorrectos");
     }

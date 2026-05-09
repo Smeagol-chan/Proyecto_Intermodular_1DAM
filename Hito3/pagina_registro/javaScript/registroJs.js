@@ -67,7 +67,7 @@ crear.addEventListener("click",(e) => {
         localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
 
         localStorage.setItem('usuario',JSON.stringify(usuario))
-        window.location.href = "inicio.html"
+        window.location.href = "perfil.html"
     }
 
 
