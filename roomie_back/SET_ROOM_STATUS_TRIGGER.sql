@@ -6,12 +6,13 @@ ON ROOM
 AFTER INSERT
 AS
 BEGIN
-	DECLARE @Number AS INT
+	DECLARE @Number AS TINYINT
 		, @Address AS VARCHAR(150)
+		, @CityID AS SMALLINT
 		, @Type AS CHAR(15)
 		, @Status AS CHAR(12)
 
-	SELECT @Number = RoomNumber, @Address = PropertyAddress, @Type = Type
+	SELECT @Number = RoomNumber, @Address = PropertyAddress, @CityID = PropertyCityID, @Type = Type
 	FROM inserted
 
 	IF @Type = 'Bedroom'
@@ -27,5 +28,6 @@ BEGIN
 	SET Status = @Status
 	WHERE RoomNumber = @Number
 		AND PropertyAddress = @Address
+		AND PropertyCityID = @CityID
 END
 GO
