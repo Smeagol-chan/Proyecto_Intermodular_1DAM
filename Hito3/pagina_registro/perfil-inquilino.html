@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo_perfil.css">
+    <link rel="stylesheet" href="css/estilo_nav.css">
+    <script src="javaScript/perfilInqJs.js" defer></script>
+    <title>Roomie - Perfil inquilino</title>
+</head>
+
+<body>
+
+    <!--=======NAVEGADOR==============-->
+    <div class="navegador">
+        <img src="img/logo.png" alt="">
+
+        <ul>
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="buscar.html">Buscar</a></li>
+            <li><button class="btn_inicio" id="perfil"></button></li>
+            <li><button class="btn_registro" id="registro">Cerrar Sesión</button></li>
+        </ul>
+    </div>
+
+
+
+  <!--=======CUERPO==============-->
+
+    <div class="contenedor">
+        <h2>Tus datos</h2>
+        <div class="separador"></div>
+
+        <div class="datos-perfil"> 
+            <svg width="130px" height="130px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="9" r="3" stroke="#3C7160" stroke-width="1.5"></circle> <circle cx="12" cy="12" r="10" stroke="#3C7160" stroke-width="1.5"></circle> <path d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20" stroke="#3C7160" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+
+            <div class="datos-perfil-user">
+
+            </div>
+
+        </div>
+        <div class="separador"></div>
+        <div class="horizontal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" data-kiwi-icon="true" class="_kiwi-svg-icon_7n01w_4 _kiwi-svg-icon--large_7n01w_4" aria-hidden="false" data-testid="svg-testId" focusable="false" style="color: inherit; opacity: var(--opacity-100);"><path d="m23 7-6-6L2 16v6h6L23 7ZM4 20v-3.17l9.96-9.96 3.17 3.17L7.17 20H4ZM18.54 8.63l-3.17-3.17L17 3.83 20.17 7l-1.63 1.63Z"></path></svg>
+            <a href="#" id="editar-perfil">Editar perfil</a>
+        </div>
+
+    </div>
+
+    <!--MODAL DE EDICION DE DATOS-->
+    <dialog id="modal">
+          <h2>Introduce tus nuevos datos</h2>
+            <form action="">
+                <label for="">Nombre</label>
+                <input type="text" name="" id="nuevo_nombre" placeholder="Nuevo nombre">
+                <label for="">Apellidos</label>
+                <input type="text" name="" id="nuevo_apellido" placeholder="Nuevos apellidos">
+                <label for="">Correo</label>
+                <input type="text" name="" id="nuevo_correo" placeholder="Nuevo correo">
+                <label for="">Teléfono</label>
+                <input type="tel" name="" id="nuevo_telefono" placeholder="Nuevo número de teléfono">
+                
+            </form>
+            <button type="submit" id="guardar_datos_nuevos">Guardar</button>
+            <button id="cerrar-modal">Cerrar</button>
+    </dialog>
+
+
+    <!--CONTENEDOR DE ABAJO DONDE SE AÑADEN HABITACIONES-->
+    <div class="contenedor-habitaciones">
+        <h2>Tus habitaciones</h2>
+        <div class="separador"></div>
+        
+
+    </div>
+
+    <!-- ========FOOTER=============  -->
+
+    <div class="footer-cont">
+
+        <div class="col1">
+            <h4>Página</h4>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="buscar.html">Buscar</a></li>
+                <li><a href="registro.html">Registro</a></li>
+            </ul>
+        </div>
+
+        <div class="col2">
+            <h4>Empresa</h4>
+            <ul>
+                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+
+        <div class="col3">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Términos y condiciones</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+            </ul>
+        </div>
+
+        <div class="separador"></div>
+        <div class="copy">© 2026 Roomie. Todos los derechos reservados.</div>
+
+    </div>
+
+</body>
+
+</html>

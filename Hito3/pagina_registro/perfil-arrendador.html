@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo_perfil.css">
+    <link rel="stylesheet" href="css/estilo_nav.css">
+    <script src="javaScript/perfilJs.js" defer></script>
+    <title>Roomie - Perfil arrendador</title>
+</head>
+
+<body>
+<!--=======NAVEGADOR==============-->
+    <div class="navegador">
+        <img src="img/logo.png" alt="">
+
+        <ul>
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="buscar.html">Buscar</a></li>
+            <li><button class="btn_inicio" id="perfil"></button></li>
+            <li><button class="btn_registro" id="registro">Cerrar Sesión</button></li>
+        </ul>
+    </div>
+
+
+    <!--=======CUERPO==============-->
+    <div class="titulo-panel">
+        <h1>Panel de control</h1> 
+        <p style="color: grey;">Gestiona tus propiedades</p>  
+        
+    </div>
+
+    
+    
+
+    <div class="panel-control">
+        <h2>
+            <svg fill="#3C7160" width="35px" height="35px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M10 1.6a8.4 8.4 0 1 0 0 16.8 8.4 8.4 0 0 0 0-16.8zm5 9.4h-4v4H9v-4H5V9h4V5h2v4h4v2z"></path></g></svg>
+            Publicar nueva habitación
+        </h2>
+        <div class="separador"></div>
+
+        <div class="contenedor-formulario">
+            <form action="" id="formulario">
+                <label for="">Título del anuncio</label>
+                <input type="text" name="" id="titulo" placeholder="Ej: Habitación individual todo incluido"><br>
+
+                <!--Dirección y zona-->
+                <div class="horizontal">
+                   
+                    <div class="input-group">
+                        <label for="">Dirección</label>
+                        <input type="text" id="direccion" name="direccion" placeholder="Calle Ejemplo, 4 1ºA">
+                    </div>
+
+                    
+                    <div class="input-group">
+                        <label for="">Zona</label>
+                        <input type="text" id="zona" name="zona" placeholder="Ej: Alicante centro">
+                    </div>
+
+                </div>
+
+                <!--Precio y tipo-->
+                <div class="horizontal">
+                   
+                    <div class="input-group">
+                        <label for="">Precio mensual (€)</label>
+                        <input type="number" id="precio" name="precio" placeholder="300">
+                    </div>
+
+                    
+                    <div class="input-group">
+                        <label for="">Tipo de habitación</label>
+                        <select name="" id="tipo">
+                            <option value="Habitación individual">Habitación individual</option>
+                            <option value="Habitación compartida">Habitación compartida</option>
+                            <option value="Estudio/loft">Estudio/loft</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <br>
+
+                <label for="">Descripción detallada</label>
+                <textarea name="" id="descripcion" placeholder="Describe la habitación, zonas comunes, servicios incluidos, normas..."></textarea>
+                <br>
+
+                <label for="">Fotos de la habitación</label>
+                <input type="file" name="" id="fotos" multiple accept="image/*">
+
+                <button type="submit" id="boton-publicar">Publicar habitación</button>
+                
+            </form>
+        </div>
+
+    </div>
+
+    <div class="contenedor-habitaciones">
+        <h2>Tus habitaciones</h2>
+        <div class="separador"></div>
+
+
+        
+        <!--
+        Ejemplo habitacion
+         <div class="habitacion">
+            <div class="foto-habitacion"><img src="img/logo.png" alt=""></div>
+            <div class="datos-habitacion">
+                <h3>Titulo</h3>
+                <p>Dirección y zona</p>
+
+            </div>
+            <div class="datos-habitacion">
+                <p>Precio</p>
+                <p>Tipo de habitacion</p>
+            </div>
+
+
+            <button id="eliminar-habitacion">Eliminar</button>
+   
+        </div>         
+        -->
+     
+        
+
+    </div>
+
+    <!-- ========FOOTER=============  -->
+
+    <div class="footer-cont">
+
+        <div class="col1">
+            <h4>Página</h4>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="buscar.html">Buscar</a></li>
+                <li><a href="registro.html">Registro</a></li>
+            </ul>
+        </div>
+
+        <div class="col2">
+            <h4>Empresa</h4>
+            <ul>
+                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+
+        <div class="col3">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Términos y condiciones</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+            </ul>
+        </div>
+
+        <div class="separador"></div>
+        <div class="copy">© 2026 Roomie. Todos los derechos reservados.</div>
+
+    </div>
+
+</body>
+
+</html>

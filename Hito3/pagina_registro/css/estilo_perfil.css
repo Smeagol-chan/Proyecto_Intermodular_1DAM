@@ -1,0 +1,248 @@
+body{
+     font-family: sans-serif;
+}
+.panel-control{
+    border-radius: 25px;
+    width: 1000px;
+    justify-self: center;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 2px gray;
+    margin: 20px auto;
+}
+
+
+.titulo-panel{
+    width: 1000px;
+    justify-self: center;
+    text-align: start;
+    margin: 10px;
+}
+
+h1{
+    color: #1e4e47;
+    font-weight: 800;
+}
+
+h2{
+    display: flex;
+    align-items: center;
+    color: #3C7160;
+    gap: 12px;
+}
+
+.separador{
+    border-bottom: 1px solid #000000;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    width: 98%;
+    justify-self: center;
+}
+
+/*PERFIL ARRENDADOR*/
+.contenedor-formulario{
+    font-weight: bold;
+}
+
+form input {
+    border: solid rgb(184, 184, 184) 1px;
+    border-radius: 10px;
+    padding: 13px;
+    padding-left: 11px;
+    margin: 5px;
+    width: 450px;
+    font-size: 15px;
+}
+
+form select{
+    border: solid rgb(184, 184, 184) 1px;
+    border-radius: 10px;
+    padding: 13px;
+    padding-left: 11px;
+    margin: 5px;
+    width: 478px;
+    font-size: 15px;
+}
+
+form textarea{
+    border: solid rgb(184, 184, 184) 1px;
+    border-radius: 10px;
+    padding: 13px;
+    padding-left: 11px;
+    margin: 5px;
+    width: 900px;
+    height: 100px;
+    font-size: 15px;
+}
+
+
+.horizontal {
+  display: flex;
+  gap: 20px; 
+  align-items: flex-start;
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column; 
+  flex: 1; 
+}
+
+form label {
+  margin: 2px; 
+}  
+
+#fotos{
+    border: solid rgb(184, 184, 184) 1px;
+    border-radius: 10px;
+    padding: 13px;
+    padding-left: 11px;
+    margin: 5px;
+    width: 900px;
+    height: 100px;
+    font-size: 15px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form button{
+
+    align-self: flex-end;
+    width: 250px;
+    background-color: #3C7160;
+    color: white;
+    padding: 20px;
+    margin: 20px;
+
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 20px;   
+}
+
+form button:hover{
+    background-color: #d2ebe2;
+    color: #3C7160;
+}
+
+.contenedor-habitaciones{
+    border-radius: 25px;
+    width: 1000px;
+    justify-self: center;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 2px gray;
+    margin: 20px auto;
+}
+
+.habitacion{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;
+}
+
+.foto-habitacion{
+    width: 25%;
+}
+
+.foto-habitacion img{
+    max-width: 100%;
+}
+
+.datos-habitacion{
+    width: 25%;
+}
+
+.btn-eliminar-habitacion{
+    color: red;
+    background-color: rgb(243, 243, 243);
+    border-radius: 20px;
+    border: #d2ebe2 solid 1px;
+    font-weight: bold;   
+    padding: 10px; 
+    height: 45px;
+    cursor: pointer;
+
+    width: auto;
+    font-size: 14px;
+    align-self: auto;
+    margin: 0;
+}
+
+.btn-eliminar-habitacion:hover{
+    background-color: rgb(231, 154, 154);
+    color: white;
+}
+
+/*PERFIL INQUILINO*/
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: start;
+    border-radius: 25px;
+    width: 1000px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 2px gray;
+    margin: auto;
+}
+
+.contenedor a{
+    font-size: large;
+    padding: 1px;
+}
+
+.datos-perfil{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.datos-perfil-user p{
+    padding: 10px;
+}
+
+svg{
+    cursor: pointer;
+}
+
+/*MODAL EDICION PERFIL*/
+
+dialog{
+    border: none;
+    border-radius: 8px;
+    padding: 30px;
+    width: 600px;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+}
+
+dialog button{
+
+    background-color: #3C7160;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 17px; 
+    cursor: pointer;
+}
+
+dialog button:hover{
+    background-color: #d2ebe2;
+    color: #3C7160;   
+}
