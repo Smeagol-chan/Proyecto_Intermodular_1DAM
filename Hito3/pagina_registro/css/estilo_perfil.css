@@ -12,19 +12,6 @@ body{
     margin: 20px;
 }
 
-.contenedor {
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    justify-content: center;
-    align-items: center;
-    border-radius: 25px;
-    width: 700px;
-    background-color: white;
-    padding: 20px 0px 20px 0px;
-    box-shadow: 0px 0px 10px 2px gray;
-    margin: auto;
-}
 
 .titulo-panel{
     width: 1000px;
@@ -53,7 +40,7 @@ h2{
     justify-self: center;
 }
 
-
+/*PERFIL ARRENDADOR*/
 .contenedor-formulario{
     font-weight: bold;
 }
@@ -193,3 +180,69 @@ form button:hover{
     color: white;
 }
 
+/*PERFIL INQUILINO*/
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: start;
+    border-radius: 25px;
+    width: 1000px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 2px gray;
+    margin: auto;
+}
+
+.contenedor a{
+    font-size: large;
+    padding: 1px;
+}
+
+.datos-perfil{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.datos-perfil-user p{
+    padding: 10px;
+}
+
+svg{
+    cursor: pointer;
+}
+
+/*MODAL EDICION PERFIL*/
+
+dialog{
+    border: none;
+    border-radius: 8px;
+    padding: 30px;
+    width: 600px;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+}
+
+dialog button{
+
+    background-color: #3C7160;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 17px; 
+    cursor: pointer;
+}
+
+dialog button:hover{
+    background-color: #d2ebe2;
+    color: #3C7160;   
+}

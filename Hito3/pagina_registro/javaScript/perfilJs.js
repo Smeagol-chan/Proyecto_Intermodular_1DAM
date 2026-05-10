@@ -37,42 +37,7 @@ let usuario = JSON.parse(datosGuardados);
         window.location.href = "login.html";
     });
 
-/* Crear las habitaciones que se ponen en el form y enseñarlas en un div*/
-
-function crearHabitacion(titulo, direccion, zona, precio, tipo, descripcion, fotoURL) {
-
-    const div = document.createElement("div");
-    div.classList.add("habitacion");
-
-    div.innerHTML = `
-        <div class="foto-habitacion">
-            <img src="${fotoURL}" alt="Foto de la habitación">
-        </div>
-
-        <div class="datos-habitacion">
-            <h3>${titulo}</h3>
-            <p>${direccion}</p>
-            <p>${zona}</p>
-        </div>
-
-        <div class="datos-habitacion">
-            <p><strong>${precio} €/mes</strong></p>
-            <p>${tipo}</p>
-            <p>${descripcion}</p>
-        </div>
-
-        <button class="btn-eliminar-habitacion">Eliminar</button>
-    `;
-
-    // Botón eliminar: quita la tarjeta del DOM
-    div.querySelector(".btn-eliminar-habitacion").addEventListener("click", () => {
-        div.remove();
-    });
-
-    return div;
-}
-
-   
+/* Crear las habitaciones que se ponen en el form y enseñarlas en un div*/   
 
 document.getElementById("boton-publicar").addEventListener("click", (e) =>{
     e.preventDefault();
@@ -108,4 +73,38 @@ document.getElementById("boton-publicar").addEventListener("click", (e) =>{
     }
 
 })
+
+
+function crearHabitacion(titulo, direccion, zona, precio, tipo, descripcion, fotoURL) {
+
+    const div = document.createElement("div");
+    div.classList.add("habitacion");
+
+    div.innerHTML = `
+        <div class="foto-habitacion">
+            <img src="${fotoURL}" alt="Foto de la habitación">
+        </div>
+
+        <div class="datos-habitacion">
+            <h3>${titulo}</h3>
+            <p>${direccion}</p>
+            <p>${zona}</p>
+        </div>
+
+        <div class="datos-habitacion">
+            <p><strong>${precio} €/mes</strong></p>
+            <p>${tipo}</p>
+            <p>${descripcion}</p>
+        </div>
+
+        <button class="btn-eliminar-habitacion">Eliminar</button>
+    `;
+
+    // Botón eliminar: quita la tarjeta del DOM
+    div.querySelector(".btn-eliminar-habitacion").addEventListener("click", () => {
+        div.remove();
+    });
+
+    return div;
+}
 
