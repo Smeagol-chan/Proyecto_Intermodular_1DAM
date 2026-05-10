@@ -1,7 +1,7 @@
 USE ROOMIE
 GO
 
-INSERT INTO FURNITURE_CATEGORY
+INSERT INTO FURNITURE_CATEGORY (CategoryName)
 VALUES ('Bedroom desk')
 	, ('Bed')
 	, ('Armchair')
@@ -17,7 +17,7 @@ VALUES ('Bedroom desk')
 	, ('Sofa')
 	, ('Television')
 	, ('Wardrobe')
-	, ('Dining Room Chair')
+	, ('Dining room chair')
 	, ('Rug')
 	, ('Cabinet')
 	, ('Ceiling lamp')
@@ -25,5 +25,4 @@ VALUES ('Bedroom desk')
 	, ('Cupboard')
 	, ('Pillow')
 	, ('Ceiling fan')
-	, ('Cabinet')
 GO

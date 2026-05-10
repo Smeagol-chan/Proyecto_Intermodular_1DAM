@@ -14,7 +14,7 @@ public class RoomieAplication extends Application
 
     private static Parent loadFXML(String fxml) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(RoomieAplication.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomieAplication.class.getResource(fxml + "-view.fxml"));
         return fxmlLoader.load();
     }
 
@@ -26,10 +26,10 @@ public class RoomieAplication extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        final String VENTANA_INICIAL = "login-view";
+        final String VENTANA_INICIAL = "login";
         final String NOMBRE_VENTANA = "Roomie";
 
-        scene = new Scene(loadFXML(VENTANA_INICIAL), 600, 400);
+        scene = new Scene(loadFXML(VENTANA_INICIAL), 800, 500);
 
         stage.setTitle(NOMBRE_VENTANA);
         stage.setScene(scene);

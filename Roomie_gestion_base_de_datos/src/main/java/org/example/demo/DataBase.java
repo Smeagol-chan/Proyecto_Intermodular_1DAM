@@ -1,8 +1,11 @@
 package org.example.demo;
 
+import javafx.collections.ObservableList;
+import org.example.demo.objects.locations.Province;
+
 import java.sql.*;
 
-public class DataBase
+public class Database
 {
     public static Connection conexion()
     {

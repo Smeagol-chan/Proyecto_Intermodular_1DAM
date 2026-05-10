@@ -93,22 +93,22 @@ RoomNumber INT IDENTITY
 );
 GO
 
-CREATE TABLE FURNITURE_CATEGORY(
-CategoryID INT IDENTITY PRIMARY KEY
-, CategoryName CHAR(15) UNIQUE NOT NULL
+CREATE TABLE FURNITURE(
+FurnitureID INT IDENTITY PRIMARY KEY
+, FurnitureName CHAR(20) UNIQUE NOT NULL
+, FurnitureDescription VARCHAR(50)
 );
 GO
 
-CREATE TABLE FURNITURE(
-FurnitureNumber INT IDENTITY
+CREATE TABLE ROOM_FURNITURE(
+FurnitureID INT NOT NULL
 , PropertyAddress VARCHAR(150) UNIQUE NOT NULL
 , RoomNumber INT NOT NULL
-, Name VARCHAR(30) NOT NULL
-, Category INT NOT NULL
-, Quantity TINYINT NOT NULL
-, PRIMARY KEY (FurnitureNumber, PropertyAddress, RoomNumber)
+, Quantity TINYINT DEFAULT 1
+, PRIMARY KEY (FurnitureID, PropertyAddress, RoomNumber)
 , FOREIGN KEY (RoomNumber,PropertyAddress) REFERENCES ROOM(RoomNumber,PropertyAddress)
-, FOREIGN KEY (Category) REFERENCES FURNITURE_CATEGORY (CategoryID)
+, FOREIGN KEY (FurnitureID) REFERENCES FURNITURE(FurnitureID)
+, CHECK (Quantity > 0)
 );
 GO
 
@@ -130,7 +130,7 @@ SignatureDate DATE NOT NULL
 GO
 
 CREATE TABLE REPORT(
-ReportDate DATE NOT NULL
+ReportDate DATETIME NOT NULL
 , UserDni CHAR(9) UNIQUE NOT NULL
 , RoomNumber INT NOT NULL
 , PropertyAddress VARCHAR(150) NOT NULL
@@ -143,4 +143,117 @@ ReportDate DATE NOT NULL
 , CHECK (UserDni LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]')
 , CHECK (Status IN ('Pending', 'Checked'))
 );
+GO
+
+----------------------------INSERTS-----------------------------------
+
+INSERT INTO PROVINCE (ProvinceName, ProvinceID)
+VALUES ('Ávala', 'VI')
+	, ('Albacete', 'AB')
+	, ('Alicante', 'A')
+	, ('Almería', 'AL')
+	, ('Asturias', 'O')
+	, ('Ávila', 'AV')
+	, ('Badajoz', 'BA')
+	, ('Barcelona', 'B')
+	, ('Burgos', 'BU')
+	, ('Cádiz', 'CA')
+	, ('Cantabria', 'S')
+	, ('Cáceres', 'CC')
+	, ('Castellón', 'CS')
+	, ('Ceuta', 'CE')
+	, ('Ciudad Real', 'CR')
+	, ('Córdoba', 'CO')
+	, ('La Coruña', 'C')
+	, ('Cuenca', 'CU')
+	, ('Las Palmas de Gran Canaria', 'GC')
+	, ('Girona', 'GI')
+	, ('Granada', 'GR')
+	, ('Guadalajara', 'GU')
+	, ('Guipúzcua', 'SS')
+	, ('Huelva', 'H')
+	, ('Islas Baleares', 'IB')
+	, ('Jaén', 'J')
+	, ('León', 'LE')
+	, ('Lérida', 'L')
+	, ('La Rioja', 'LO')
+	, ('Lugo', 'LU')
+	, ('Madrid', 'M')
+	, ('Málaga', 'MA')
+	, ('Melilla', 'ML')
+	, ('Murcia', 'MU')
+	, ('Navarra', 'NA')
+	, ('Ourense', 'OU')
+	, ('Palencia', 'P')
+	, ('Pontevedra', 'PO')
+	, ('Salamanca', 'SA')
+	, ('Segovia', 'SG')
+	, ('Sevilla', 'SE')
+	, ('Soria', 'SO')
+	, ('Tarragona', 'T')
+	, ('Santa Cruz de Tenerife', 'TF')
+	, ('Teruel', 'TE')
+	, ('Toledo', 'TO')
+	, ('Valencia', 'V')
+	, ('Valladolid', 'VA')
+	, ('Vizcaya', 'BI')
+	, ('Zamora', 'ZA')
+	, ('Zaragoza', 'Z')
+GO
+
+INSERT INTO FURNITURE (FurnitureName)
+VALUES ('Bedroom desk')
+	, ('Bed')
+	, ('Armchair')
+	, ('Nightstand')
+	, ('Desktop')
+	, ('Simple shelf')
+	, ('Display shelf')
+	, ('Standing lamp')
+	, ('Office chair')
+	, ('Rolling cart')
+	, ('Coffee table')
+	, ('Dining room table')
+	, ('Sofa')
+	, ('Television')
+	, ('Wardrobe')
+	, ('Dining room chair')
+	, ('Rug')
+	, ('Ceiling lamp')
+	, ('Display case')
+	, ('Cupboard')
+	, ('Pillow')
+	, ('Ceiling fan')
+	, ('Cabinet')
+GO
+
+-------------------------TRIGGERS------------------
+
+CREATE OR ALTER TRIGGER SET_ROOM_STATUS
+ON ROOM
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @Number AS INT
+		, @Address AS VARCHAR(150)
+		, @Type AS CHAR(15)
+		, @Status AS CHAR(12)
+
+	SELECT @Number = RoomNumber, @Address = PropertyAddress, @Type = Type
+	FROM inserted
+
+	IF @Type = 'Bedroom'
+	BEGIN
+		SET @Status = 'Available'
+	END
+	ELSE
+	BEGIN
+		SET @Status = 'Shared Space'
+	END
+
+	UPDATE ROOM
+	SET Status = @Status
+	WHERE RoomNumber = @Number
+		AND PropertyAddress = @Address
+END
 GO
