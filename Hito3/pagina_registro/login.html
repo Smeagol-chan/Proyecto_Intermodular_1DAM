@@ -333,7 +333,7 @@
                         localStorage.setItem('usuario', JSON.stringify(usuario));
                         if (usuario.tipo === "Inquilino") {
                             window.location.href = "perfil-inquilino.html";
-                        } else {
+                        } else if(usuario.tipo === "Arrendador") {
                             window.location.href = "perfil-arrendador.html";
                         }
                     } else {
