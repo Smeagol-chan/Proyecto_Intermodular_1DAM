@@ -38,7 +38,7 @@ Dni CHAR(9) PRIMARY KEY
 , CHECK (Password LIKE '%[A-Z]%'
 	AND Password LIKE '%[a-z]%'
 	AND Password LIKE '%[0-9]%'
-	AND Password LIKE '%[.-+_#*=]%')
+	AND Password LIKE '%[-.+_#*=]%')
 , CHECK (PhoneNumber LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 );
 GO
