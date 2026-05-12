@@ -36,16 +36,23 @@ document.getElementById("but_buscar").addEventListener("click", (event) => {
     ListaHabitaciones.forEach(habitacion => {
         let precio_habitacion = habitacion.querySelector(".precio_habitacion").textContent.toLowerCase();
         let precio_final_habitacion = parseInt(precio_habitacion);
-        let opciones_habitacion = habitacion.querySelector(".servicios").textContent.toLowerCase();
         let tipo_habitacion = habitacion.querySelector(".caracteristicas").textContent.toLowerCase();
         let ubicacion_habitacion = habitacion.querySelector(".ubicacion").textContent.toLowerCase();
-        //No sé qué atributos filtra. Estos son un ejemplo
+
+        let servicios_habitaciones = habitacion.querySelectorAll(".servicios");
         let mostrar = true;
 
         if (filtro_precio !== "" && precio_final_habitacion > parseInt(filtro_precio))
             mostrar = false;
 
-        if (filtro_opciones !== "" && !opciones_habitacion.includes(filtro_opciones))
+        let tiene_servicio = false;
+        servicios_habitaciones.forEach(servicios => {
+            if (servicios.textContent.toLowerCase().includes(filtro_opciones)) {
+                tiene_servicio = true;
+            }
+        });
+
+        if (filtro_opciones !== "" && !tiene_servicio)
             mostrar = false;
 
         if (filtro_tipo !== "" && !tipo_habitacion.includes(filtro_tipo))
