@@ -1,0 +1,192 @@
+@startuml diagrama_clases
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+' ─────────────────────────────────────────
+' Packages
+' ─────────────────────────────────────────
+
+package "objects.users" {
+
+  abstract class User {
+    # dni : String
+    # userName : String
+    # surnames : String
+    # birthdate : LocalDate
+    # phoneNumber : String
+    # email : String
+    # password : String
+    + getDni() : String
+    + getUserName() : String
+    + getSurnames() : String
+    + getBirthdate() : LocalDate
+    + getPhoneNumber() : String
+    + getEmail() : String
+  }
+
+  class Owner {
+    + Owner(dni, name, surnames, birthdate, phoneNumber, email, password)
+  }
+
+  class Tenant {
+    - studentLicense : String
+    + Tenant(dni, userName, surnames, birthdate, phoneNumber, email, password, studentLicense)
+    + getStudentLicense() : String
+  }
+
+}
+
+package "objects.locations" {
+
+  class Province {
+    - provinceId : String
+    - provinceName : String
+    + getProvinceId() : String
+    + getProvinceName() : String
+  }
+
+  class City {
+    - cityId : int
+    - cityName : String
+    - provinceId : String
+    + getCityId() : int
+    + getCityName() : String
+    + getProvinceId() : String
+  }
+
+  class Institution {
+    - institutionId : int
+    - institutionName : String
+    - cityId : int
+    + getInstitutionId() : int
+    + getInstitutionName() : String
+    + getCityId() : int
+  }
+
+}
+
+package "objects.properties" {
+
+  class Property {
+    - address : String
+    - ownerDni : String
+    - status : String
+    - surface : double
+    + getAddress() : String
+    + getOwnerDni() : String
+    + getStatus() : String
+    + getSurface() : double
+  }
+
+  class Room {
+    - roomNumber : int
+    - propertyAddress : int
+    - type : String
+    - surface : double
+    - status : String
+    - pricePerMonth : double
+    + getRoomNumber() : int
+    + getPropertyAddress() : int
+    + getType() : String
+    + getSurface() : double
+    + getStatus() : String
+    + getPricePerMonth() : double
+  }
+
+  class Furniture {
+    - furnitureId : int
+    - furnitureName : String
+    - description : String
+    + getFurnitureId() : int
+    + getFurnitureName() : String
+    + getDescription() : String
+  }
+
+  class RoomFurniture {
+    - furnitureId : int
+    - propertyAddress : String
+    - roomNumber : int
+    - quantity : int
+    + getFurnitureId() : int
+    + getPropertyAddress() : String
+    + getRoomNumber() : int
+    + getQuantity() : int
+  }
+
+}
+
+package "objects.paperwork" {
+
+  class Contract {
+    - signatureDate : LocalDate
+    - tenantDni : String
+    - roomNumber : int
+    - propertyAddress : String
+    - pricePerMonth : double
+    - startingDate : LocalDate
+    - endingDate : LocalDate
+    - status : String
+    + getSignatureDate() : LocalDate
+    + getTenantDni() : String
+    + getRoomNumber() : int
+    + getPropertyAddress() : String
+    + getPricePerMonth() : double
+    + getStartingDate() : LocalDate
+    + getEndingDate() : LocalDate
+    + getStatus() : String
+  }
+
+  class Report {
+    - reportDate : LocalDateTime
+    - userDni : String
+    - roomNumber : int
+    - propertyAddress : String
+    - issue : String
+    - details : String
+    - status : String
+    + getReportDate() : LocalDateTime
+    + getUserDni() : String
+    + getRoomNumber() : int
+    + getPropertyAddress() : String
+    + getIssue() : String
+    + getDetails() : String
+    + getStatus() : String
+  }
+
+}
+
+' ─────────────────────────────────────────
+' Herencia (extends)
+' ─────────────────────────────────────────
+
+User <|-- Owner
+User <|-- Tenant
+
+' ─────────────────────────────────────────
+' Relaciones estructurales (via FK/ID)
+' ─────────────────────────────────────────
+
+Province "1" o-- "0.*" City : provinceId >
+
+City "1" o-- "0.*" Institution : cityId >
+
+Owner "1" o-- "0.*" Property : ownerDni >
+
+Property "1" o-- "0.*" Room : propertyAddress >
+
+Room "1" o-- "0.*" RoomFurniture : roomNumber / propertyAddress >
+
+Furniture "1" o-- "0.*" RoomFurniture : furnitureId >
+
+Tenant "1" o-- "0.*" Contract : tenantDni >
+
+Room "1" o-- "0.*" Contract : roomNumber / propertyAddress >
+
+User "1" o-- "0.*" Report : userDni >
+
+Room "1" o-- "0.*" Report : roomNumber / propertyAddress >
+
+@enduml
