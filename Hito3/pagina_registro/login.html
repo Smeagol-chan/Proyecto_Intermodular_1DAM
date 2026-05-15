@@ -337,12 +337,10 @@
                             window.location.href = "perfil-arrendador.html";
                         }
                     } else {
-                        // Si no hay usuario en localStorage, redirige igualmente al perfil de inquilino
-                        // (útil para pruebas antes de registrarte)
                         alert("Cara reconocida pero no se encontró usuario vinculado.\nRevisa CORREO_VINCULADO en el código.");
                         btnFacial.disabled = false;
                     }
-                }, 800);
+                }, 1500);
             }
         }
 
