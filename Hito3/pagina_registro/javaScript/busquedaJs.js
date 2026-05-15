@@ -4,40 +4,40 @@ const ListaHabitaciones = document.querySelectorAll(".habitaciones");
 let perfil = document.getElementById("perfil");
 let registro = document.getElementById("registro");
 
-    if(usuario){
-        perfil.innerHTML = `${usuario.nombre}`;
-        registro.innerHTML= "Cerrar sesión"
+if (usuario) {
+    perfil.innerHTML = `${usuario.nombre}`;
+    registro.innerHTML = "Cerrar sesión"
 
-        registro.addEventListener("click", () => {
-            localStorage.removeItem('usuario');
-            window.location.href = "login.html";
-        });
+    registro.addEventListener("click", () => {
+        localStorage.removeItem('usuario');
+        window.location.href = "login.html";
+    });
 
-    }else{
-        perfil.innerHTML = "Iniciar sesión"
-        registro.innerHTML = "Registrarse"
-
-        perfil.addEventListener("click", () =>{
-            window.location.href = "login.html"
-        })
-
-        registro.addEventListener("click", () => {
-            localStorage.removeItem('usuario');
-            window.location.href = "registro.html";
-        });
-
-    }
-
-    //El boton del perfil manda al perfil de inquilino o de arrendador dependiendo el tipo de usuario
-    let inq = usuario.tipo;
+} else {
+    perfil.innerHTML = "Iniciar sesión"
+    registro.innerHTML = "Registrarse"
 
     perfil.addEventListener("click", () => {
-        if (inq === "Inquilino") {
-            window.location.href = "perfil-inquilino.html";
-        } else if (inq === "Arrendador") {
-            window.location.href = "perfil-arrendador.html";
-        }
+        window.location.href = "login.html"
     })
+
+    registro.addEventListener("click", () => {
+        localStorage.removeItem('usuario');
+        window.location.href = "registro.html";
+    });
+
+}
+
+//El boton del perfil manda al perfil de inquilino o de arrendador dependiendo el tipo de usuario
+let inq = usuario.tipo;
+
+perfil.addEventListener("click", () => {
+    if (inq === "Inquilino") {
+        window.location.href = "perfil-inquilino.html";
+    } else if (inq === "Arrendador") {
+        window.location.href = "perfil-arrendador.html";
+    }
+})
 
 
 document.getElementById("but_buscar").addEventListener("click", (event) => {
@@ -93,8 +93,8 @@ document.getElementById("but_buscar").addEventListener("click", (event) => {
 let modal = document.getElementById("modal")
 let cerrar_modal = document.getElementById("cerrar-modal")
 
-    ListaHabitaciones.forEach(habitacion => {
-        habitacion.addEventListener("click", () => {
+ListaHabitaciones.forEach(habitacion => {
+    habitacion.addEventListener("click", () => {
 
         let imagen = habitacion.querySelector("img").src;
         let titulo = habitacion.querySelector("h2").textContent;
@@ -104,12 +104,12 @@ let cerrar_modal = document.getElementById("cerrar-modal")
         let servicios = habitacion.querySelector(".servicios").textContent;
 
         let servicios2 = habitacion.querySelector(".servicios_dos");
-        if(servicios2 !== null){
+        if (servicios2 !== null) {
             servicios2 = servicios2.textContent;
         }
 
         let caracteristicas = habitacion.querySelector(".caracteristicas").textContent;
-        
+
 
         modal.querySelector("img").src = imagen;
         modal.querySelector("h2").textContent = titulo;
@@ -120,15 +120,15 @@ let cerrar_modal = document.getElementById("cerrar-modal")
         modal.querySelector(".servicios_dos").textContent = servicios2;
         modal.querySelector(".caracteristicas").textContent = caracteristicas;
 
-        modal.showModal(); 
-        
-        })
+        modal.showModal();
 
-
-    });
-
-    cerrar_modal.addEventListener("click", () =>{
-        modal.close()
     })
 
-    
+
+});
+
+cerrar_modal.addEventListener("click", () => {
+    modal.close()
+})
+
+

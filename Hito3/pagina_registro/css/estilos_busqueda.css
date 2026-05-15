@@ -93,14 +93,16 @@
     cursor: pointer;
 }
 
-.habitaciones .ubicacion {
+.habitaciones h2 {
     color: #3C7160;
-    font-size: 20px;
     font-weight: bold;
 }
 
+.habitaciones .ubicacion {
+    font-size: 20px;
+}
+
 .habitaciones .superficie {
-    color: black;
     font-size: 20px;
 }
 
@@ -127,7 +129,7 @@ dialog {
     width: 600px;
     position: fixed;
     top: 30%;
-    left: 40%;
+    left: 30%;
 }
 
 dialog::backdrop {
