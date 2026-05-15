@@ -11,6 +11,13 @@
     margin: auto;
 }
 
+.contenedor_busqueda img {
+    width: 30%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 .contenedor_busqueda h1 {
     margin-left: 50px;
     font-size: 40px;
@@ -65,10 +72,9 @@
 .contenedor_habitacion {
     display: flex;
     flex-direction: row;
-    margin-left: 20px;
-    margin-right: 20px;
+    align-items: center;
+    width: 90%;
     margin-bottom: 20px;
-
 }
 
 .info {
@@ -87,9 +93,34 @@
     cursor: pointer;
 }
 
+.habitaciones .ubicacion {
+    color: #3C7160;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.habitaciones .superficie {
+    color: black;
+    font-size: 20px;
+}
+
+.habitaciones .precio_habitacion {
+    font-size: 24px;
+    color: #3C7160;
+}
+
+.habitaciones .extras p {
+    background-color: #3C7160;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 0;
+}
+
 /*MODAL*/
 
-dialog{
+dialog {
     border: none;
     border-radius: 8px;
     padding: 30px;
@@ -100,10 +131,45 @@ dialog{
 }
 
 dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo oscuro */
 }
 
-dialog button{
+dialog .contenedor_habitacion img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+dialog .info h2 {
+    color: #3C7160;
+    font-size: 26px;
+    margin: 0;
+}
+
+dialog .info p {
+    color: #444;
+    font-size: 18px;
+    margin: 2px 0;
+}
+
+dialog .info .precio_habitacion {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3C7160;
+}
+
+dialog .extras p {
+    background-color: #3C7160;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 0;
+}
+
+dialog button {
 
     background-color: #3C7160;
     color: white;
@@ -112,11 +178,11 @@ dialog button{
 
     border-radius: 20px;
     font-weight: bold;
-    font-size: 17px; 
+    font-size: 17px;
     cursor: pointer;
 }
 
-dialog button:hover{
+dialog button:hover {
     background-color: #d2ebe2;
-    color: #3C7160;   
+    color: #3C7160;
 }
