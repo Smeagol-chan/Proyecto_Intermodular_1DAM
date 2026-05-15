@@ -16,7 +16,7 @@ let registro = document.getElementById("registro");
     }else{
         perfil.innerHTML = "Iniciar sesión"
         registro.innerHTML = "Registrarse"
-        
+
         perfil.addEventListener("click", () =>{
             window.location.href = "login.html"
         })
@@ -87,3 +87,48 @@ document.getElementById("but_buscar").addEventListener("click", (event) => {
         }
     });
 });
+
+/* ENSEÑAR MODAL AL PULSAR EN UNA HABITACIÓN*/
+
+let modal = document.getElementById("modal")
+let cerrar_modal = document.getElementById("cerrar-modal")
+
+    ListaHabitaciones.forEach(habitacion => {
+        habitacion.addEventListener("click", () => {
+
+        let imagen = habitacion.querySelector("img").src;
+        let titulo = habitacion.querySelector("h2").textContent;
+        let ubicacion = habitacion.querySelector(".ubicacion").textContent;
+        let superficie = habitacion.querySelector(".superficie").textContent;
+        let precio = habitacion.querySelector(".precio_habitacion").textContent;
+        let servicios = habitacion.querySelector(".servicios").textContent;
+
+        let servicios2 = habitacion.querySelector(".servicios_dos");
+        if(servicios2 !== null){
+            servicios2 = servicios2.textContent;
+        }
+
+        let caracteristicas = habitacion.querySelector(".caracteristicas").textContent;
+        
+
+        modal.querySelector("img").src = imagen;
+        modal.querySelector("h2").textContent = titulo;
+        modal.querySelector(".ubicacion").textContent = ubicacion;
+        modal.querySelector(".superficie").textContent = superficie;
+        modal.querySelector(".precio_habitacion").textContent = precio;
+        modal.querySelector(".servicios").textContent = servicios;
+        modal.querySelector(".servicios_dos").textContent = servicios2;
+        modal.querySelector(".caracteristicas").textContent = caracteristicas;
+
+        modal.showModal(); 
+        
+        })
+
+
+    });
+
+    cerrar_modal.addEventListener("click", () =>{
+        modal.close()
+    })
+
+    

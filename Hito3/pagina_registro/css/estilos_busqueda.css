@@ -86,3 +86,37 @@
     border: solid #3C7160 4px;
     cursor: pointer;
 }
+
+/*MODAL*/
+
+dialog{
+    border: none;
+    border-radius: 8px;
+    padding: 30px;
+    width: 600px;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+}
+
+dialog button{
+
+    background-color: #3C7160;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 17px; 
+    cursor: pointer;
+}
+
+dialog button:hover{
+    background-color: #d2ebe2;
+    color: #3C7160;   
+}
