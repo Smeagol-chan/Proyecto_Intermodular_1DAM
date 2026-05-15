@@ -11,12 +11,12 @@
 </head>
 
 <body>
-<!--=======NAVEGADOR==============-->
+    <!--=======NAVEGADOR==============-->
     <div class="navegador">
         <img src="img/logo.png" alt="">
 
         <ul>
-            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="buscar.html">Buscar</a></li>
             <li><button class="btn_inicio" id="perfil"></button></li>
             <li><button class="btn_registro" id="registro">Cerrar sesión</button></li>
@@ -26,17 +26,24 @@
 
     <!--=======CUERPO==============-->
     <div class="titulo-panel">
-        <h1>Panel de control</h1> 
-        <p style="color: grey;">Gestiona tus propiedades</p>  
-        
+        <h1>Panel de control</h1>
+        <p style="color: grey;">Gestiona tus propiedades</p>
+
     </div>
 
-    
-    
+
+
 
     <div class="panel-control">
         <h2>
-            <svg fill="#3C7160" width="35px" height="35px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M10 1.6a8.4 8.4 0 1 0 0 16.8 8.4 8.4 0 0 0 0-16.8zm5 9.4h-4v4H9v-4H5V9h4V5h2v4h4v2z"></path></g></svg>
+            <svg fill="#3C7160" width="35px" height="35px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M10 1.6a8.4 8.4 0 1 0 0 16.8 8.4 8.4 0 0 0 0-16.8zm5 9.4h-4v4H9v-4H5V9h4V5h2v4h4v2z">
+                    </path>
+                </g>
+            </svg>
             Publicar nueva habitación
         </h2>
         <div class="separador"></div>
@@ -48,13 +55,13 @@
 
                 <!--Dirección y zona-->
                 <div class="horizontal">
-                   
+
                     <div class="input-group">
                         <label for="">Dirección</label>
                         <input type="text" id="direccion" name="direccion" placeholder="Calle Ejemplo, 4 1ºA">
                     </div>
 
-                    
+
                     <div class="input-group">
                         <label for="">Zona</label>
                         <input type="text" id="zona" name="zona" placeholder="Ej: Alicante centro">
@@ -64,13 +71,13 @@
 
                 <!--Precio y tipo-->
                 <div class="horizontal">
-                   
+
                     <div class="input-group">
                         <label for="">Precio mensual (€)</label>
                         <input type="number" id="precio" name="precio" placeholder="300">
                     </div>
 
-                    
+
                     <div class="input-group">
                         <label for="">Tipo de habitación</label>
                         <select name="" id="tipo">
@@ -79,19 +86,20 @@
                             <option value="Estudio/loft">Estudio/loft</option>
                         </select>
                     </div>
-                    
+
                 </div>
                 <br>
 
                 <label for="">Descripción detallada</label>
-                <textarea name="" id="descripcion" placeholder="Describe la habitación, zonas comunes, servicios incluidos, normas..."></textarea>
+                <textarea name="" id="descripcion"
+                    placeholder="Describe la habitación, zonas comunes, servicios incluidos, normas..."></textarea>
                 <br>
 
                 <label for="">Fotos de la habitación</label>
                 <input type="file" name="" id="fotos" multiple accept="image/*">
 
                 <button type="submit" id="boton-publicar">Publicar habitación</button>
-                
+
             </form>
         </div>
 
@@ -102,7 +110,7 @@
         <div class="separador"></div>
 
 
-        
+
         <!--
         Ejemplo habitacion
          <div class="habitacion">
@@ -122,8 +130,8 @@
    
         </div>         
         -->
-     
-        
+
+
 
     </div>
 

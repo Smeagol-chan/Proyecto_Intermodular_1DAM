@@ -133,7 +133,7 @@
     <div class="navegador">
         <img src="img/logo.png" alt="Logo Roomie">
         <ul>
-            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="buscar.html">Buscar</a></li>
             <li><a href="login.html" class="btn_inicio">Iniciar Sesión</a></li>
             <li><a href="registro.html" class="btn_registro">Registrarse</a></li>
@@ -150,10 +150,11 @@
         <!-- RECONOCIMIENTO FACIAL -->
         <div id="facial-section">
             <button id="btn-facial">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="8" r="4"/>
-                    <path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
-                    <path d="M2 12h2M20 12h2M12 2v2M12 20v2"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+                    <path d="M2 12h2M20 12h2M12 2v2M12 20v2" />
                 </svg>
                 Iniciar sesión con reconocimiento facial
             </button>
@@ -333,7 +334,7 @@
                         localStorage.setItem('usuario', JSON.stringify(usuario));
                         if (usuario.tipo === "Inquilino") {
                             window.location.href = "perfil-inquilino.html";
-                        } else if(usuario.tipo === "Arrendador") {
+                        } else if (usuario.tipo === "Arrendador") {
                             window.location.href = "perfil-arrendador.html";
                         }
                     } else {
@@ -358,4 +359,5 @@
     </script>
 
 </body>
+
 </html>
