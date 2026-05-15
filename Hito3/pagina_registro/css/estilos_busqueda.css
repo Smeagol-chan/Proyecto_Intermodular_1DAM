@@ -171,6 +171,10 @@ dialog .extras p {
     margin: 0;
 }
 
+dialog .extras p:empty {
+    display: none;
+}
+
 dialog button {
 
     background-color: #3C7160;
