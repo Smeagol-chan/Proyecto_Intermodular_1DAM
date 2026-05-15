@@ -133,7 +133,7 @@ ContractID INT IDENTITY PRIMARY KEY
 , FOREIGN KEY (RoomNumber,PropertyAddress,PropertyCityID) REFERENCES ROOM(RoomNumber,PropertyAddress,PropertyCityID)
 , CHECK (TenantDni LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]')
 , CHECK (Status in ('Ongoing', 'Ended'))
-, CHECK (DATEDIFF(dd, StartingDate, EndingDate) <= 0)
+, CHECK (DATEDIFF(dd, StartingDate, EndingDate) > 0) 
 );
 GO
 
