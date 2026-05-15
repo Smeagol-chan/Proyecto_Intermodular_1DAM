@@ -1,0 +1,243 @@
+:root {
+    --color-pro: #3C7160;
+    --color-soft: #48a999;
+    --yellow-line: #F5C842;
+    --bg-page: #F8FAF9;
+    --dark: #1A2129;
+    --gray: #666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.home-hero {
+    padding: 100px;
+}
+
+.contenedor-flex {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.col-texto { 
+    flex: 1.2; 
+}
+
+.col-dibujo { 
+    flex: 0.8; display: flex; justify-content: center; 
+}
+
+.top-tag {
+    background: #FEFAF0;
+    color: var(--color-pro);
+    padding: 8px 18px;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.txt-principal {
+    font-size: 55px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.marca-amarilla {
+    position: relative;
+    white-space: nowrap;
+}
+
+.marca-amarilla::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    height: 10px;
+    background: var(--yellow-line);
+    z-index: -1;
+}
+
+.bajada {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 2.5rem;
+    max-width: 550px;
+}
+
+/* SEARCH */
+.barra-busqueda {
+    background: #fff;
+    padding: 8px 8px 8px 20px;
+    border-radius: 60px;
+    display: flex;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    margin-bottom: 3rem;
+}
+
+.barra-busqueda input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.btn-main {
+    background: var(--color-pro);
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-main:hover { 
+    background: var(--color-soft); 
+}
+
+.datos-home { 
+    display: flex; gap: 50px; 
+}
+
+.dato strong { 
+    font-size: 28px; color: var(--dark); display: block; 
+}
+
+.dato p { 
+    font-size: 14px; color: #888; 
+}
+
+.info-pasos, .features-site {
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.label-verde {
+    color: var(--color-soft);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.titulo-sec { 
+    font-size: 38px; margin: 15px 0 50px; 
+}
+
+.grid-pasos, .grid-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card-paso, .f-item {
+    background: #fff;
+    padding: 45px;
+    border-radius: 25px;
+    text-align: left;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+.num { 
+    font-size: 14px; font-weight: 800; color: var(--color-soft); display: block; margin-bottom: 10px; 
+}
+
+.emoji { 
+    font-size: 32px; display: block; margin-bottom: 20px; font-style: normal; 
+}
+
+/* PERFILES */
+.bloque-perfiles {
+    padding: 50px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.box-p { 
+    padding: 60px; border-radius: 35px; 
+}
+
+.student-side { 
+    background: var(--color-pro); color: #fff; 
+}
+
+.owner-side { 
+    background: #fff; border: 1px solid #eee; 
+}
+
+.link-p {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.student-side .link-p { 
+    background: #fff; color: var(--color-pro); 
+}
+
+.owner-side .link-p { 
+    border: 2px solid var(--color-pro); color: var(--color-pro); 
+}
+
+.bottom-cta {
+    background: var(--color-pro);
+    color: #fff;
+    text-align: center;
+    padding: 100px;
+}
+
+.bottom-cta h2 { 
+    font-size: 45px; margin-bottom: 20px; 
+}
+
+.botones-final { 
+    margin-top: 35px; 
+}
+
+.botones-final a {
+    display: inline-block;
+    padding: 18px 38px;
+    margin: 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.b-white { 
+    background: #fff; color: var(--color-pro); 
+}
+
+.b-line { 
+    border: 2px solid #fff; color: #fff; 
+}
+
+.footer-cont{
+    margin-top: 0px !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 950px) {
+    .contenedor-flex, .bloque-perfiles { 
+        flex-direction: column; grid-template-columns: 1fr; 
+    }
+
+    .txt-principal { 
+        font-size: 38px; 
+    }
+}
