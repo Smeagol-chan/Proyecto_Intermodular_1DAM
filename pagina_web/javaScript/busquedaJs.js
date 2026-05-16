@@ -115,7 +115,7 @@ ListaHabitaciones.forEach(habitacion => {
 
         let caracteristicas = habitacion.querySelector(".caracteristicas").textContent;
 
-        // Guardar los datos de la habitación actual que es un objeto para usarlos en el listener externo
+        // Guardar los datos de la habitación actual para usarlos en el listener externo
         habitacionActual = { titulo, ubicacion, superficie, precio, servicios, servicios2, caracteristicas, imagen };
 
         modal.querySelector("img").src = imagen;
@@ -131,11 +131,9 @@ ListaHabitaciones.forEach(habitacion => {
     })
 });
 
-// Listener para el botón de solicitar visita, al pulsar en el boton se crea un div con los datos de la habitación y se inserta en el local storage
-// Para que después se pueda sacar de ahi e insertar en el perfil de inquilino
-// Se comprueba si el usuario es inquilino o arrendador, si es arrendador no puede solicitar una visita, si es inquilino puede
-// Si no hay usuario, manda a login
+// Listener único para el botón de solicitar visita (evita que se acumulen listeners)
 document.getElementById('pedir_visita').addEventListener("click", () => {
+
 
     if (inq === "Inquilino") {
         let div = crearHabitacion(habitacionActual.titulo, habitacionActual.ubicacion, habitacionActual.superficie, habitacionActual.precio, habitacionActual.servicios, habitacionActual.servicios2, habitacionActual.caracteristicas, habitacionActual.imagen);
