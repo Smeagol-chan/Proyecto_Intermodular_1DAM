@@ -41,41 +41,51 @@ crear.addEventListener("click",(e) => {
     }else{
 
         if(contrasenya !== contrasenyaConfirm){
-        alert("Las contraseñas tienen que coincidir")
+            alert("Las contraseñas tienen que coincidir")
 
-    }else{
+        }else{
 
-        if(soyInquilino === true){
-            tipo = "Inquilino"
-        }else if(soyArrendador === true){
-            tipo = "Arrendador"
-        }
+            if(soyInquilino === true){
+                tipo = "Inquilino"
+            }else if(soyArrendador === true){
+                tipo = "Arrendador"
+            }
 
-        let usuario = {
-            nombre: nombre,
-            apellidos: apellidos,
-            correo: correo,
-            telefono: telefono,
-            contrasenya: contrasenya,
-            tipo: tipo
-        }
+            let usuario = {
+                nombre: nombre,
+                apellidos: apellidos,
+                correo: correo,
+                telefono: telefono,
+                contrasenya: contrasenya,
+                tipo: tipo
+            }
 
 
-        let listaExistente = JSON.parse(localStorage.getItem('listaUsuarios')) || [];
-    
-        listaExistente.push(usuario);
-        localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
+            let listaExistente = JSON.parse(localStorage.getItem('listaUsuarios')) || [];
+            let pararRegistro = false;
 
-        localStorage.setItem('usuario',JSON.stringify(usuario))
+            listaExistente.forEach(user => {
+                if(user.correo === correo){
+                    alert("Ya existe un usuario con ese correo")
+                    pararRegistro = true;
+                }
+            });
 
-        if(soyInquilino === true){
-            window.location.href = "perfil-inquilino.html"
-        }else if(soyArrendador === true){
-            window.location.href = "perfil-arrendador.html"
-        }
-
+            if(pararRegistro){return;}
         
-    }
+            listaExistente.push(usuario);
+            localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
+
+            localStorage.setItem('usuario',JSON.stringify(usuario))
+
+            if(soyInquilino === true){
+                window.location.href = "perfil-inquilino.html"
+            }else if(soyArrendador === true){
+                window.location.href = "perfil-arrendador.html"
+            }
+
+            
+        }
 
 
     }

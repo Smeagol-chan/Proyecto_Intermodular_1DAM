@@ -1,13 +1,13 @@
 let datosGuardados = localStorage.getItem('usuario');
 let usuario = JSON.parse(datosGuardados);
 
-
     if (!usuario) {
         window.location.href = "login.html";
     }
 
 
     let inq = usuario.tipo;
+    let con = usuario.contrasenya
     let perfil = document.getElementById("perfil");
     perfil.innerHTML = `${usuario.nombre}`;
     
@@ -68,17 +68,35 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
             apellidos: nuevo_apellidos,
             correo: nuevo_correo,
             telefono: nuevo_telefono,
+            contrasenya: con,
+            tipo: inq
         }
 
         
-        //Hay que reescribir el innerhtml del contenedor para que se reflejen los cambios
-        contenedor.innerHTML = `
+    //Hay que reescribir el innerhtml del contenedor para que se reflejen los cambios
+    contenedor.innerHTML = `
     
         <p><strong>Nombre:</strong> ${usuario.nombre} ${usuario.apellidos}</p>
         <p><strong>Correo:</strong> ${usuario.correo}</p>
         <p><strong>Teléfono:</strong> ${usuario.telefono}</p>
     
     `;
+
+    //Reset de los textos del boton de perfil y se vuelve a subir el usuario modificado al localStorage
+    perfil.innerHTML = `${usuario.nombre}`;
+    localStorage.setItem('usuario',JSON.stringify(usuario))
+
+    //Añadir este nuevo usuario a la lista
+    let listaExistente = JSON.parse(localStorage.getItem('listaUsuarios'));
+    
+    listaExistente.forEach(user => {
+        if(user.correo === input_correo){
+            listaExistente.pop(user);
+        }
+    });
+
+    listaExistente.push(usuario);
+    localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
 
     modal.close();
 })
