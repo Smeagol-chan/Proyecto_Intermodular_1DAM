@@ -132,6 +132,8 @@ ListaHabitaciones.forEach(habitacion => {
 });
 
 // Listener único para el botón de solicitar visita (evita que se acumulen listeners)
+//Si pide visita siendo inquilino se crea el div con el metodo crearHabitación y se guarda en localStorage
+//Si eres arrendador o no estás registrado, no se crea este div
 document.getElementById('pedir_visita').addEventListener("click", () => {
 
 
