@@ -78,8 +78,7 @@
                     <columns>
                         <TableColumn fx:id="cityIdTableColumn" prefWidth="75.0" text="CityID" />
                         <TableColumn fx:id="cityNameTableColumn" minWidth="-Infinity" prefWidth="226.0" text="CityName" />
-                  <TableColumn fx:id="provinceIdTableView" prefWidth="95.0" text="ProvinceID" />
-                  <TableColumn fx:id="provinceNameTableColumn" prefWidth="217.0" text="ProvinceName" />
+                  <TableColumn fx:id="provinceIdTableColumn" prefWidth="95.0" text="ProvinceID" />
                     </columns>
                 </TableView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -101,13 +100,23 @@
                   </Button>
                </children>
             </HBox>
+            <Label fx:id="statusMessageLabel" textFill="#c9871d">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
             <Separator prefHeight="288.0" prefWidth="760.0" valignment="BOTTOM" />
+            <Button fx:id="insertButton" mnemonicParsing="false" onAction="#onInsertClickButton" text="Insert">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
             <Label fx:id="warningMessageLabel" textFill="#f50000">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <GridPane prefHeight="323.0" prefWidth="760.0" vgap="5.0">
+            <GridPane prefHeight="382.0" prefWidth="760.0" vgap="5.0">
               <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="195.0" />
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="565.0" />
@@ -125,8 +134,8 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="cityNameTextField" prefHeight="25.0" prefWidth="379.0" GridPane.columnIndex="1" />
-                  <ChoiceBox fx:id="provinceNameChoiceBox" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="cityNameTextField" disable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
+                  <ChoiceBox fx:id="provinceNameChoiceBox" disable="true" prefHeight="25.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Province" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
@@ -137,21 +146,22 @@
                   </Label>
                </children>
             </GridPane>
+            <Separator prefHeight="288.0" prefWidth="760.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelClickButton" text="Cancel">
+                  <Button fx:id="cancelButton" disable="true" mnemonicParsing="false" onAction="#onCancelClickButton" text="Cancel">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirmClickButton" text="Confirm">
+                  <Button fx:id="confirmButton" disable="true" mnemonicParsing="false" onAction="#onConfirmClickButton" text="Confirm">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             </children>

@@ -11,6 +11,87 @@ import java.sql.Statement;
 
 public class ProvinceQueries
 {
+    public static String obtainIDByName(Connection connection, String provinceName)
+    {
+        String query = "SELECT ProvinceID FROM PROVINCE WHERE ProvinceName = '" + provinceName + "'";
+
+        Statement stmt;
+        ResultSet result;
+
+        String provinceID;
+
+        try
+        {
+            stmt = connection.createStatement();
+            result = stmt.executeQuery(query);
+
+            result.next();
+
+            provinceID = result.getString("ProvinceID");
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return provinceID;
+    }
+
+    public static String obtainNameByID(Connection connection, String provinceID)
+    {
+        String query = "SELECT ProvinceName FROM PROVINCE WHERE ProvinceID = '" + provinceID + "'";
+
+        Statement stmt;
+        ResultSet result;
+
+        String provinceName;
+
+        try
+        {
+            stmt = connection.createStatement();
+            result = stmt.executeQuery(query);
+
+            result.next();
+
+            provinceName = result.getString("ProvinceName");
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return provinceName;
+    }
+
+    public static ObservableList<String> selectAllNames(Connection connection)
+    {
+        ObservableList<String> provinceNameList = FXCollections.observableArrayList();
+
+        String query = "SELECT DISTINCT ProvinceName FROM PROVINCE GO";
+
+        Statement stmt;
+        ResultSet result;
+
+        try
+        {
+            stmt = connection.createStatement();
+            result = stmt.executeQuery(query);
+
+            while(result.next())
+            {
+                String provinceName = result.getString("ProvinceName");
+                provinceNameList.add(provinceName);
+            }
+
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return provinceNameList;
+    }
+
     public static ObservableList<Province> selectAll(Connection connection)
     {
         ObservableList<Province> provincesList = FXCollections.observableArrayList();
