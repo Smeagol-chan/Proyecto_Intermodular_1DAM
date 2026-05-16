@@ -95,6 +95,9 @@ document.getElementById("but_buscar").addEventListener("click", (event) => {
 let modal = document.getElementById("modal")
 let cerrar_modal = document.getElementById("cerrar-modal")
 
+// Datos de la habitación actualmente abierta en el modal
+let habitacionActual = {};
+
 ListaHabitaciones.forEach(habitacion => {
     habitacion.addEventListener("click", () => {
 
@@ -112,6 +115,8 @@ ListaHabitaciones.forEach(habitacion => {
 
         let caracteristicas = habitacion.querySelector(".caracteristicas").textContent;
 
+        // Guardar los datos de la habitación actual para usarlos en el listener externo
+        habitacionActual = { titulo, ubicacion, superficie, precio, servicios, servicios2, caracteristicas, imagen };
 
         modal.querySelector("img").src = imagen;
         modal.querySelector("h2").textContent = titulo;
@@ -123,31 +128,27 @@ ListaHabitaciones.forEach(habitacion => {
         modal.querySelector(".caracteristicas").textContent = caracteristicas;
 
         modal.showModal();
-
-        //meter el div creado en el local storage al darle al botón de pedir visita
-        let guardarHabitacion = document.getElementById('pedir_visita');
-        guardarHabitacion.addEventListener("click", () =>{
-            if(inq === "Inquilino"){
-                let div = crearHabitacion(titulo,ubicacion,superficie,precio,servicios,servicios2,caracteristicas,imagen)
-                localStorage.setItem('divHabitacion',div)
-                alert("Se ha solicitado una visita.");
-                modal.close();
-            }
-            if(inq === "Arrendador"){
-                alert("Eres arrendador, no puedes solicitar una visita.")
-                modal.close();
-            }
-            if(inq === undefined){
-                window.location.href = "login.html"
-            }
-        })
-
-        
-
     })
-
-
 });
+
+// Listener único para el botón de solicitar visita (evita que se acumulen listeners)
+document.getElementById('pedir_visita').addEventListener("click", () => {
+
+
+    if (inq === "Inquilino") {
+        let div = crearHabitacion(habitacionActual.titulo, habitacionActual.ubicacion, habitacionActual.superficie, habitacionActual.precio, habitacionActual.servicios, habitacionActual.servicios2, habitacionActual.caracteristicas, habitacionActual.imagen);
+        localStorage.setItem('divHabitacion', div);
+        alert("Se ha solicitado una visita para esta habitación.");
+        modal.close();
+    }
+    if (inq === "Arrendador") {
+        alert("Eres arrendador, no puedes solicitar una visita.");
+        modal.close();
+    }
+    if (inq === undefined) {
+        window.location.href = "login.html";
+    }
+})
 
 cerrar_modal.addEventListener("click", () => {
     modal.close()
@@ -163,6 +164,10 @@ Esta funcion crea un div para insertar en la página de inquilino. El innerhtml 
 function crearHabitacion(titulo, zona, superficie, precio, servicios, servicios2, caracteristicas, fotoURL) {
 
     const div = document.createElement("div");
+
+    if (servicios2 == null) {
+        servicios2 = "";
+    }
 
     div.innerHTML = `
         <div class="habitacion">
