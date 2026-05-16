@@ -86,17 +86,42 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
     perfil.innerHTML = `${usuario.nombre}`;
     localStorage.setItem('usuario',JSON.stringify(usuario))
 
-    //Añadir este nuevo usuario a la lista
+    //Saco la lista del localStorage
     let listaExistente = JSON.parse(localStorage.getItem('listaUsuarios'));
     
+    //borro los datos anteriores del usuario
     listaExistente.forEach(user => {
         if(user.correo === input_correo){
             listaExistente.pop(user);
         }
     });
 
+    //meto el nuevo usuario con los nuevos datos
     listaExistente.push(usuario);
     localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
 
     modal.close();
 })
+
+/*AÑADIR HABITACIONES DEL LOCAL STORAGE AL INICIAR */
+//Se coge el div guardado en el localStorage y se mete en el contenedor
+//Solo permite poner una habitacion
+//Al borrar la habitación se elimina el objeto del localStorage y se refresca la página para que se reflejen los cambios
+document.addEventListener("DOMContentLoaded",() => {
+    
+    let div = localStorage.getItem('divHabitacion');
+    const contenedor = document.querySelector(".contenedor-habitaciones");
+
+      if(div){
+        contenedor.innerHTML += div; 
+    }
+
+    // Botón eliminar: quita la tarjeta del DOM
+    document.querySelector(".btn-eliminar-habitacion").addEventListener("click", () => {
+        localStorage.removeItem('divHabitacion')
+        location.reload();
+
+    });
+
+});
+

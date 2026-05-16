@@ -122,6 +122,13 @@ ListaHabitaciones.forEach(habitacion => {
 
         modal.showModal();
 
+        //meter el div creado en el local storage al darle al botón de pedir visita
+        let guardarHabitacion = document.getElementById('pedir_visita');
+        guardarHabitacion.addEventListener("click", () =>{
+            let div = crearHabitacion(titulo,ubicacion,superficie,precio,servicios,servicios2,caracteristicas,imagen)
+            localStorage.setItem('divHabitacion',div)
+        })
+
     })
 
 
@@ -130,5 +137,42 @@ ListaHabitaciones.forEach(habitacion => {
 cerrar_modal.addEventListener("click", () => {
     modal.close()
 })
+
+
+
+/*
+GUARDAR HABITACION EN LOCAL STORAGE
+Esta funcion crea un div para insertar en la página de inquilino. El innerhtml del div se sube al local storage para más tarde sacarlo e insertarlo en el perfil inquilino
+*/
+
+function crearHabitacion(titulo, zona, superficie, precio, servicios, servicios2, caracteristicas, fotoURL) {
+
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+        <div class="habitacion">
+            <div class="foto-habitacion">
+                <img src="${fotoURL}" alt="Foto de la habitación">
+            </div>
+
+            <div class="datos-habitacion">
+                <h3>${titulo}</h3>
+                <p>${zona}</p>
+                <p>${superficie}</p>
+                <p><strong>${precio}</strong></p>
+            </div>
+
+            <div class="datos-habitacion">
+                <p>${caracteristicas}</p>
+                <p>${servicios}</p>
+                <p>${servicios2}</p>
+            </div>
+
+            <button class="btn-eliminar-habitacion">Eliminar</button>
+        </div>
+    `;
+
+    return div.innerHTML;
+}
 
 
