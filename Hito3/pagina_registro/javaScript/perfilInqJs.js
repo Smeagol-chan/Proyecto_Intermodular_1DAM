@@ -23,6 +23,7 @@ let usuario = JSON.parse(datosGuardados);
 
     document.getElementById("registro").addEventListener("click", () => {
         localStorage.removeItem('usuario');
+        localStorage.removeItem('divHabitacion');
         window.location.href = "login.html";
     });
 
@@ -118,7 +119,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     // Botón eliminar: quita la tarjeta del DOM
     document.querySelector(".btn-eliminar-habitacion").addEventListener("click", () => {
-        localStorage.removeItem('divHabitacion')
+        localStorage.removeItem('divHabitacion');
         location.reload();
 
     });

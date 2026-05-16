@@ -11,18 +11,6 @@ let usuario = JSON.parse(datosGuardados);
     let perfil = document.getElementById("perfil");
     perfil.innerHTML = `${usuario.nombre}`;
 
-    /*
-        let contenedor = document.querySelector('.contenedor');
-    contenedor.innerHTML = `
-        <div style="padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
-            <h3>Mis Datos</h3>
-            <p><strong>Nombre:</strong> ${usuario.nombre} ${usuario.apellidos}</p>
-            <p><strong>Correo:</strong> ${usuario.correo}</p>
-            <p><strong>Teléfono:</strong> ${usuario.telefono}</p>
-        </div>
-    `;
-    */ 
-
     perfil.addEventListener("click", () => {
         if(inq === "Inquilino"){
             window.location.href = "perfil-inquilino.html";
@@ -34,6 +22,7 @@ let usuario = JSON.parse(datosGuardados);
 
     document.getElementById("registro").addEventListener("click", () => {
         localStorage.removeItem('usuario');
+        localStorage.removeItem('divHabitacion');
         window.location.href = "login.html";
     });
 

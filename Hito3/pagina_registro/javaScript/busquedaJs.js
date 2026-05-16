@@ -10,6 +10,7 @@ if (usuario) {
 
     registro.addEventListener("click", () => {
         localStorage.removeItem('usuario');
+        localStorage.removeItem('divHabitacion');
         window.location.href = "login.html";
     });
 

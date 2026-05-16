@@ -9,6 +9,7 @@ let registro = document.getElementById("registro");
 
         registro.addEventListener("click", () => {
             localStorage.removeItem('usuario');
+            localStorage.removeItem('divHabitacion');
             window.location.href = "login.html";
         });
 
