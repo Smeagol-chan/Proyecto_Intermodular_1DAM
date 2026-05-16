@@ -1,15 +1,16 @@
 let datosGuardados = localStorage.getItem('usuario');
 let usuario = JSON.parse(datosGuardados);
 let listaExistente = JSON.parse(localStorage.getItem('listaUsuarios'));
+let inq = usuario.tipo;
+let con = usuario.contrasenya
+let perfil = document.getElementById("perfil");
 
 if (!usuario) {
     window.location.href = "login.html";
 }
 
 
-let inq = usuario.tipo;
-let con = usuario.contrasenya
-let perfil = document.getElementById("perfil");
+
 perfil.innerHTML = `${usuario.nombre}`;
 
 
@@ -30,7 +31,7 @@ document.getElementById("registro").addEventListener("click", () => {
 
 
 let contenedor = document.querySelector('.datos-perfil-user');
-contenedor.innerHTML = `
+    contenedor.innerHTML = `
     
         <p><strong>Nombre:</strong> ${usuario.nombre} ${usuario.apellidos}</p>
         <p><strong>Correo:</strong> ${usuario.correo}</p>
@@ -39,7 +40,6 @@ contenedor.innerHTML = `
     `;
 
 //EDITAR DATOS PERFIL 
-
 let editar_datos = document.getElementById("editar-perfil");
 let modal = document.getElementById("modal");
 let cerrar_modal = document.getElementById("cerrar-modal");
