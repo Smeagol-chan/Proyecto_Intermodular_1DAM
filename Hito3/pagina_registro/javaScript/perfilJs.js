@@ -22,7 +22,6 @@ let usuario = JSON.parse(datosGuardados);
 
     document.getElementById("registro").addEventListener("click", () => {
         localStorage.removeItem('usuario');
-        localStorage.removeItem('divHabitacion');
         window.location.href = "login.html";
     });
 

@@ -10,7 +10,6 @@ if (usuario) {
 
     registro.addEventListener("click", () => {
         localStorage.removeItem('usuario');
-        localStorage.removeItem('divHabitacion');
         window.location.href = "login.html";
     });
 
@@ -126,9 +125,19 @@ ListaHabitaciones.forEach(habitacion => {
         //meter el div creado en el local storage al darle al botón de pedir visita
         let guardarHabitacion = document.getElementById('pedir_visita');
         guardarHabitacion.addEventListener("click", () =>{
-            let div = crearHabitacion(titulo,ubicacion,superficie,precio,servicios,servicios2,caracteristicas,imagen)
-            localStorage.setItem('divHabitacion',div)
+            if(inq === "Inquilino"){
+                let div = crearHabitacion(titulo,ubicacion,superficie,precio,servicios,servicios2,caracteristicas,imagen)
+                localStorage.setItem('divHabitacion',div)
+                alert("Se ha solicitado una visita.");
+                modal.close();
+            }
+            if(inq === "Arrendador"){
+                alert("Eres arrendador, no puedes solicitar una visita.")
+                modal.close();
+            }
         })
+
+        
 
     })
 
