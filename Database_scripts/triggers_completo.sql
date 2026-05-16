@@ -1,5 +1,37 @@
 USE ROOMIE
 GO
+
+CREATE OR ALTER TRIGGER SET_ROOM_STATUS
+ON ROOM
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @Number AS TINYINT
+		, @Address AS VARCHAR(150)
+		, @CityID AS SMALLINT
+		, @Type AS CHAR(15)
+		, @Status AS CHAR(12)
+
+	SELECT @Number = RoomNumber, @Address = PropertyAddress, @CityID = PropertyCityID, @Type = Type
+	FROM inserted
+
+	IF @Type = 'Bedroom'
+	BEGIN
+		SET @Status = 'Available'
+	END
+	ELSE
+	BEGIN
+		SET @Status = 'Shared Space'
+	END
+
+	UPDATE ROOM
+	SET Status = @Status
+	WHERE RoomNumber = @Number
+		AND PropertyAddress = @Address
+		AND PropertyCityID = @CityID
+END
+GO
+
 ----------------------------------------------------------CONTRACT--------------------------------------------------------------------------------
 -- Checks if both room and tenant exist before commiting the insertion.
 -- If a contract is inserted in CONTRACT table and it's status is 'Ongoing', the related room status is update to 'Rented'.
@@ -56,6 +88,7 @@ BEGIN
 END
 GO
 
+----------------------------------------------------------------------------
 -- Updates the room status when a contract ends
 CREATE OR ALTER TRIGGER CONTRACT_STATUS_UPDATED
 ON [CONTRACT]
@@ -82,6 +115,7 @@ BEGIN
 END
 GO
 
+------------------------------------------------------------------------------
 -- The update is avoided if t any attribute besides the status is update
 CREATE OR ALTER TRIGGER CONTRACT_PROHIBITTED_UPDATES
 ON [CONTRACT]
@@ -150,6 +184,7 @@ BEGIN
 END
 GO
 
+------------------------------------------------------
 -- No deletes are permitted on CONTRACTS
 CREATE OR ALTER TRIGGER DELETE_CONTRACT_BLOCKADE
 ON [CONTRACT]
@@ -233,6 +268,7 @@ BEGIN
 END
 GO
 
+----------------------------------------------------------------------------
 -- The update is avoided if t any attribute besides the status is update
 CREATE OR ALTER TRIGGER REPORT_PROHIBITTED_UPDATES
 ON REPORT
@@ -296,6 +332,7 @@ BEGIN
 END
 GO
 
+-------------------------------------------------------------
 -- No deletes are permitted on REPORTS
 CREATE OR ALTER TRIGGER DELETE_REPORT_BLOCKADE
 ON REPORT
@@ -303,5 +340,198 @@ INSTEAD OF DELETE
 AS
 BEGIN
 	PRINT 'Deletes over REPORT are not permitted.'
+END
+GO
+
+----------------------------------------------------------------
+CREATE OR ALTER TRIGGER BLOCK_PROVINCE_DELETE_TRIGGER
+ON PROVINCE
+INSTEAD OF DELETE
+AS
+BEGIN
+	PRINT 'Delete are not permitted for PROVINCE table.'
+END
+GO
+
+-------------------------------------------------------------
+CREATE OR ALTER TRIGGER CHECK_NUM_PROVINCES_ON_INSERT_TRIGGER
+ON PROVINCE
+INSTEAD OF INSERT
+AS
+BEGIN
+	IF 51 > (SELECT COUNT(*) FROM PROVINCE)
+	BEGIN
+		DECLARE @ID AS CHAR(2)
+			, @Name AS CHAR(26)
+
+		SELECT @ID = ProvinceID, @Name = ProvinceName
+		FROM inserted
+
+		INSERT INTO PROVINCE (ProvinceID, ProvinceName)
+		VALUES (@ID, @Name)
+	END
+END
+GO
+
+----------------------------------------------------------------
+CREATE OR ALTER TRIGGER CITY_DELETE_TRIGGER
+ON CITY
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @ID AS SMALLINT = (SELECT CityID FROM deleted)
+
+	DELETE FROM INSTITUTION
+	WHERE CityID = @ID
+
+	DELETE FROM PROPERTY
+	WHERE CityID = @ID
+
+	DELETE FROM CITY
+	WHERE CityID = @ID
+END
+GO
+
+-----------------------------------------------------------------
+CREATE OR ALTER TRIGGER INSTITUTION_DELETE_TRIGGER
+ON INSTITUTION
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @ID AS SMALLINT = (SELECT InstitutionID FROM deleted)
+
+	DELETE FROM PROPERTY_INSITUTION
+	WHERE InstitutionID = @ID
+
+	DELETE FROM INSTITUTION
+	WHERE InstitutionID = @ID
+END
+GO
+
+-------------------------------------------------------------------
+CREATE OR ALTER TRIGGER PROPERTY_DELETE_TRIGGER
+ON PROPERTY
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @Address AS VARCHAR(150)
+		, @CityID AS SMALLINT
+
+	SELECT @Address = Address, @CityID = CityID
+	FROM deleted
+
+	DELETE FROM PROPERTY_INSITUTION
+	WHERE PropertyAddress = @Address
+		AND PropertyCityID = @CityID
+
+	DELETE FROM ROOM
+	WHERE PropertyAddress = @Address
+		AND PropertyCityID = @CityID
+
+	DELETE FROM PROPERTY
+	WHERE Address = @Address
+		AND CityID = @CityID
+END
+GO
+
+--------------------------------------------------------------
+CREATE OR ALTER TRIGGER OWNER_DELETE_TRIGGER
+ON [OWNER]
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @Dni AS CHAR(9) = (SELECT Dni FROM deleted)
+
+	DELETE FROM [USER]
+	WHERE Dni = @Dni
+END
+GO
+
+CREATE OR ALTER TRIGGER TENANT_DELETE_TRIGGER
+ON TENANT
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @Dni AS CHAR(9) = (SELECT Dni FROM deleted)
+
+	DELETE FROM [USER]
+	WHERE Dni = @Dni
+END
+GO
+
+---------------------------------------------------------
+CREATE OR ALTER TRIGGER ROOM_DELETE_TRIGGER
+ON ROOM
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @RoomNumber AS TINYINT
+		, @Address AS VARCHAR(150)
+		, @CityID AS SMALLINT
+
+	SELECT @RoomNumber = RoomNumber, @Address = PropertyAddress, @CityID = PropertyCityID
+	FROM deleted
+
+	DELETE FROM ROOM_FURNITURE
+	WHERE @RoomNumber = RoomNumber
+		AND @Address = PropertyAddress
+		AND @CityID = PropertyCityID
+
+	DELETE FROM [CONTRACT]
+	WHERE @RoomNumber = RoomNumber
+		AND @Address = PropertyAddress
+		AND @CityID = PropertyCityID
+
+	DELETE FROM ROOM
+	WHERE @RoomNumber = RoomNumber
+		AND @Address = PropertyAddress
+		AND @CityID = PropertyCityID
+END
+GO
+
+--------------------------------------------------
+
+CREATE OR ALTER TRIGGER FURNITURE_DELETE_TRIGGER
+ON FURNITURE
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @ID AS SMALLINT = (SELECT FurnitureID FROM deleted)
+
+	DELETE FROM ROOM_FURNITURE
+	WHERE FurnitureID = @ID
+
+	DELETE FROM FURNITURE
+	WHERE FurnitureID = @ID
+END
+GO
+
+--------------------------------------------------
+CREATE OR ALTER TRIGGER USER_DELETE_TRIGGER
+ON [USER]
+INSTEAD OF DELETE
+AS
+BEGIN
+	DECLARE @Dni AS CHAR(9) = (SELECT Dni FROM [USER])
+
+	IF EXISTS (SELECT * FROM TENANT WHERE Dni = @Dni)
+	BEGIN
+		DELETE FROM [CONTRACT]
+		WHERE TenantDni = @Dni
+	END
+	ELSE
+	BEGIN
+		IF EXISTS (SELECT * FROM [OWNER] WHERE Dni = @Dni)
+		BEGIN
+			DELETE FROM PROPERTY
+			WHERE OwnerDni = @Dni
+		END
+	END
+
+	DELETE FROM REPORT
+	WHERE UserDni = @Dni
+
+	DELETE FROM [USER]
+	WHERE Dni = @Dni
 END
 GO

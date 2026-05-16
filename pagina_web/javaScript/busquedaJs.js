@@ -3,6 +3,7 @@ let usuario = JSON.parse(datosGuardados);
 const ListaHabitaciones = document.querySelectorAll(".habitaciones");
 let perfil = document.getElementById("perfil");
 let registro = document.getElementById("registro");
+let inq;
 
 if (usuario) {
     perfil.innerHTML = `${usuario.nombre}`;
@@ -12,6 +13,7 @@ if (usuario) {
         localStorage.removeItem('usuario');
         window.location.href = "login.html";
     });
+    inq = usuario.tipo;
 
 } else {
     perfil.innerHTML = "Iniciar sesión"
@@ -29,7 +31,7 @@ if (usuario) {
 }
 
 //El boton del perfil manda al perfil de inquilino o de arrendador dependiendo el tipo de usuario
-let inq = usuario.tipo;
+
 
 perfil.addEventListener("click", () => {
     if (inq === "Inquilino") {
@@ -134,6 +136,9 @@ ListaHabitaciones.forEach(habitacion => {
             if(inq === "Arrendador"){
                 alert("Eres arrendador, no puedes solicitar una visita.")
                 modal.close();
+            }
+            if(inq === undefined){
+                window.location.href = "login.html"
             }
         })
 

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo_cont.css">
+    <link rel="stylesheet" href="css/estilo_nav.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <script src="javaScript/loginJs.js" defer></script>
+    <title>Roomie - Iniciar sesión</title>
+
+    <style>
+        /* ===== ESTILOS RECONOCIMIENTO FACIAL ===== */
+        #facial-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        #btn-facial {
+            width: 90%;
+            background-color: white;
+            color: #3C7160;
+            padding: 14px 20px;
+            border-radius: 20px;
+            border: 2px solid #3C7160;
+            font-weight: bold;
+            font-size: 17px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        #btn-facial:hover {
+            background-color: #d2ebe2;
+        }
+
+        #facial-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 90%;
+            padding: 16px;
+            background-color: #f3f3f3;
+            border-radius: 16px;
+            border: 2px dashed #3C7160;
+        }
+
+        #facial-container.activo {
+            display: flex;
+        }
+
+        #webcam-container canvas {
+            border-radius: 12px;
+            border: 3px solid #3C7160;
+        }
+
+        #label-container {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #444;
+            text-align: center;
+        }
+
+        #estado-facial {
+            font-weight: bold;
+            font-size: 15px;
+            color: #3C7160;
+            text-align: center;
+            min-height: 22px;
+        }
+
+        #estado-facial.error {
+            color: #c0392b;
+        }
+
+        .separador-login {
+            display: flex;
+            align-items: center;
+            width: 90%;
+            gap: 10px;
+            color: grey;
+            font-size: 13px;
+            font-family: sans-serif;
+        }
+
+        .separador-login::before,
+        .separador-login::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #btn-cerrar-camara {
+            background: none;
+            border: none;
+            color: #c0392b;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: underline;
+            font-family: inherit;
+        }
+
+        .barra-confianza {
+            width: 100%;
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .barra-relleno {
+            height: 100%;
+            background-color: #3C7160;
+            border-radius: 4px;
+            transition: width 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navegador">
+        <img src="img/logo.png" alt="Logo Roomie">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="buscar.html">Buscar</a></li>
+            <li><a href="login.html" class="btn_inicio">Iniciar Sesión</a></li>
+            <li><a href="registro.html" class="btn_registro">Registrarse</a></li>
+        </ul>
+    </div>
+
+    <div class="contenedor">
+        <img src="img/logo.png" alt="Logo Roomie">
+
+        <h1>Bienvenido/a de nuevo</h1>
+        <p class="gris">Inicia sesión para continuar</p>
+        <br>
+
+        <!-- RECONOCIMIENTO FACIAL -->
+        <div id="facial-section">
+            <button id="btn-facial">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+                    <path d="M2 12h2M20 12h2M12 2v2M12 20v2" />
+                </svg>
+                Iniciar sesión con reconocimiento facial
+            </button>
+
+            <div id="facial-container">
+                <p style="font-size:13px; color:grey; margin:0;">Mira a la cámara — el acceso es automático</p>
+                <div id="webcam-container"></div>
+                <div id="estado-facial">Cargando modelo...</div>
+                <div id="label-container"></div>
+                <button id="btn-cerrar-camara">✕ Cancelar</button>
+            </div>
+
+            <div class="separador-login">o inicia sesión con correo</div>
+        </div>
+
+        <div class="formu">
+            <form action="#" method="POST">
+                <label for="email">Correo electrónico</label><br>
+                <input type="email" name="email" id="email" placeholder="tu@email.com" required><br>
+
+                <label for="pwd">Contraseña</label><br>
+                <input type="password" name="pwd" id="pwd" placeholder="........" required><br>
+
+                <a href="#" class="enlace">¿Olvidaste tu contraseña?</a>
+
+                <button id="crear">Iniciar sesión</button>
+            </form>
+
+            <p>
+                ¿No tienes cuenta? <a href="registro.html" class="enlace">Regístrate gratis</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========FOOTER============= -->
+    <div class="footer-cont">
+        <div class="col1">
+            <h4>Página</h4>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="buscar.html">Buscar</a></li>
+                <li><a href="registro.html">Registro</a></li>
+            </ul>
+        </div>
+        <div class="col2">
+            <h4>Empresa</h4>
+            <ul>
+                <li><a href="index.html#sobreNosotros">Sobre nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="col3">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="terminos-y-condiciones.html">Términos y condiciones</a></li>
+                <li><a href="politica.html">Política de privacidad</a></li>
+            </ul>
+        </div>
+        <div class="separador"></div>
+        <div class="copy">© 2026 Roomie. Todos los derechos reservados.</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // CONFIGURACIÓN RECONOCIMIENTO FACIAL
+        // ============================================================
+
+        // Ruta a la carpeta donde están tus archivos del modelo
+        // (model.json, weights.bin, metadata.json)
+        const MODEL_URL = "./modelo/";   // <-- carpeta relativa al HTML
+
+        // Nombre de la clase que representa TU cara en Teachable Machine
+        const CLASE_RECONOCIDA = "Adrian";
+
+        // Correo del usuario de localStorage que corresponde a tu cara
+        const CORREO_VINCULADO = "cara@roomie.com";  // <-- CAMBIA ESTO
+
+        // Umbral de confianza mínimo para considerar que eres tú (0.0 - 1.0)
+        const UMBRAL_CONFIANZA = 0.90;
+
+        // ============================================================
+
+        let model, webcam, labelContainer, maxPredictions;
+        let reconocimientoActivo = false;
+        let loginRealizado = false;
+
+        const btnFacial = document.getElementById("btn-facial");
+        const facialContainer = document.getElementById("facial-container");
+        const estadoFacial = document.getElementById("estado-facial");
+        const btnCerrarCamara = document.getElementById("btn-cerrar-camara");
+
+        btnFacial.addEventListener("click", iniciarReconocimiento);
+        btnCerrarCamara.addEventListener("click", detenerReconocimiento);
+
+        async function iniciarReconocimiento() {
+            facialContainer.classList.add("activo");
+            btnFacial.disabled = true;
+            estadoFacial.textContent = "Cargando modelo de IA...";
+            estadoFacial.className = "";
+
+            try {
+                const modelURL = MODEL_URL + "model.json";
+                const metadataURL = MODEL_URL + "metadata.json";
+
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                // Configurar webcam
+                const flip = true;
+                webcam = new tmImage.Webcam(250, 250, flip);
+                await webcam.setup();
+                await webcam.play();
+
+                document.getElementById("webcam-container").appendChild(webcam.canvas);
+
+                // Contenedor de etiquetas
+                labelContainer = document.getElementById("label-container");
+                labelContainer.innerHTML = "";
+
+                reconocimientoActivo = true;
+                loginRealizado = false;
+                estadoFacial.textContent = "Analizando tu rostro...";
+
+                loop();
+
+            } catch (err) {
+                estadoFacial.textContent = "Error al cargar la cámara o el modelo.";
+                estadoFacial.className = "error";
+                console.error(err);
+                btnFacial.disabled = false;
+            }
+        }
+
+        async function loop() {
+            if (!reconocimientoActivo) return;
+            webcam.update();
+            await predict();
+            requestAnimationFrame(loop);
+        }
+
+        async function predict() {
+            if (loginRealizado) return;
+
+            const prediction = await model.predict(webcam.canvas);
+
+            // Mostrar barras de confianza
+            labelContainer.innerHTML = "";
+            prediction.forEach(p => {
+                const porcentaje = Math.round(p.probability * 100);
+                labelContainer.innerHTML += `
+                    <div style="margin:3px 0; text-align:left; width:220px;">
+                        <span style="font-size:12px;">${p.className}: ${porcentaje}%</span>
+                        <div class="barra-confianza">
+                            <div class="barra-relleno" style="width:${porcentaje}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Buscar la clase objetivo
+            const resultado = prediction.find(p => p.className === CLASE_RECONOCIDA);
+
+            if (resultado && resultado.probability >= UMBRAL_CONFIANZA) {
+                loginRealizado = true;
+                estadoFacial.textContent = `✓ ¡Hola, ${CLASE_RECONOCIDA}! Accediendo...`;
+                estadoFacial.className = "";
+
+                // Buscar el usuario en localStorage
+                const todos = JSON.parse(localStorage.getItem('listaUsuarios')) || [];
+                const usuario = todos.find(u => u.correo === CORREO_VINCULADO);
+
+                setTimeout(() => {
+                    detenerReconocimiento();
+
+                    if (usuario) {
+                        localStorage.setItem('usuario', JSON.stringify(usuario));
+                        if (usuario.tipo === "Inquilino") {
+                            window.location.href = "perfil-inquilino.html";
+                        } else if (usuario.tipo === "Arrendador") {
+                            window.location.href = "perfil-arrendador.html";
+                        }
+                    } else {
+                        alert("Cara reconocida pero no se encontró usuario vinculado.\nRevisa CORREO_VINCULADO en el código.");
+                        btnFacial.disabled = false;
+                    }
+                }, 1500);
+            }
+        }
+
+        function detenerReconocimiento() {
+            reconocimientoActivo = false;
+            if (webcam) {
+                webcam.stop();
+                document.getElementById("webcam-container").innerHTML = "";
+            }
+            facialContainer.classList.remove("activo");
+            labelContainer && (labelContainer.innerHTML = "");
+            estadoFacial.textContent = "";
+            btnFacial.disabled = false;
+        }
+    </script>
+
+</body>
+
+</html>
