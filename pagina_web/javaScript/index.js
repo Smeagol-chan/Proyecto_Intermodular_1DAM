@@ -4,7 +4,9 @@ let perfil = document.getElementById("perfil");
 let registro = document.getElementById("registro");
 let lugar = "";
 let boton = document.getElementById("buscar_index");
+let inq;
 
+//Verificar si hay un usuario logueado
 if (usuario) {
     perfil.innerHTML = `${usuario.nombre}`;
     registro.innerHTML = "Cerrar sesión"
@@ -13,6 +15,7 @@ if (usuario) {
         localStorage.removeItem('usuario');
         window.location.href = "login.html";
     });
+    inq = usuario.tipo;
 
 } else {
     perfil.innerHTML = "Iniciar sesión"
@@ -30,7 +33,6 @@ if (usuario) {
 }
 
 //El boton del perfil manda al perfil de inquilino o de arrendador dependiendo el tipo de usuario
-let inq = usuario.tipo;
 
 perfil.addEventListener("click", () => {
     if (inq === "Inquilino") {

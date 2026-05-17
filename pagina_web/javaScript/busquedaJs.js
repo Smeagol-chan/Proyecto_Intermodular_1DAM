@@ -55,18 +55,24 @@ document.getElementById("but_buscar").addEventListener("click", (event) => {
         let tipo_habitacion = habitacion.querySelector(".caracteristicas").textContent.toLowerCase();
         let ubicacion_habitacion = habitacion.querySelector(".ubicacion").textContent.toLowerCase();
 
-        let servicios_habitaciones = habitacion.querySelectorAll(".servicios");
+        let servicios_habitaciones = habitacion.querySelector(".servicios");
+        let servicios_dos = habitacion.querySelector(".servicios_dos");
         let mostrar = true;
 
         if (filtro_precio !== "" && precio_final_habitacion > parseInt(filtro_precio))
             mostrar = false;
 
         let tiene_servicio = false;
-        servicios_habitaciones.forEach(servicios => {
-            if (servicios.textContent.toLowerCase().includes(filtro_opciones)) {
+        if (servicios_habitaciones !== null) {
+            if (servicios_habitaciones.textContent.toLowerCase().includes(filtro_opciones)) {
                 tiene_servicio = true;
             }
-        });
+        }
+        if (servicios_dos !== null) {
+            if (servicios_dos.textContent.toLowerCase().includes(filtro_opciones)) {
+                tiene_servicio = true;
+            }
+        }
 
         if (filtro_opciones !== "" && !tiene_servicio)
             mostrar = false;
