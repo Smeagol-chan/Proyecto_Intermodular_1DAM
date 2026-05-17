@@ -906,17 +906,6 @@ BEGIN
 END
 GO
 
-------------------------------------------------------
--- No deletes are permitted on CONTRACTS
-CREATE OR ALTER TRIGGER DELETE_CONTRACT_BLOCKADE
-ON [CONTRACT]
-INSTEAD OF DELETE
-AS
-BEGIN
-	PRINT 'Deletes over CONTRACT are not permitted.'
-END
-GO
-
 --------------------------------------------------------------------REPORT---------------------------------------------------------
 -- Checks if the user and the room exist and if the user is related to the reported room.
 CREATE OR ALTER TRIGGER NEW_REPORT_INSERTED
@@ -1051,27 +1040,6 @@ BEGIN
 		SET Status = @NewStatus
 		WHERE @ReportID = ReportID
 	END
-END
-GO
-
--------------------------------------------------------------
--- No deletes are permitted on REPORTS
-CREATE OR ALTER TRIGGER DELETE_REPORT_BLOCKADE
-ON REPORT
-INSTEAD OF DELETE
-AS
-BEGIN
-	PRINT 'Deletes over REPORT are not permitted.'
-END
-GO
-
-----------------------------------------------------------------
-CREATE OR ALTER TRIGGER BLOCK_PROVINCE_DELETE_TRIGGER
-ON PROVINCE
-INSTEAD OF DELETE
-AS
-BEGIN
-	PRINT 'Delete are not permitted for PROVINCE table.'
 END
 GO
 

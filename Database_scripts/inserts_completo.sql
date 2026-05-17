@@ -106,11 +106,11 @@ VALUES
 ('Barakaldo', 'BI'),
 ('Talavera de la Reina', 'TO'),
 ('Ponferrada', 'LE'),
-('Algeciras', 'CA');
+('Algeciras', 'CA')
 
 go
 
-insert into INSTITUTION (InstitutionName,CityID)
+insert into INSTITUTION (InstitutionName, CityID)
 values
 ('Universidad de Alicante',1),
 ('Universidad de Elche',2),
@@ -211,7 +211,7 @@ VALUES
 ('91368025W', 'Marcos', 'Benítez Acosta', '17/07/1980', '622110099', 'marcos.ba@email.com', 'mB4+soul'),
 ('02479136X', 'Rocío', 'Merino Cabrera', '09/10/1991', '644778822', 'rocio.mc@email.com', 'rM7_life'),
 ('13580247Y', 'Ismael', 'Velasco Solís', '25/12/1984', '688223311', 'ismael.vs@email.com', 'iV2*love'),
-('24691358Z', 'Nuria', 'Pallarés León', '13/04/1995', '611445500', 'nuria.pl@email.com', 'nP5.home');
+('24691358Z', 'Nuria', 'Pallarés León', '13/04/1995', '611445500', 'nuria.pl@email.com', 'nP5.home')
 go
 
 
@@ -271,7 +271,7 @@ VALUES
 ('34567890K', '44227755'),
 ('10582736C', '66883311'),
 ('12345098H', '99551144'),
-('13579246T', '22884477');
+('13579246T', '22884477')
 
 go
 
@@ -301,7 +301,7 @@ VALUES
 ('Calle de Alcalá 200', 33, '79146803Z', 'Confirmed', 118.6),
 ('Calle de la Victoria 14', 37, '84756123G', 'Denied', 91.1),
 ('Avenida de Andalucía 55', 38, '91368025B', 'Confirmed', 103.4),
-('Calle Sierpes 10', 39, '91368025W', 'Pending', 62.9);
+('Calle Sierpes 10', 39, '91368025W', 'Pending', 62.9)
 
 GO
 
@@ -399,7 +399,7 @@ VALUES
 ('Avenida de la Libertad 45', 2, 'Bedroom', 12.5, 'Available', 350.0),
 ('Calle del Mar 3', 3, 'Bedroom', 10.5, 'Rented', 290.0),
 ('Calle San José 22', 5, 'Bedroom', 11.8, 'Available', 310.0),
-('Avenida Mediterráneo 88', 6, 'Bedroom', 13.0, 'Available', 340.0);
+('Avenida Mediterráneo 88', 6, 'Bedroom', 13.0, 'Available', 340.0)
 go
 
 INSERT INTO FURNITURE (FurnitureName)
@@ -521,7 +521,7 @@ VALUES
 go
 INSERT INTO ROOM_FURNITURE (FurnitureID, PropertyAddress, PropertyCityID, RoomNumber, Quantity)
 VALUES
-(2, 'Plaza de España 5', 19, 40, 1), (15, 'Plaza de España 5', 19, 40, 1);
+(2, 'Plaza de España 5', 19, 40, 1), (15, 'Plaza de España 5', 19, 40, 1)
 
 go
 
