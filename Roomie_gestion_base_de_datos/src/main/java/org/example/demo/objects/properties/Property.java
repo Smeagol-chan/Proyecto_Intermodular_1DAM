@@ -5,12 +5,14 @@ import org.example.demo.objects.users.User;
 public class Property
 {
     private String address;
+    private Integer cityID;
     private String ownerDni;
     private String status;
-    private double surface;
+    private Double surface;
 
-    public Property(String address, String ownerDni, String status, double surface) {
+    public Property(String address, Integer cityID, String ownerDni, String status, Double surface) {
         this.address = address;
+        this.cityID = cityID;
         this.ownerDni = ownerDni;
         this.status = status;
         this.surface = surface;
@@ -18,6 +20,10 @@ public class Property
 
     public String getAddress() {
         return address;
+    }
+
+    public Integer getCityID() {
+        return cityID;
     }
 
     public String getOwnerDni() {
@@ -28,7 +34,7 @@ public class Property
         return status;
     }
 
-    public double getSurface() {
+    public Double getSurface() {
         return surface;
     }
 }

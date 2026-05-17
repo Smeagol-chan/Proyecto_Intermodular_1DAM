@@ -2,6 +2,7 @@ package org.example.demo.queries;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.example.demo.objects.locations.City;
 import org.example.demo.objects.locations.Province;
 
 import java.sql.Connection;
@@ -67,7 +68,7 @@ public class ProvinceQueries
     {
         ObservableList<String> provinceNameList = FXCollections.observableArrayList();
 
-        String query = "SELECT DISTINCT ProvinceName FROM PROVINCE GO";
+        String query = "SELECT DISTINCT ProvinceName FROM PROVINCE";
 
         Statement stmt;
         ResultSet result;
@@ -96,7 +97,7 @@ public class ProvinceQueries
     {
         ObservableList<Province> provincesList = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM PROVINCE GO";
+        String query = "SELECT * FROM PROVINCE";
 
         Statement stmt;
         ResultSet result;
@@ -125,8 +126,7 @@ public class ProvinceQueries
     public static void insert(Connection connection, Province province)
     {
         String query = "INSERT INTO PROVINCE (ProvinceID, ProvinceName)" +
-                "VALUES ('"+ province.getProvinceId() +"', '"+ province.getProvinceName() +"') " +
-                "GO";
+                " VALUES ('"+ province.getProvinceId() +"', '"+ province.getProvinceName() +"')";
 
         Statement stmt;
 
@@ -145,8 +145,27 @@ public class ProvinceQueries
     public static void delete(Connection connection, String provinceID)
     {
         String query = "DELETE FROM PROVINCE" +
-                "WHERE ProvinceID = '"+ provinceID +"'" +
-                "GO";
+                " WHERE ProvinceID = '"+ provinceID +"'";
+
+        Statement stmt;
+
+        try
+        {
+            stmt = connection.createStatement();
+            stmt.executeUpdate(query);
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void update(Connection connection, Province province)
+    {
+        String query = "UPDATE PROVINCE" +
+                " SET ProvinceName = '"+ province.getProvinceName() +"'" +
+                " WHERE ProvinceID = " + province.getProvinceId();
 
         Statement stmt;
 

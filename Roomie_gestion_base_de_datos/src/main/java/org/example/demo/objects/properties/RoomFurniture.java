@@ -2,16 +2,24 @@ package org.example.demo.objects.properties;
 
 public class RoomFurniture
 {
-    private int furnitureId;
+    private Integer furnitureId;
     private String propertyAddress;
-    private int roomNumber;
-    private int quantity;
+    private Integer cityID;
+    private Integer roomNumber;
+    private Integer quantity;
+    private String furnitureName;
 
-    public RoomFurniture(int furnitureId, String propertyAddress, int roomNumber, int quantity) {
+    public RoomFurniture(Integer furnitureId, Integer cityID, String propertyAddress, Integer roomNumber, Integer quantity) {
         this.furnitureId = furnitureId;
+        this. cityID = cityID;
         this.propertyAddress = propertyAddress;
         this.roomNumber = roomNumber;
         this.quantity = quantity;
+    }
+
+    public RoomFurniture(Integer furnitureId, Integer cityID, String propertyAddress, Integer roomNumber, Integer quantity, String furnitureName) {
+        this(furnitureId, cityID, propertyAddress, roomNumber, quantity);
+        this.furnitureName = furnitureName;
     }
 
     public int getFurnitureId() {
@@ -28,5 +36,13 @@ public class RoomFurniture
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public Integer getCityID() {
+        return cityID;
+    }
+
+    public String getFurnitureName() {
+        return furnitureName;
     }
 }

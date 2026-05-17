@@ -2,35 +2,46 @@ package org.example.demo.objects.properties;
 
 public class Room
 {
-    private int roomNumber;
-    private int propertyAddress;
+    private Integer roomNumber;
+    private String propertyAddress;
+    private Integer cityID;
     private String type;
-    private double surface;
+    private Double surface;
     private String status;
-    private double pricePerMonth;
+    private Double pricePerMonth;
 
-    public Room(int roomNumber, int propertyAddress, String type, double surface, String status, double pricePerMonth) {
+    public Room(Integer roomNumber, String propertyAddress, Integer cityID, String type, Double surface, String status, Double pricePerMonth) {
         this.roomNumber = roomNumber;
         this.propertyAddress = propertyAddress;
+        this.cityID = cityID;
         this.type = type;
         this.surface = surface;
         this.status = status;
         this.pricePerMonth = pricePerMonth;
     }
 
-    public int getRoomNumber() {
+    public Room(String propertyAddress, Integer cityID, String type, Double surface, String status, Double pricePerMonth)
+    {
+        this(null, propertyAddress, cityID, type, surface, status, pricePerMonth);
+    }
+
+    public Integer getRoomNumber() {
         return roomNumber;
     }
 
-    public int getPropertyAddress() {
+    public String getPropertyAddress() {
         return propertyAddress;
+    }
+
+    public Integer getCityID() {
+        return cityID;
     }
 
     public String getType() {
         return type;
     }
 
-    public double getSurface() {
+    public Double getSurface() {
         return surface;
     }
 
@@ -38,7 +49,7 @@ public class Room
         return status;
     }
 
-    public double getPricePerMonth() {
+    public Double getPricePerMonth() {
         return pricePerMonth;
     }
 }

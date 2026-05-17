@@ -2,81 +2,203 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controllers.WelcomeController">
-   <children>
-      <ToolBar layoutX="30.0" layoutY="-6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <Button fx:id="propertiesButton" mnemonicParsing="false" onAction="#onPropertiesClickButton" text="Properties">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="furnitureButton" mnemonicParsing="false" onAction="#onFurnitureClickButton" text="Furniture">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="usersButton" mnemonicParsing="false" onAction="#onUsersClickButton" text="Users">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <MenuButton fx:id="locationsMenuButton" mnemonicParsing="false" text="Locations">
-              <items>
-                <MenuItem fx:id="provincesMenuItem" mnemonicParsing="false" onAction="#onProvincesClickMenuItem" text="Provinces" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem fx:id="citiesMenuItem" mnemonicParsing="false" onAction="#onCitiesClickMenuItem" text="Cities" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="institutionsMenuItem" mnemonicParsing="false" onAction="#onInstitutionsClickMenuItem" text="Intitutions" />
-              </items>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </MenuButton>
-            <MenuButton fx:id="documentsMenuButton" mnemonicParsing="false" text="Documents">
-              <items>
-                <MenuItem fx:id="contractsMenuItem" mnemonicParsing="false" onAction="#onContractsClickMenuItem" text="Contracts" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem fx:id="reportsMenuItem" mnemonicParsing="false" onAction="#onReportsClickMenuItem" text="Reports" />
-              </items>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </MenuButton>
-            <Separator prefWidth="200.0" />
-            <Button fx:id="logoutButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogoutClickButton" text="Log out">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-        </items>
-      </ToolBar>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-         <children>
-            <Label text="Welcome">
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Label>
-            <Label text="Select an option in the upper menu bar">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controllers.PropertyController">
+    <children>
+        <ToolBar layoutX="30.0" layoutY="-6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <MenuButton fx:id="propertiesMenuButton" mnemonicParsing="false" text="Properties">
+                    <items>
+                        <MenuItem fx:id="propertiesMenuItem" mnemonicParsing="false" onAction="#onPropertiesClickMenuItem" text="Properties" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="roomsMenuItem" mnemonicParsing="false" onAction="#onRoomsClickMenuItem" text="Rooms" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="furnitureMenuItem" mnemonicParsing="false" onAction="#onFurnitureClickMenuItem" text="Furniture" />
+                    </items>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+                <MenuButton fx:id="usersMenuButton" mnemonicParsing="false" text="Users">
+                    <items>
+                        <MenuItem fx:id="ownerMenuItem" mnemonicParsing="false" onAction="#onOwnerClickMenuItem" text="Owners" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="tenantMenuItem" mnemonicParsing="false" onAction="#onTenantClickMenuItem" text="Tenants" />
+                    </items>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+                <MenuButton fx:id="locationsMenuButton" mnemonicParsing="false" text="Locations">
+                    <items>
+                        <MenuItem fx:id="provincesMenuItem" mnemonicParsing="false" onAction="#onProvincesClickMenuItem" text="Provinces" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="citiesMenuItem" mnemonicParsing="false" onAction="#onCitiesClickMenuItem" text="Cities" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="institutionsMenuItem" mnemonicParsing="false" onAction="#onInstitutionsClickMenuItem" text="Intitutions" />
+                    </items>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+                <MenuButton fx:id="documentsMenuButton" mnemonicParsing="false" text="Documents">
+                    <items>
+                        <MenuItem fx:id="contractsMenuItem" mnemonicParsing="false" onAction="#onContractsClickMenuItem" text="Contracts" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="reportsMenuItem" mnemonicParsing="false" onAction="#onReportsClickMenuItem" text="Reports" />
+                    </items>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+                <Separator prefWidth="200.0" />
+                <Button fx:id="logoutButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onLogoutClickButton" text="Log out">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            </items>
+        </ToolBar>
+        <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="50.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <TableView fx:id="propertyTableView">
+                    <columns>
+                        <TableColumn fx:id="cityIdTableColumn" prefWidth="75.0" text="CityID" />
+                        <TableColumn fx:id="addressTableColumn" minWidth="-Infinity" prefWidth="238.0" text="Address" />
+                        <TableColumn fx:id="ownerDniTableColumn" prefWidth="106.0" text="OwnerDNI" />
+                  <TableColumn fx:id="statusTableColumn" prefWidth="96.0" text="Status" />
+                  <TableColumn fx:id="surfaceTableColumn" prefWidth="105.0" text="Surface (m²)" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                    <children>
+                        <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#onModifyClickButton" text="Modify">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteClickButton" text="Delete">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <Label fx:id="statusMessageLabel" textFill="#c9871d">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <Separator prefHeight="288.0" prefWidth="760.0" valignment="BOTTOM" />
+                <Button fx:id="insertButton" mnemonicParsing="false" onAction="#onInsertClickButton" text="Insert">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Label fx:id="warningMessageLabel" textFill="#f50000">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <GridPane prefHeight="400.0" prefWidth="760.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="110.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="211.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="112.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="334.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Owner DNI" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets right="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="ownerDniTextField" disable="true" prefHeight="22.0" prefWidth="565.0" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+                        <ChoiceBox fx:id="statusChoiceBox" disable="true" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Status" GridPane.rowIndex="2">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets right="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                  <Label text="Surface" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="City" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Address">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="addressTextField" disable="true" prefHeight="25.0" prefWidth="632.0" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                  <ChoiceBox fx:id="cityChoiceBox" disable="true" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="surfaceTextField" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+                <Separator prefHeight="288.0" prefWidth="760.0" />
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                    <children>
+                        <Button fx:id="cancelButton" disable="true" mnemonicParsing="false" onAction="#onCancelClickButton" text="Cancel">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="confirmButton" disable="true" mnemonicParsing="false" onAction="#onConfirmClickButton" text="Confirm">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

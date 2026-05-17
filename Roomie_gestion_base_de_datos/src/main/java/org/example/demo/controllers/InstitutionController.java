@@ -1,19 +1,20 @@
 package org.example.demo.controllers;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.example.demo.Database;
 import org.example.demo.RoomieAplication;
-import org.example.demo.objects.locations.City;
+import org.example.demo.objects.locations.Institution;
 import org.example.demo.queries.CityQueries;
-import org.example.demo.queries.ProvinceQueries;
+import org.example.demo.queries.InstitutionQueries;
 
 import java.io.IOException;
 import java.sql.Connection;
 
-public class CitiesController
+public class InstitutionController
 {
     private static Connection connection;
 
@@ -21,22 +22,22 @@ public class CitiesController
     private static boolean currentlyUpdating = false;
 
     @FXML
-    private TableView<City> cityTableView;
+    private TableView<Institution> institutionTableView;
 
     @FXML
-    private TableColumn<City, Integer> cityIdTableColumn;
+    private TableColumn<Institution, Integer> institutionIdTableColumn;
 
     @FXML
-    private TableColumn<City, String> cityNameTableColumn;
+    private TableColumn<Institution, String> institutionNameTableColumn;
 
     @FXML
-    private TableColumn<City, String> provinceIdTableColumn;
+    private TableColumn<Institution, Integer> cityIdTableColumn;
 
     @FXML
-    private ChoiceBox<String> provinceNameChoiceBox;
+    private TextField institutionNameTextField;
 
     @FXML
-    private TextField cityNameTextField;
+    private ChoiceBox<String> cityChoiceBox;
 
     @FXML
     private Label warningMessageLabel;
@@ -64,31 +65,32 @@ public class CitiesController
     {
         connection = Database.conexion();
 
+        institutionIdTableColumn.setCellValueFactory(dato -> new SimpleIntegerProperty(dato.getValue().getInstitutionId()).asObject());
         cityIdTableColumn.setCellValueFactory(dato -> new SimpleIntegerProperty(dato.getValue().getCityId()).asObject());
-        cityNameTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getCityName()));
-        provinceIdTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getProvinceId()));
+        institutionNameTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getInstitutionName()));
 
-        provinceNameChoiceBox.setItems(ProvinceQueries.selectAllNames(connection));
+        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvince(connection));
 
-        cityTableView.setItems(CityQueries.selectAll(connection));
+        institutionTableView.setItems(InstitutionQueries.selectAll(connection));
     }
 
     @FXML
     private void onModifyClickButton()
     {
-        City city = cityTableView.getSelectionModel().getSelectedItem();
+        Institution institution = institutionTableView.getSelectionModel().getSelectedItem();
 
-        if(city == null)
+        if(institution == null)
         {
-            warningMessageLabel.setText("No city was selected.");
+            warningMessageLabel.setText("No institution was selected.");
             statusMessageLabel.setText("");
         }
         else
         {
             warningMessageLabel.setText("");
             statusMessageLabel.setText("");
-            cityNameTextField.setText(city.getCityName());
-            provinceNameChoiceBox.setValue(ProvinceQueries.obtainNameByID(connection, city.getProvinceId()));
+
+            institutionNameTextField.setText(institution.getInstitutionName());
+            cityChoiceBox.setValue(CityQueries.getPorpertyCityName(connection, institution.getCityId()));
 
             activateDataFields(true);
             currentlyUpdating = true;
@@ -98,39 +100,39 @@ public class CitiesController
     @FXML
     private void onDeleteClickButton()
     {
-        City city = cityTableView.getSelectionModel().getSelectedItem();
+        Institution institution = institutionTableView.getSelectionModel().getSelectedItem();
 
-        if(city == null)
+        if(institution == null)
         {
-            warningMessageLabel.setText("No city was selected.");
+            warningMessageLabel.setText("No institution was selected.");
             statusMessageLabel.setText("");
         }
         else
         {
-            CityQueries.delete(connection, city.getCityId());
+            InstitutionQueries.delete(connection, institution.getInstitutionId());
 
             warningMessageLabel.setText("");
-            statusMessageLabel.setText("City '"+ city.getCityName() +"' deleted.");
-            cityTableView.setItems(CityQueries.selectAll(connection));
+            statusMessageLabel.setText("Institution deleted.");
+            institutionTableView.setItems(InstitutionQueries.selectAll(connection));
         }
     }
 
     @FXML
     private void onInsertClickButton()
     {
+        currentlyInserting = true;
         activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
-        currentlyInserting = true;
     }
 
     @FXML
     private void onConfirmClickButton()
     {
-        String cityName = cityNameTextField.getText();
-        Object provinceName = provinceNameChoiceBox.getValue();
+        String institutionName = institutionNameTextField.getText();
+        Integer cityID = CityQueries.getCityIdByCityNameProvinceID(connection, cityChoiceBox.getValue());
 
-        if(cityName == null || provinceName == null)
+        if(institutionName == null || cityID == null)
         {
             warningMessageLabel.setText("Empty fields left.");
             statusMessageLabel.setText("");
@@ -138,33 +140,32 @@ public class CitiesController
         else
         {
             warningMessageLabel.setText("");
-            String provinceID = ProvinceQueries.obtainIDByName(connection, provinceName.toString());
 
             if(currentlyInserting)
             {
-                CityQueries.insert(connection, new City(cityName, provinceID));
-                statusMessageLabel.setText("City #" + CityQueries.getLastCityIDInserted(connection) + ", "+ cityName +" inserted.");
+                InstitutionQueries.insert(connection, new Institution(institutionName, cityID));
+                statusMessageLabel.setText("Institution inserted.");
                 currentlyInserting = false;
             }
             else if(currentlyUpdating)
             {
-                Integer cityID = cityTableView.getSelectionModel().getSelectedItem().getCityId();
+                Integer institutionID = institutionTableView.getSelectionModel().getSelectedItem().getInstitutionId();
 
-                CityQueries.update(connection, new City(cityID, cityName, provinceID));
-                statusMessageLabel.setText("City #"+ cityID +", "+ cityName +" updated.");
+                InstitutionQueries.update(connection, new Institution(institutionID, institutionName, cityID));
+                statusMessageLabel.setText("Institution updated.");
                 currentlyUpdating = false;
             }
 
             activateDataFields(false);
-            cityTableView.setItems(CityQueries.selectAll(connection));
+            institutionTableView.setItems(InstitutionQueries.selectAll(connection));
         }
     }
 
     @FXML
     private void onCancelClickButton()
     {
-        activateDataFields(false);
         reset();
+        activateDataFields(false);
     }
 
     @FXML
@@ -238,18 +239,19 @@ public class CitiesController
         modifyButton.setDisable(isActive);
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
-        cityTableView.setDisable(isActive);
+        institutionTableView.setDisable(isActive);
 
-        cityNameTextField.setDisable(!isActive);
-        provinceNameChoiceBox.setDisable(!isActive);
+        institutionNameTextField.setDisable(!isActive);
         cancelButton.setDisable(!isActive);
         confirmButton.setDisable(!isActive);
+
+        cityChoiceBox.setDisable(!currentlyInserting);
     }
 
     private void reset()
     {
-        cityNameTextField.clear();
-        provinceNameChoiceBox.setValue(null);
+        cityChoiceBox.setValue(null);
+        institutionNameTextField.clear();
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
         currentlyInserting = false;

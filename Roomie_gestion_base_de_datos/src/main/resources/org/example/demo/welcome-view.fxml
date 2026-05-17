@@ -16,21 +16,28 @@
    <children>
       <ToolBar layoutX="30.0" layoutY="-6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <Button fx:id="propertiesButton" mnemonicParsing="false" onAction="#onPropertiesClickButton" text="Properties">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="furnitureButton" mnemonicParsing="false" onAction="#onFurnitureClickButton" text="Furniture">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="usersButton" mnemonicParsing="false" onAction="#onUsersClickButton" text="Users">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+            <MenuButton fx:id="propertiesMenuButton" mnemonicParsing="false" text="Properties">
+                <items>
+                    <MenuItem fx:id="propertiesMenuItem" mnemonicParsing="false" onAction="#onPropertiesClickMenuItem" text="Properties" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="roomsMenuItem" mnemonicParsing="false" onAction="#onRoomsClickMenuItem" text="Rooms" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="furnitureMenuItem" mnemonicParsing="false" onAction="#onFurnitureClickMenuItem" text="Furniture" />
+                </items>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MenuButton>
+            <MenuButton fx:id="usersMenuButton" mnemonicParsing="false" text="Users">
+                <items>
+                    <MenuItem fx:id="ownerMenuItem" mnemonicParsing="false" onAction="#onOwnerClickMenuItem" text="Owners" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="tenantMenuItem" mnemonicParsing="false" onAction="#onTenantClickMenuItem" text="Tenants" />
+                </items>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MenuButton>
             <MenuButton fx:id="locationsMenuButton" mnemonicParsing="false" text="Locations">
               <items>
                 <MenuItem fx:id="provincesMenuItem" mnemonicParsing="false" onAction="#onProvincesClickMenuItem" text="Provinces" />

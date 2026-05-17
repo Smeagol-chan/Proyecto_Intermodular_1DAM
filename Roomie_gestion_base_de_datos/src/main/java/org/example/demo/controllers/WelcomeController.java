@@ -8,21 +8,33 @@ import java.io.IOException;
 public class WelcomeController
 {
     @FXML
-    private void onPropertiesClickButton() throws IOException
+    private void onPropertiesClickMenuItem() throws IOException
     {
         RoomieAplication.setRoot("properties");
     }
 
     @FXML
-    private void onFurnitureClickButton() throws IOException
+    private void onRoomsClickMenuItem() throws IOException
+    {
+        RoomieAplication.setRoot("room");
+    }
+
+    @FXML
+    private void onFurnitureClickMenuItem() throws IOException
     {
         RoomieAplication.setRoot("furniture");
     }
 
     @FXML
-    private void onUsersClickButton() throws IOException
+    private void onOwnerClickMenuItem() throws IOException
     {
-        RoomieAplication.setRoot("users");
+        RoomieAplication.setRoot("owner");
+    }
+
+    @FXML
+    private void onTenantClickMenuItem() throws IOException
+    {
+        RoomieAplication.setRoot("tenant");
     }
 
     @FXML

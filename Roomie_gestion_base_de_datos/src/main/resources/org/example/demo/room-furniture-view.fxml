@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -19,22 +20,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controllers.ProvincesController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controllers.RoomFurnitureController">
     <children>
-        <ToolBar layoutX="30.0" layoutY="-6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ToolBar disable="true" layoutX="30.0" layoutY="-6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <MenuButton fx:id="propertiesMenuButton" mnemonicParsing="false" text="Properties">
-                    <items>
-                        <MenuItem fx:id="propertiesMenuItem" mnemonicParsing="false" onAction="#onPropertiesClickMenuItem" text="Properties" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="roomsMenuItem" mnemonicParsing="false" onAction="#onRoomsClickMenuItem" text="Rooms" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="furnitureMenuItem" mnemonicParsing="false" onAction="#onFurnitureClickMenuItem" text="Furniture" />
-                    </items>
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </MenuButton>
+            <MenuButton fx:id="propertiesMenuButton" mnemonicParsing="false" text="Properties">
+              <items>
+                  <MenuItem fx:id="propertiesMenuItem" mnemonicParsing="false" onAction="#onPropertiesClickMenuItem" text="Properties" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="roomsMenuItem" mnemonicParsing="false" onAction="#onRoomsClickMenuItem" text="Rooms" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="furnitureMenuItem" mnemonicParsing="false" onAction="#onFurnitureClickMenuItem" text="Furniture" />
+              </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MenuButton>
                 <MenuButton fx:id="usersMenuButton" mnemonicParsing="false" text="Users">
                     <items>
                         <MenuItem fx:id="ownerMenuItem" mnemonicParsing="false" onAction="#onOwnerClickMenuItem" text="Owners" />
@@ -80,12 +81,27 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
             <children>
-                <TableView fx:id="provinceTableView">
+            <Label fx:id="currentRoomLabel" text="Room #">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentPropertyLabel">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+                <TableView fx:id="roomFurnitureTableView">
                     <columns>
-                        <TableColumn fx:id="provinceIdTableColumn" prefWidth="95.0" text="ProvinceID" />
-                        <TableColumn fx:id="provinceNameTableColumn" minWidth="-Infinity" prefWidth="226.0" text="ProvinceName" />
+                        <TableColumn fx:id="furnitureIdTableColumn" prefWidth="100.0" text="FurnitureID" />
+                        <TableColumn fx:id="furnitureNameTableColumn" minWidth="-Infinity" prefWidth="201.0" text="FurnitureName" />
+                        <TableColumn fx:id="qtyTableColumn" prefWidth="114.0" text="Quantity" />
                     </columns>
                 </TableView>
+            <Button mnemonicParsing="false" onAction="#onRoomsClickMenuItem" text="Return">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                     <children>
                         <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#onModifyClickButton" text="Modify">
@@ -116,17 +132,18 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <GridPane prefHeight="357.0" prefWidth="760.0" vgap="5.0">
+                <GridPane prefHeight="119.0" prefWidth="760.0" vgap="10.0">
                     <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="195.0" />
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="565.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="153.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="208.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="103.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="296.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Province Name">
+                        <Label text="Furniture*">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -134,8 +151,8 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <TextField fx:id="provinceNameTextField" disable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="565.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
-                  <Label text="Province ID" GridPane.rowIndex="1">
+                  <ChoiceBox fx:id="furnitureChoiceBox" disable="true" prefHeight="25.0" prefWidth="198.0" GridPane.columnIndex="1" />
+                  <Label prefHeight="25.0" prefWidth="68.0" text="Quantity*" GridPane.columnIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -143,7 +160,7 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="provinceIDTextField" disable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="565.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="qtyTextField" disable="true" GridPane.columnIndex="3" />
                     </children>
                 </GridPane>
                 <Separator prefHeight="288.0" prefWidth="760.0" />

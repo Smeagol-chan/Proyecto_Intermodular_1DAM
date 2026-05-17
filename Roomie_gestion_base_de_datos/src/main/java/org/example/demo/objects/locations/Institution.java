@@ -2,17 +2,23 @@ package org.example.demo.objects.locations;
 
 public class Institution
 {
-    private int institutionId;
+    private Integer institutionId;
     private String institutionName;
-    private int cityId;
+    private Integer cityId;
 
-    public Institution(int institutionId, String institutionName, int cityId) {
+    public Institution(Integer institutionId, String institutionName, Integer cityId)
+    {
         this.institutionId = institutionId;
         this.institutionName = institutionName;
         this.cityId = cityId;
     }
 
-    public int getInstitutionId() {
+    public Institution(String institutionName, Integer cityId)
+    {
+        this(null, institutionName, cityId);
+    }
+
+    public Integer getInstitutionId() {
         return institutionId;
     }
 

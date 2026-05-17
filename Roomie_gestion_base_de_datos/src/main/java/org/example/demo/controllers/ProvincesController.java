@@ -2,11 +2,12 @@ package org.example.demo.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.example.demo.Database;
 import org.example.demo.RoomieAplication;
+import org.example.demo.objects.locations.City;
 import org.example.demo.objects.locations.Province;
+import org.example.demo.queries.CityQueries;
 import org.example.demo.queries.ProvinceQueries;
 
 import java.io.IOException;
@@ -16,6 +17,9 @@ public class ProvincesController
 {
     private static Connection connection;
 
+    private static boolean currentlyInserting = false;
+    private static boolean currentlyUpdating = false;
+
     @FXML
     private TableView<Province> provinceTableView;
 
@@ -24,6 +28,33 @@ public class ProvincesController
 
     @FXML
     private TableColumn<Province, String> provinceNameTableColumn;
+
+    @FXML
+    private TextField provinceNameTextField;
+
+    @FXML
+    private TextField provinceIDTextField;
+
+    @FXML
+    private Label warningMessageLabel;
+
+    @FXML
+    private Label statusMessageLabel;
+
+    @FXML
+    private Button modifyButton;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Button insertButton;
+
+    @FXML
+    private Button cancelButton;
+
+    @FXML
+    private Button confirmButton;
 
     @FXML
     private void initialize()
@@ -37,21 +68,126 @@ public class ProvincesController
     }
 
     @FXML
-    private void onPropertiesClickButton() throws IOException
+    private void onModifyClickButton()
+    {
+        Province province = provinceTableView.getSelectionModel().getSelectedItem();
+
+        if(province == null)
+        {
+            warningMessageLabel.setText("No province was selected.");
+            statusMessageLabel.setText("");
+        }
+        else
+        {
+            warningMessageLabel.setText("");
+            statusMessageLabel.setText("");
+            provinceNameTextField.setText(province.getProvinceName());
+            provinceIDTextField.setText(province.getProvinceId());
+
+            activateDataFields(true);
+            currentlyUpdating = true;
+        }
+    }
+
+    @FXML
+    private void onDeleteClickButton()
+    {
+        Province province = provinceTableView.getSelectionModel().getSelectedItem();
+
+        if(province == null)
+        {
+            warningMessageLabel.setText("No province was selected.");
+            statusMessageLabel.setText("");
+        }
+        else
+        {
+            ProvinceQueries.delete(connection, province.getProvinceId());
+
+            warningMessageLabel.setText("");
+            statusMessageLabel.setText("Province '"+ province.getProvinceName() +"' deleted.");
+            provinceTableView.setItems(ProvinceQueries.selectAll(connection));
+        }
+    }
+
+    @FXML
+    private void onInsertClickButton()
+    {
+        activateDataFields(true);
+        statusMessageLabel.setText("");
+        warningMessageLabel.setText("");
+        currentlyInserting = true;
+    }
+
+    @FXML
+    private void onConfirmClickButton()
+    {
+        String provinceID = provinceIDTextField.getText();
+        String provinceName = provinceNameTextField.getText();
+
+        if(provinceID == null || provinceName == null)
+        {
+            warningMessageLabel.setText("Empty fields left.");
+            statusMessageLabel.setText("");
+        }
+        else
+        {
+            warningMessageLabel.setText("");
+
+            if(currentlyInserting)
+            {
+                ProvinceQueries.insert(connection, new Province(provinceID, provinceName));
+                statusMessageLabel.setText("Province " + provinceName + " inserted.");
+                currentlyInserting = false;
+            }
+            else if(currentlyUpdating)
+            {
+                provinceIDTextField.setDisable(true);
+
+                ProvinceQueries.update(connection, new Province(provinceID, provinceName));
+                statusMessageLabel.setText("Province "+ provinceName +" updated.");
+                currentlyUpdating = false;
+            }
+
+            activateDataFields(false);
+            provinceTableView.setItems(ProvinceQueries.selectAll(connection));
+        }
+    }
+
+    @FXML
+    private void onCancelClickButton()
+    {
+        activateDataFields(false);
+        reset();
+    }
+
+    @FXML
+    private void onPropertiesClickMenuItem() throws IOException
     {
         RoomieAplication.setRoot("properties");
     }
 
     @FXML
-    private void onFurnitureClickButton() throws IOException
+    private void onRoomsClickMenuItem() throws IOException
+    {
+        RoomieAplication.setRoot("room");
+    }
+
+    @FXML
+    private void onFurnitureClickMenuItem() throws IOException
     {
         RoomieAplication.setRoot("furniture");
     }
 
     @FXML
-    private void onUsersClickButton() throws IOException
+    private void onOwnerClickMenuItem() throws IOException
     {
-        RoomieAplication.setRoot("users");
+        RoomieAplication.setRoot("owner");
+    }
+
+    @FXML
+    private void onTenantClickMenuItem() throws IOException
+    {
+        RoomieAplication.setRoot("tenant");
     }
 
     @FXML
@@ -88,5 +224,27 @@ public class ProvincesController
     private void onLogoutClickButton() throws IOException
     {
         RoomieAplication.setRoot("login");
+    }
+
+    private void activateDataFields(boolean isActive)
+    {
+        modifyButton.setDisable(isActive);
+        deleteButton.setDisable(isActive);
+        insertButton.setDisable(isActive);
+        provinceTableView.setDisable(isActive);
+
+        provinceNameTextField.setDisable(!isActive);
+        cancelButton.setDisable(!isActive);
+        confirmButton.setDisable(!isActive);
+    }
+
+    private void reset()
+    {
+        provinceNameTextField.clear();
+        provinceIDTextField.clear();
+        statusMessageLabel.setText("");
+        warningMessageLabel.setText("");
+        currentlyInserting = false;
+        currentlyUpdating = false;
     }
 }

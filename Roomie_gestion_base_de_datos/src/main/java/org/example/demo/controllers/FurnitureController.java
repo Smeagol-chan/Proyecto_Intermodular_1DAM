@@ -6,14 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.example.demo.Database;
 import org.example.demo.RoomieAplication;
-import org.example.demo.objects.locations.City;
-import org.example.demo.queries.CityQueries;
-import org.example.demo.queries.ProvinceQueries;
+import org.example.demo.objects.properties.Furniture;
+import org.example.demo.queries.FurnitureQueries;
 
 import java.io.IOException;
 import java.sql.Connection;
 
-public class CitiesController
+public class FurnitureController
 {
     private static Connection connection;
 
@@ -21,22 +20,22 @@ public class CitiesController
     private static boolean currentlyUpdating = false;
 
     @FXML
-    private TableView<City> cityTableView;
+    private TableView<Furniture> furnitureTableView;
 
     @FXML
-    private TableColumn<City, Integer> cityIdTableColumn;
+    private TableColumn<Furniture, Integer> furnitureIdTableColumn;
 
     @FXML
-    private TableColumn<City, String> cityNameTableColumn;
+    private TableColumn<Furniture, String> furnitureNameTableColumn;
 
     @FXML
-    private TableColumn<City, String> provinceIdTableColumn;
+    private TableColumn<Furniture, String> furnitureDescriptionTableColumn;
 
     @FXML
-    private ChoiceBox<String> provinceNameChoiceBox;
+    private TextField furnitureNameTextField;
 
     @FXML
-    private TextField cityNameTextField;
+    private TextArea furnitureDescriptionTextArea;
 
     @FXML
     private Label warningMessageLabel;
@@ -64,31 +63,29 @@ public class CitiesController
     {
         connection = Database.conexion();
 
-        cityIdTableColumn.setCellValueFactory(dato -> new SimpleIntegerProperty(dato.getValue().getCityId()).asObject());
-        cityNameTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getCityName()));
-        provinceIdTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getProvinceId()));
+        furnitureIdTableColumn.setCellValueFactory(dato -> new SimpleIntegerProperty(dato.getValue().getFurnitureId()).asObject());
+        furnitureNameTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getFurnitureName()));
+        furnitureDescriptionTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getDescription()));
 
-        provinceNameChoiceBox.setItems(ProvinceQueries.selectAllNames(connection));
-
-        cityTableView.setItems(CityQueries.selectAll(connection));
+        furnitureTableView.setItems(FurnitureQueries.selectAll(connection));
     }
 
     @FXML
     private void onModifyClickButton()
     {
-        City city = cityTableView.getSelectionModel().getSelectedItem();
+        Furniture furniture = furnitureTableView.getSelectionModel().getSelectedItem();
 
-        if(city == null)
+        if(furniture == null)
         {
-            warningMessageLabel.setText("No city was selected.");
+            warningMessageLabel.setText("No furniture was selected.");
             statusMessageLabel.setText("");
         }
         else
         {
             warningMessageLabel.setText("");
             statusMessageLabel.setText("");
-            cityNameTextField.setText(city.getCityName());
-            provinceNameChoiceBox.setValue(ProvinceQueries.obtainNameByID(connection, city.getProvinceId()));
+            furnitureNameTextField.setText(furniture.getFurnitureName());
+            furnitureDescriptionTextArea.setText(furniture.getDescription());
 
             activateDataFields(true);
             currentlyUpdating = true;
@@ -98,20 +95,20 @@ public class CitiesController
     @FXML
     private void onDeleteClickButton()
     {
-        City city = cityTableView.getSelectionModel().getSelectedItem();
+        Furniture furniture = furnitureTableView.getSelectionModel().getSelectedItem();
 
-        if(city == null)
+        if(furniture == null)
         {
-            warningMessageLabel.setText("No city was selected.");
+            warningMessageLabel.setText("No furniture was selected.");
             statusMessageLabel.setText("");
         }
         else
         {
-            CityQueries.delete(connection, city.getCityId());
+            FurnitureQueries.delete(connection, furniture.getFurnitureId());
 
             warningMessageLabel.setText("");
-            statusMessageLabel.setText("City '"+ city.getCityName() +"' deleted.");
-            cityTableView.setItems(CityQueries.selectAll(connection));
+            statusMessageLabel.setText("Furniture deleted.");
+            furnitureTableView.setItems(FurnitureQueries.selectAll(connection));
         }
     }
 
@@ -127,36 +124,35 @@ public class CitiesController
     @FXML
     private void onConfirmClickButton()
     {
-        String cityName = cityNameTextField.getText();
-        Object provinceName = provinceNameChoiceBox.getValue();
+        String furnitureName = furnitureNameTextField.getText();
+        String furnitureDescription = furnitureDescriptionTextArea.getText();
 
-        if(cityName == null || provinceName == null)
+        if(furnitureName == null)
         {
-            warningMessageLabel.setText("Empty fields left.");
+            warningMessageLabel.setText("Furniture name can not be left empty.");
             statusMessageLabel.setText("");
         }
         else
         {
             warningMessageLabel.setText("");
-            String provinceID = ProvinceQueries.obtainIDByName(connection, provinceName.toString());
 
             if(currentlyInserting)
             {
-                CityQueries.insert(connection, new City(cityName, provinceID));
-                statusMessageLabel.setText("City #" + CityQueries.getLastCityIDInserted(connection) + ", "+ cityName +" inserted.");
+                FurnitureQueries.insert(connection, new Furniture(furnitureName, furnitureDescription));
+                statusMessageLabel.setText("Furniture inserted.");
                 currentlyInserting = false;
             }
             else if(currentlyUpdating)
             {
-                Integer cityID = cityTableView.getSelectionModel().getSelectedItem().getCityId();
+                Integer furnitureID = furnitureTableView.getSelectionModel().getSelectedItem().getFurnitureId();
 
-                CityQueries.update(connection, new City(cityID, cityName, provinceID));
-                statusMessageLabel.setText("City #"+ cityID +", "+ cityName +" updated.");
+                FurnitureQueries.update(connection, new Furniture(furnitureID, furnitureName, furnitureDescription));
+                statusMessageLabel.setText("Furniture updated.");
                 currentlyUpdating = false;
             }
 
             activateDataFields(false);
-            cityTableView.setItems(CityQueries.selectAll(connection));
+            furnitureTableView.setItems(FurnitureQueries.selectAll(connection));
         }
     }
 
@@ -238,18 +234,18 @@ public class CitiesController
         modifyButton.setDisable(isActive);
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
-        cityTableView.setDisable(isActive);
+        furnitureTableView.setDisable(isActive);
 
-        cityNameTextField.setDisable(!isActive);
-        provinceNameChoiceBox.setDisable(!isActive);
+        furnitureNameTextField.setDisable(!isActive);
+        furnitureDescriptionTextArea.setDisable(!isActive);
         cancelButton.setDisable(!isActive);
         confirmButton.setDisable(!isActive);
     }
 
     private void reset()
     {
-        cityNameTextField.clear();
-        provinceNameChoiceBox.setValue(null);
+        furnitureNameTextField.clear();
+        furnitureDescriptionTextArea.clear();
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
         currentlyInserting = false;
