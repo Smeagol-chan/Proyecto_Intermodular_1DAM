@@ -4,6 +4,7 @@ const ListaHabitaciones = document.querySelectorAll(".habitaciones");
 let perfil = document.getElementById("perfil");
 let registro = document.getElementById("registro");
 let inq;
+let lugarGuardado = localStorage.getItem('lugar');
 
 if (usuario) {
     perfil.innerHTML = `${usuario.nombre}`;
@@ -31,8 +32,6 @@ if (usuario) {
 }
 
 //El boton del perfil manda al perfil de inquilino o de arrendador dependiendo el tipo de usuario
-
-
 perfil.addEventListener("click", () => {
     if (inq === "Inquilino") {
         window.location.href = "perfil-inquilino.html";
@@ -89,6 +88,14 @@ document.getElementById("but_buscar").addEventListener("click", (event) => {
         }
     });
 });
+
+// Si venimos de index.html con una búsqueda guardada, se hace click automáticamente para buscar.
+// Después se elimina el lugar guardado para que no se busque de nuevo al recargar la página.
+if (lugarGuardado !== "") {
+    document.getElementById("busqueda").value = lugarGuardado;
+    localStorage.removeItem('lugar');
+    document.getElementById("but_buscar").click();
+}
 
 /* ENSEÑAR MODAL AL PULSAR EN UNA HABITACIÓN*/
 
