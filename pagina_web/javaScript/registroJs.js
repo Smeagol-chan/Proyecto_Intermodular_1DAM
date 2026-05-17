@@ -34,14 +34,15 @@ crear.addEventListener("click",(e) => {
     let contrasenya = document.getElementById("pwd").value;
     let contrasenyaConfirm = document.getElementById("pwd_confirm").value;
     let tipo;
+    let checkBox = document.getElementById("confirm").checked;
 
-    if(nombre === "" || apellidos === "" || correo === "" || telefono === "" || contrasenya === "" || contrasenyaConfirm === ""){
+    if(nombre === "" || apellidos === "" || correo === "" || telefono === "" || contrasenya === "" || contrasenyaConfirm === "" || checkBox === false){
         alert("Rellena todos los campos")
 
     }else{
 
-        if(contrasenya !== contrasenyaConfirm){
-            alert("Las contraseñas tienen que coincidir")
+        if(contrasenya !== contrasenyaConfirm || contrasenya.length < 8){
+            alert("Contraseña tienen que ser iguales y al menos 8 caracteres")
 
         }else{
 
