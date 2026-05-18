@@ -10,7 +10,7 @@ body {
 
 .navegador {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between; 
     align-items: center;
     position: fixed;
     top: 20px;
@@ -21,13 +21,15 @@ body {
     border: solid white 1px;
     border-radius: 60px;
     box-shadow: 0px 0px 10px 2px gray;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 .navegador ul {
     display: flex;
-    justify-content: space-around;
     list-style: none;
     align-items: center;
+    margin: 0;
 }
 
 .navegador li {
