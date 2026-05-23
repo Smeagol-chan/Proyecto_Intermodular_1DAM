@@ -165,7 +165,7 @@ public class ProvinceQueries
     {
         String query = "UPDATE PROVINCE" +
                 " SET ProvinceName = '"+ province.getProvinceName() +"'" +
-                " WHERE ProvinceID = " + province.getProvinceId();
+                " WHERE ProvinceID = '" + province.getProvinceId() +"'";
 
         Statement stmt;
 

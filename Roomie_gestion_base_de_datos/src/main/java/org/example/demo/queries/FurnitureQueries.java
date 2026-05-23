@@ -16,7 +16,7 @@ public class FurnitureQueries
     public static Integer getFurnitureIdByFurnitureName(Connection connection, String furnitureName)
     {
         String query = "SELECT FurnitureID FROM FURNITURE" +
-                " WHERE FurnitureName = "+ furnitureName;
+                " WHERE FurnitureName = '"+ furnitureName +"'";
 
         Statement stmt;
         ResultSet result;
@@ -30,7 +30,7 @@ public class FurnitureQueries
 
             result.next();
 
-            furnitureID = result.getInt("FurnitureName");
+            furnitureID = result.getInt("FurnitureID");
         }
         catch(SQLException e)
         {

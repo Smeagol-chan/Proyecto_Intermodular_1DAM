@@ -158,10 +158,10 @@ public class TenantController
     @FXML
     private void onInsertClickButton()
     {
-        activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
         currentlyInserting = true;
+        activateDataFields(true);
     }
 
     @FXML
@@ -206,8 +206,8 @@ public class TenantController
     @FXML
     private void onCancelClickButton()
     {
-        activateDataFields(false);
         reset();
+        activateDataFields(false);
     }
 
     @FXML

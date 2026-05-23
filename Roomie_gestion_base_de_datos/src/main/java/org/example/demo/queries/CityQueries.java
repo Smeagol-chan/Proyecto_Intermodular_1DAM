@@ -10,14 +10,14 @@ import java.util.Stack;
 
 public class CityQueries
 {
-    public static Integer getCityIdByCityNameProvinceID(Connection connection, String city)
+    public static Integer getCityIdByCityNameProvinceName(Connection connection, String cityString)
     {
         Stack<String> cityNameProvince = new Stack<>();
 
-        cityNameProvince.addAll(Arrays.asList(city.split(", ")));
+        cityNameProvince.addAll(Arrays.asList(cityString.split(", ")));
 
         String query = "SELECT CityID FROM CITY" +
-                " WHERE ProvinceID = '"+ cityNameProvince.pop() +"'"+
+                " WHERE ProvinceID = '"+ ProvinceQueries.obtainIDByName(connection, cityNameProvince.pop()) +"'"+
                 " AND CityName = '"+ cityNameProvince.pop() +"'";
 
         Statement stmt;
@@ -42,9 +42,12 @@ public class CityQueries
         return cityID;
     }
 
-    public static String getPorpertyCityName(Connection connection, int cityID)
+    public static String getCityNameProvinceName(Connection connection, int cityID)
     {
-        String query = "SELECT CityName, ProvinceID FROM CITY WHERE CityID = "+ cityID;
+        String query = "SELECT c.CityName AS 'CityName', p.ProvinceName AS 'ProvinceName'" +
+                " FROM CITY c" +
+                " JOIN PROVINCE p ON c.ProvinceID = p.ProvinceID" +
+                " WHERE c.CityID = "+ cityID;
 
         Statement stmt;
         ResultSet result;
@@ -59,7 +62,7 @@ public class CityQueries
             result.next();
 
             String cityName = result.getString("CityName");
-            String provinceID = result.getString("ProvinceID");
+            String provinceID = result.getString("ProvinceName");
             city = cityName +", "+ provinceID;
         }
         catch(SQLException e)
@@ -70,7 +73,7 @@ public class CityQueries
         return city;
     }
 
-    public static ObservableList<String> selectCitiesNameProvince(Connection connection)
+    public static ObservableList<String> selectCitiesNameProvinceName(Connection connection)
     {
         ObservableList<String> citiesNamesList = FXCollections.observableArrayList();
 

@@ -102,6 +102,11 @@
                                 <Font size="14.0" />
                             </font>
                         </Button>
+                  <Button mnemonicParsing="false" onAction="#onCheckInstitutionsClickButton" text="Check Institutions near by">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                     </children>
                 </HBox>
                 <Label fx:id="statusMessageLabel" textFill="#c9871d">
@@ -133,7 +138,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Owner DNI" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label text="Owner DNI*" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -151,7 +156,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                  <Label text="Surface" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Label text="Surface*" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -159,7 +164,7 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="City" GridPane.rowIndex="1">
+                  <Label text="City*" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -167,7 +172,7 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Address">
+                  <Label text="Address*">
                      <font>
                         <Font size="16.0" />
                      </font>

@@ -1,7 +1,6 @@
 package org.example.demo.controllers;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -123,7 +122,7 @@ public class ReportController
         reportTableView.setItems(ReportQueries.selectAll(connection));
 
         statusChoiceBox.setItems(STATUS_LIST);
-        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvince(connection));
+        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvinceName(connection));
     }
 
     @FXML
@@ -144,7 +143,7 @@ public class ReportController
             reportDateDatePicker.setValue(report.getReportDate().toLocalDate());
             userDniTextField.setText(report.getUserDni());
             addressTextField.setText(report.getPropertyAddress());
-            cityChoiceBox.setValue(CityQueries.getPorpertyCityName(connection, report.getPropertyCityId()));
+            cityChoiceBox.setValue(CityQueries.getCityNameProvinceName(connection, report.getPropertyCityId()));
             roomNumberTextField.setText(String.valueOf(report.getRoomNumber()));
             issueTextField.setText(report.getIssue());
             detailsTextArea.setText(report.getDetails());
@@ -178,10 +177,10 @@ public class ReportController
     @FXML
     private void onInsertClickButton()
     {
-        activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
         currentlyInserting = true;
+        activateDataFields(true);
     }
 
     @FXML
@@ -190,7 +189,7 @@ public class ReportController
         LocalDate reportDate = reportDateDatePicker.getValue();
         String userDni = userDniTextField.getText();
         String address = addressTextField.getText();
-        Integer cityID = CityQueries.getCityIdByCityNameProvinceID(connection, cityChoiceBox.getValue());
+        Integer cityID = CityQueries.getCityIdByCityNameProvinceName(connection, cityChoiceBox.getValue());
         Integer roomNumber;
         String issue = issueTextField.getText();
         String details = detailsTextArea.getText();
@@ -241,8 +240,8 @@ public class ReportController
     @FXML
     private void onCancelClickButton()
     {
-        activateDataFields(false);
         reset();
+        activateDataFields(false);
     }
 
     @FXML

@@ -3,30 +3,27 @@ package org.example.demo.controllers;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.example.demo.Database;
 import org.example.demo.RoomieAplication;
+import org.example.demo.objects.locations.Institution;
+import org.example.demo.objects.locations.PropertyInstitution;
 import org.example.demo.objects.properties.Property;
 import org.example.demo.queries.CityQueries;
-import org.example.demo.queries.PropertyQueries;
+import org.example.demo.queries.PropertyInstituteQueries;
 
 import java.io.IOException;
 import java.sql.Connection;
 
-public class PropertyController
+public class PropertiesNearbyController
 {
     private static Connection connection;
 
-    private static boolean currentlyInserting = false;
-    private static boolean currentlyUpdating = false;
-
-    private static final ObservableList<String> STATUS_LIST = FXCollections.observableArrayList("Denied", "Confirmed", "Pending");
+    public static Institution currentInstitution;
 
     @FXML
-    private TableView<Property> propertyTableView;
+    private TableView<Property> propertiesTableView;
 
     @FXML
     private TableColumn<Property, String> addressTableColumn;
@@ -44,28 +41,22 @@ public class PropertyController
     private TableColumn<Property, Double> surfaceTableColumn;
 
     @FXML
-    private TextField addressTextField;
-
-    @FXML
     private ChoiceBox<String> cityChoiceBox;
 
     @FXML
-    private TextField ownerDniTextField;
+    private TextField addressTextField;
 
     @FXML
-    private ChoiceBox<String> statusChoiceBox;
+    private Label targetInstitutionIdLabel;
 
     @FXML
-    private TextField surfaceTextField;
+    private Label targetInstitutionNameLabel;
 
     @FXML
     private Label warningMessageLabel;
 
     @FXML
     private Label statusMessageLabel;
-
-    @FXML
-    private Button modifyButton;
 
     @FXML
     private Button deleteButton;
@@ -90,54 +81,18 @@ public class PropertyController
         statusTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getStatus()));
         surfaceTableColumn.setCellValueFactory(dato -> new SimpleDoubleProperty(dato.getValue().getSurface()).asObject());
 
-        statusChoiceBox.setItems(STATUS_LIST);
-        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvinceName(connection));
+        cityChoiceBox.setItems(PropertyInstituteQueries.getAllPropertyCitiesExceptAlreadyAdded(connection, currentInstitution.getCityId()));
 
-        propertyTableView.setItems(PropertyQueries.selectAll(connection));
-    }
+        propertiesTableView.setItems(PropertyInstituteQueries.selectPropertiesNearByInstitution(connection, currentInstitution.getCityId()));
 
-    @FXML
-    private void onCheckInstitutionsClickButton()throws IOException
-    {
-        Property property = propertyTableView.getSelectionModel().getSelectedItem();
-
-        if(property == null) warningMessageLabel.setText("No property was selected.");
-        else
-        {
-            InstitutionsNearbyController.currentProperty = property;
-            RoomieAplication.setRoot("institutions-nearby");
-        }
-    }
-
-    @FXML
-    private void onModifyClickButton()
-    {
-        Property property = propertyTableView.getSelectionModel().getSelectedItem();
-
-        if(property == null)
-        {
-            warningMessageLabel.setText("No property was selected.");
-            statusMessageLabel.setText("");
-        }
-        else
-        {
-            warningMessageLabel.setText("");
-            statusMessageLabel.setText("");
-            addressTextField.setText(property.getAddress());
-            cityChoiceBox.setValue(CityQueries.getCityNameProvinceName(connection, property.getCityID()));
-            ownerDniTextField.setText(property.getOwnerDni());
-            statusChoiceBox.setValue(property.getStatus());
-            surfaceTextField.setText(String.valueOf(property.getSurface()));
-
-            activateDataFields(true);
-            currentlyUpdating = true;
-        }
+        targetInstitutionIdLabel.setText(targetInstitutionIdLabel.getText() + currentInstitution.getInstitutionId());
+        targetInstitutionNameLabel.setText(currentInstitution.getInstitutionName() +", "+ CityQueries.getCityNameProvinceName(connection, currentInstitution.getCityId()));
     }
 
     @FXML
     private void onDeleteClickButton()
     {
-        Property property = propertyTableView.getSelectionModel().getSelectedItem();
+        Property property = propertiesTableView.getSelectionModel().getSelectedItem();
 
         if(property == null)
         {
@@ -146,18 +101,17 @@ public class PropertyController
         }
         else
         {
-            PropertyQueries.delete(connection, property);
+            PropertyInstituteQueries.delete(connection, new PropertyInstitution(currentInstitution.getInstitutionId(), property.getAddress(), property.getCityID()));
 
             warningMessageLabel.setText("");
             statusMessageLabel.setText("Property deleted.");
-            propertyTableView.setItems(PropertyQueries.selectAll(connection));
+            propertiesTableView.setItems(PropertyInstituteQueries.selectPropertiesNearByInstitution(connection, currentInstitution.getCityId()));
         }
     }
 
     @FXML
     private void onInsertClickButton()
     {
-        currentlyInserting = true;
         activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
@@ -168,21 +122,8 @@ public class PropertyController
     {
         String address = addressTextField.getText();
         Integer cityID = CityQueries.getCityIdByCityNameProvinceName(connection, cityChoiceBox.getValue());
-        String ownerDni = ownerDniTextField.getText();
-        String status = statusChoiceBox.getValue();
-        Double surface;
-        try
-        {
-            surface = Double.parseDouble(surfaceTextField.getText());
-        }
-        catch (NumberFormatException e)
-        {
-            warningMessageLabel.setText("Surface field only admits numeric values.");
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
 
-        if(address == null || cityID == null || ownerDni == null || surface == null)
+        if(address == null || cityID == null)
         {
             warningMessageLabel.setText("Empty fields left.");
             statusMessageLabel.setText("");
@@ -191,21 +132,14 @@ public class PropertyController
         {
             warningMessageLabel.setText("");
 
-            if(currentlyInserting)
+            if(PropertyInstituteQueries.tryInsertProperty(connection, new PropertyInstitution(currentInstitution.getInstitutionId(), address, cityID)))
             {
-                PropertyQueries.insert(connection, new Property(address, cityID, ownerDni, status, surface));
                 statusMessageLabel.setText("Property inserted.");
-                currentlyInserting = false;
-            }
-            else if(currentlyUpdating)
-            {
-                PropertyQueries.update(connection, new Property(address, cityID, ownerDni, status, surface));
-                statusMessageLabel.setText("Property updated.");
-                currentlyUpdating = false;
-            }
 
-            activateDataFields(false);
-            propertyTableView.setItems(PropertyQueries.selectAll(connection));
+                activateDataFields(false);
+                propertiesTableView.setItems(PropertyInstituteQueries.selectPropertiesNearByInstitution(connection, currentInstitution.getInstitutionId()));
+            }
+            else warningMessageLabel.setText("The property does not exist.");
         }
     }
 
@@ -261,6 +195,7 @@ public class PropertyController
     @FXML
     private void onInstitutionsClickMenuItem() throws IOException
     {
+        currentInstitution = null;
         RoomieAplication.setRoot("institutions");
     }
 
@@ -284,31 +219,21 @@ public class PropertyController
 
     private void activateDataFields(boolean isActive)
     {
-        modifyButton.setDisable(isActive);
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
-        propertyTableView.setDisable(isActive);
+        propertiesTableView.setDisable(isActive);
 
-        ownerDniTextField.setDisable(!isActive);
-        surfaceTextField.setDisable(!isActive);
-        statusChoiceBox.setDisable(!isActive);
+        cityChoiceBox.setDisable(!isActive);
+        addressTextField.setDisable(!isActive);
         cancelButton.setDisable(!isActive);
         confirmButton.setDisable(!isActive);
-
-        cityChoiceBox.setDisable(!currentlyInserting);
-        addressTextField.setDisable(!currentlyInserting);
     }
 
     private void reset()
     {
         addressTextField.clear();
         cityChoiceBox.setValue(null);
-        ownerDniTextField.clear();
-        statusChoiceBox.setValue(null);
-        surfaceTextField.setText("");
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
-        currentlyInserting = false;
-        currentlyUpdating = false;
     }
 }

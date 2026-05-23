@@ -100,6 +100,11 @@
                                 <Font size="14.0" />
                             </font>
                         </Button>
+                  <Button mnemonicParsing="false" onAction="#onCheckPropertiesClickButton" text="Check Properties near by">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                     </children>
                 </HBox>
                 <Label fx:id="statusMessageLabel" textFill="#c9871d">

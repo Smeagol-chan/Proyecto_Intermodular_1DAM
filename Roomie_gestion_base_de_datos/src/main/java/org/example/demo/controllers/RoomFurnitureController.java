@@ -83,7 +83,7 @@ public class RoomFurnitureController
         roomFurnitureTableView.setItems(RoomFurnitureQueries.selectAll(connection, currentRoom));
 
         currentRoomLabel.setText(currentRoomLabel.getText() + currentRoom.getRoomNumber());
-        currentPropertyLabel.setText(currentRoom.getPropertyAddress() +", "+ CityQueries.getPorpertyCityName(connection, currentRoom.getCityID()));
+        currentPropertyLabel.setText(currentRoom.getPropertyAddress() +", "+ CityQueries.getCityNameProvinceName(connection, currentRoom.getCityID()));
     }
 
     @FXML

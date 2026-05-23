@@ -128,7 +128,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="City ID">
+                  <Label text="City Name*">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -138,7 +138,7 @@
                   </Label>
                   <TextField fx:id="cityNameTextField" disable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="565.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
                   <ChoiceBox fx:id="provinceNameChoiceBox" disable="true" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Province Name" GridPane.rowIndex="1">
+                  <Label text="Province*" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>

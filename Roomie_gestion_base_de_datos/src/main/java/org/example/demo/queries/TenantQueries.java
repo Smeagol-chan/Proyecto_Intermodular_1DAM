@@ -31,7 +31,7 @@ public class TenantQueries
 
             while(result.next())
             {
-                String dni = result.getString("DniOfOwner");
+                String dni = result.getString("DniOfTenant");
                 String name = result.getString("Name");
                 String surnames = result.getString("Surnames");
                 LocalDate birth = result.getDate("Birthday").toLocalDate();

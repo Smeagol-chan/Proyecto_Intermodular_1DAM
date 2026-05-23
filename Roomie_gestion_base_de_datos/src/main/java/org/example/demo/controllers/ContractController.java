@@ -130,7 +130,7 @@ public class ContractController
         contractTableView.setItems(ContractQueries.selectAll(connection));
 
         statusChoiceBox.setItems(STATUS_LIST);
-        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvince(connection));
+        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvinceName(connection));
     }
 
     @FXML
@@ -151,7 +151,7 @@ public class ContractController
             signatureDateDatePicker.setValue(contract.getSignatureDate());
             tenantDniTextField.setText(contract.getTenantDni());
             addressTextField.setText(contract.getPropertyAddress());
-            cityChoiceBox.setValue(CityQueries.getPorpertyCityName(connection, contract.getPropertyCityId()));
+            cityChoiceBox.setValue(CityQueries.getCityNameProvinceName(connection, contract.getPropertyCityId()));
             roomNumberTextField.setText(String.valueOf(contract.getRoomNumber()));
             startingDateDatePicker.setValue(contract.getStartingDate());
             endingDateDatePicker.setValue(contract.getEndingDate());
@@ -186,10 +186,10 @@ public class ContractController
     @FXML
     private void onInsertClickButton()
     {
-        activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
         currentlyInserting = true;
+        activateDataFields(true);
     }
 
     @FXML
@@ -198,7 +198,7 @@ public class ContractController
         LocalDate signatureDate = signatureDateDatePicker.getValue();
         String tenantDni = tenantDniTextField.getText();
         String address = addressTextField.getText();
-        Integer cityID = CityQueries.getCityIdByCityNameProvinceID(connection, cityChoiceBox.getValue());
+        Integer cityID = CityQueries.getCityIdByCityNameProvinceName(connection, cityChoiceBox.getValue());
         Integer roomNumber;
         LocalDate startingDate = startingDateDatePicker.getValue();
         LocalDate endingDate = endingDateDatePicker.getValue();
@@ -252,8 +252,8 @@ public class ContractController
     @FXML
     private void onCancelClickButton()
     {
-        activateDataFields(false);
         reset();
+        activateDataFields(false);
     }
 
     @FXML

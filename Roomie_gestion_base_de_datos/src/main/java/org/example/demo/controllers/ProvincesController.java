@@ -112,10 +112,10 @@ public class ProvincesController
     @FXML
     private void onInsertClickButton()
     {
-        activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
         currentlyInserting = true;
+        activateDataFields(true);
     }
 
     @FXML
@@ -236,6 +236,8 @@ public class ProvincesController
         provinceNameTextField.setDisable(!isActive);
         cancelButton.setDisable(!isActive);
         confirmButton.setDisable(!isActive);
+
+        provinceIDTextField.setDisable(!currentlyInserting);
     }
 
     private void reset()

@@ -7,45 +7,44 @@ import javafx.scene.control.*;
 import org.example.demo.Database;
 import org.example.demo.RoomieAplication;
 import org.example.demo.objects.locations.Institution;
+import org.example.demo.objects.locations.PropertyInstitution;
+import org.example.demo.objects.properties.Property;
 import org.example.demo.queries.CityQueries;
 import org.example.demo.queries.InstitutionQueries;
+import org.example.demo.queries.PropertyInstituteQueries;
 
 import java.io.IOException;
 import java.sql.Connection;
 
-public class InstitutionController
+public class InstitutionsNearbyController
 {
     private static Connection connection;
 
-    private static boolean currentlyInserting = false;
-    private static boolean currentlyUpdating = false;
+    public static Property currentProperty;
 
     @FXML
-    private TableView<Institution> institutionTableView;
+    private TableView<Institution> institutionsTableView;
 
     @FXML
     private TableColumn<Institution, Integer> institutionIdTableColumn;
 
     @FXML
-    private TableColumn<Institution, String> institutionNameTableColumn;
-
-    @FXML
     private TableColumn<Institution, Integer> cityIdTableColumn;
 
     @FXML
-    private TextField institutionNameTextField;
+    private TableColumn<Institution, String> institutionNameTableColumn;
 
     @FXML
-    private ChoiceBox<String> cityChoiceBox;
+    private ChoiceBox<String> institutionChoiceBox;
+
+    @FXML
+    private Label targetPropertyLabel;
 
     @FXML
     private Label warningMessageLabel;
 
     @FXML
     private Label statusMessageLabel;
-
-    @FXML
-    private Button modifyButton;
 
     @FXML
     private Button deleteButton;
@@ -68,51 +67,17 @@ public class InstitutionController
         cityIdTableColumn.setCellValueFactory(dato -> new SimpleIntegerProperty(dato.getValue().getCityId()).asObject());
         institutionNameTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getInstitutionName()));
 
-        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvinceName(connection));
+        institutionChoiceBox.setItems(PropertyInstituteQueries.getAllInstitutionsExceptAlreadyAdded(connection, currentProperty));
 
-        institutionTableView.setItems(InstitutionQueries.selectAll(connection));
-    }
+        institutionsTableView.setItems(PropertyInstituteQueries.selectInstitutionsNearByProperty(connection, currentProperty));
 
-    @FXML
-    private void onCheckPropertiesClickButton()throws IOException
-    {
-        Institution institution = institutionTableView.getSelectionModel().getSelectedItem();
-
-        if(institution == null) warningMessageLabel.setText("No institution was selected.");
-        else
-        {
-            PropertiesNearbyController.currentInstitution = institution;
-            RoomieAplication.setRoot("properties-nearby");
-        }
-    }
-
-    @FXML
-    private void onModifyClickButton()
-    {
-        Institution institution = institutionTableView.getSelectionModel().getSelectedItem();
-
-        if(institution == null)
-        {
-            warningMessageLabel.setText("No institution was selected.");
-            statusMessageLabel.setText("");
-        }
-        else
-        {
-            warningMessageLabel.setText("");
-            statusMessageLabel.setText("");
-
-            institutionNameTextField.setText(institution.getInstitutionName());
-            cityChoiceBox.setValue(CityQueries.getCityNameProvinceName(connection, institution.getCityId()));
-
-            activateDataFields(true);
-            currentlyUpdating = true;
-        }
+        targetPropertyLabel.setText(currentProperty.getAddress() +", "+ CityQueries.getCityNameProvinceName(connection, currentProperty.getCityID()));
     }
 
     @FXML
     private void onDeleteClickButton()
     {
-        Institution institution = institutionTableView.getSelectionModel().getSelectedItem();
+        Institution institution = institutionsTableView.getSelectionModel().getSelectedItem();
 
         if(institution == null)
         {
@@ -121,18 +86,17 @@ public class InstitutionController
         }
         else
         {
-            InstitutionQueries.delete(connection, institution.getInstitutionId());
+            PropertyInstituteQueries.delete(connection, new PropertyInstitution(institution.getInstitutionId(), currentProperty.getAddress(), currentProperty.getCityID()));
 
             warningMessageLabel.setText("");
             statusMessageLabel.setText("Institution deleted.");
-            institutionTableView.setItems(InstitutionQueries.selectAll(connection));
+            institutionsTableView.setItems(PropertyInstituteQueries.selectInstitutionsNearByProperty(connection, currentProperty));
         }
     }
 
     @FXML
     private void onInsertClickButton()
     {
-        currentlyInserting = true;
         activateDataFields(true);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
@@ -141,10 +105,9 @@ public class InstitutionController
     @FXML
     private void onConfirmClickButton()
     {
-        String institutionName = institutionNameTextField.getText();
-        Integer cityID = CityQueries.getCityIdByCityNameProvinceName(connection, cityChoiceBox.getValue());
+        Integer institutionID = InstitutionQueries.getIdbyNameCity(connection, institutionChoiceBox.getValue());
 
-        if(institutionName == null || cityID == null)
+        if(institutionID == null)
         {
             warningMessageLabel.setText("Empty fields left.");
             statusMessageLabel.setText("");
@@ -153,23 +116,14 @@ public class InstitutionController
         {
             warningMessageLabel.setText("");
 
-            if(currentlyInserting)
+            if(PropertyInstituteQueries.tryInsertInstitution(connection, new PropertyInstitution(institutionID, currentProperty.getAddress(), currentProperty.getCityID())))
             {
-                InstitutionQueries.insert(connection, new Institution(institutionName, cityID));
                 statusMessageLabel.setText("Institution inserted.");
-                currentlyInserting = false;
-            }
-            else if(currentlyUpdating)
-            {
-                Integer institutionID = institutionTableView.getSelectionModel().getSelectedItem().getInstitutionId();
 
-                InstitutionQueries.update(connection, new Institution(institutionID, institutionName, cityID));
-                statusMessageLabel.setText("Institution updated.");
-                currentlyUpdating = false;
+                activateDataFields(false);
+                institutionsTableView.setItems(PropertyInstituteQueries.selectInstitutionsNearByProperty(connection, currentProperty));
             }
-
-            activateDataFields(false);
-            institutionTableView.setItems(InstitutionQueries.selectAll(connection));
+            else warningMessageLabel.setText("The institution does not exist.");
         }
     }
 
@@ -183,6 +137,7 @@ public class InstitutionController
     @FXML
     private void onPropertiesClickMenuItem() throws IOException
     {
+        currentProperty = null;
         RoomieAplication.setRoot("properties");
     }
 
@@ -248,25 +203,19 @@ public class InstitutionController
 
     private void activateDataFields(boolean isActive)
     {
-        modifyButton.setDisable(isActive);
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
-        institutionTableView.setDisable(isActive);
+        institutionsTableView.setDisable(isActive);
 
-        institutionNameTextField.setDisable(!isActive);
+        institutionChoiceBox.setDisable(!isActive);
         cancelButton.setDisable(!isActive);
         confirmButton.setDisable(!isActive);
-
-        cityChoiceBox.setDisable(!currentlyInserting);
     }
 
     private void reset()
     {
-        cityChoiceBox.setValue(null);
-        institutionNameTextField.clear();
+        institutionChoiceBox.setValue(null);
         statusMessageLabel.setText("");
         warningMessageLabel.setText("");
-        currentlyInserting = false;
-        currentlyUpdating = false;
     }
 }

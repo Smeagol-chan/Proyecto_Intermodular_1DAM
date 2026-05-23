@@ -9,9 +9,48 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class InstitutionQueries
 {
+    // INSTITUTION debería ser débil o, como mínimo, tener un constrain para evitar que repitan institutos en la misma ciudad.
+    // El programa permite insertarlo y aquí petará.
+    // @author Eric
+    public static Integer getIdbyNameCity(Connection connection, String institutionString)
+    {
+        Queue<String> institutionNameCity = new ArrayBlockingQueue<>(3);
+
+        institutionNameCity.addAll(Arrays.asList(institutionString.split(", ")));
+
+        String query = "SELECT InstitutionID FROM INSTITUTION" +
+                " WHERE InstitutionName = '"+ institutionNameCity.poll() +"'" +
+                " AND CityID = "+ CityQueries.getCityIdByCityNameProvinceName(connection, institutionNameCity.poll() +", "+ institutionNameCity.poll());
+
+        Statement stmt;
+        ResultSet result;
+
+        int institutionID;
+
+        try
+        {
+            stmt = connection.createStatement();
+            result = stmt.executeQuery(query);
+
+            result.next();
+
+            institutionID = result.getInt("InstitutionID");
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return institutionID;
+    }
+
     public static ObservableList<Institution> selectAll(Connection connection)
     {
         ObservableList<Institution> institutionsList = FXCollections.observableArrayList();

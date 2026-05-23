@@ -141,7 +141,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Room number" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label text="Room number*" GridPane.columnIndex="2" GridPane.rowIndex="2">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -158,7 +158,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label text="Property city" textAlignment="RIGHT" GridPane.rowIndex="2">
+                        <Label text="Property city*" textAlignment="RIGHT" GridPane.rowIndex="2">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -166,7 +166,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="124.0" text="Property address" textAlignment="RIGHT" GridPane.rowIndex="1">
+                        <Label prefHeight="25.0" prefWidth="129.0" text="Property address*" textAlignment="RIGHT" GridPane.rowIndex="1">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -178,7 +178,7 @@
                         <ChoiceBox fx:id="cityChoiceBox" disable="true" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="roomNumberTextField" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <TextField fx:id="userDniTextField" disable="true" GridPane.columnIndex="3" />
-                        <Label text="User DNI" textAlignment="RIGHT" GridPane.columnIndex="2">
+                        <Label text="User DNI*" textAlignment="RIGHT" GridPane.columnIndex="2">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -186,7 +186,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label text="Report date" textAlignment="RIGHT">
+                        <Label text="Report date*" textAlignment="RIGHT">
                             <GridPane.margin>
                                 <Insets right="10.0" />
                             </GridPane.margin>
@@ -195,7 +195,7 @@
                             </font>
                         </Label>
                         <DatePicker fx:id="reportDateDatePicker" disable="true" editable="true" GridPane.columnIndex="1" />
-                        <Label text="Issue" GridPane.rowIndex="3">
+                        <Label text="Issue*" GridPane.rowIndex="3">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -204,7 +204,7 @@
                             </GridPane.margin>
                         </Label>
                   <TextField fx:id="issueTextField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Details" GridPane.rowIndex="4">
+                  <Label text="Details*" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
                      </font>

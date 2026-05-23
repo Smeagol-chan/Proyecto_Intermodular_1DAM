@@ -107,8 +107,7 @@ VALUES
 ('Talavera de la Reina', 'TO'),
 ('Ponferrada', 'LE'),
 ('Algeciras', 'CA')
-
-go
+GO
 
 insert into INSTITUTION (InstitutionName, CityID)
 values

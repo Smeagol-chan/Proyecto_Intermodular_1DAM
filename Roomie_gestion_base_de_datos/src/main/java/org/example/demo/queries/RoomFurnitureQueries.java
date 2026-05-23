@@ -55,7 +55,7 @@ public class RoomFurnitureQueries
                 ", "+ roomFurniture.getCityID() +
                 ", "+ roomFurniture.getRoomNumber() +
                 ", "+ roomFurniture.getFurnitureId() +
-                ", "+ roomFurniture.getQuantity();
+                ", "+ roomFurniture.getQuantity() +")";
 
         Statement stmt;
 
@@ -95,9 +95,9 @@ public class RoomFurnitureQueries
 
     public static void update(Connection connection, RoomFurniture roomFurniture)
     {
-        String query = "UPDATE ROOM" +
+        String query = "UPDATE ROOM_FURNITURE" +
                 " SET Quantity = "+ roomFurniture.getQuantity() +
-                " WHERE Address = '"+ roomFurniture.getPropertyAddress() +"'" +
+                " WHERE PropertyAddress = '"+ roomFurniture.getPropertyAddress() +"'" +
                 " AND PropertyCityID = "+ roomFurniture.getCityID() +
                 " AND RoomNumber = "+ roomFurniture.getRoomNumber() +
                 " AND FurnitureID = "+ roomFurniture.getFurnitureId();

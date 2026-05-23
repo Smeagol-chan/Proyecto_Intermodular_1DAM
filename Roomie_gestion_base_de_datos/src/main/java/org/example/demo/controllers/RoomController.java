@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import org.example.demo.Database;
 import org.example.demo.RoomieAplication;
 import org.example.demo.objects.properties.Room;
-import org.example.demo.objects.properties.RoomFurniture;
 import org.example.demo.queries.CityQueries;
 import org.example.demo.queries.RoomQueries;
 
@@ -104,7 +103,7 @@ public class RoomController
         statusTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getStatus()));
         pricePerMonthTableColumn.setCellValueFactory(dato -> new SimpleDoubleProperty(dato.getValue().getPricePerMonth()).asObject());
 
-        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvince(connection));
+        cityChoiceBox.setItems(CityQueries.selectCitiesNameProvinceName(connection));
         statusChoiceBox.setItems(STATUS_LIST);
         typeChoiceBox.setItems(TYPE_LIST);
 
@@ -139,7 +138,7 @@ public class RoomController
             warningMessageLabel.setText("");
             statusMessageLabel.setText("");
             addressTextField.setText(room.getPropertyAddress());
-            cityChoiceBox.setValue(CityQueries.getPorpertyCityName(connection, room.getCityID()));
+            cityChoiceBox.setValue(CityQueries.getCityNameProvinceName(connection, room.getCityID()));
             typeChoiceBox.setValue(room.getType());
             statusChoiceBox.setValue(room.getStatus());
             surfaceTextField.setText(String.valueOf(room.getSurface()));
@@ -183,7 +182,7 @@ public class RoomController
     private void onConfirmClickButton()
     {
         String address = addressTextField.getText();
-        Integer cityID = CityQueries.getCityIdByCityNameProvinceID(connection, cityChoiceBox.getValue());
+        Integer cityID = CityQueries.getCityIdByCityNameProvinceName(connection, cityChoiceBox.getValue());
         String type = typeChoiceBox.getValue();
         String status = statusChoiceBox.getValue();
         Double surface, pricePerMonth;

@@ -128,8 +128,8 @@
                 </Label>
                 <GridPane prefHeight="400.0" prefWidth="760.0" vgap="10.0">
                     <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="153.0" />
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="191.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="160.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="184.0" />
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="123.0" />
                         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="565.0" minWidth="10.0" prefWidth="293.0" />
                     </columnConstraints>
@@ -141,7 +141,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Room number" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label text="Room number*" GridPane.columnIndex="2" GridPane.rowIndex="2">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -158,7 +158,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label text="Ending date" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <Label text="Ending date*" GridPane.columnIndex="2" GridPane.rowIndex="3">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -166,7 +166,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label text="Property city" textAlignment="RIGHT" GridPane.rowIndex="2">
+                        <Label text="Property city*" textAlignment="RIGHT" GridPane.rowIndex="2">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -174,7 +174,7 @@
                                 <Insets right="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="124.0" text="Property address" textAlignment="RIGHT" GridPane.rowIndex="1">
+                        <Label prefHeight="25.0" prefWidth="126.0" text="Property address*" textAlignment="RIGHT" GridPane.rowIndex="1">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -183,16 +183,16 @@
                             </GridPane.margin>
                         </Label>
                         <TextField fx:id="addressTextField" disable="true" prefHeight="25.0" prefWidth="632.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-                        <Label prefHeight="25.0" prefWidth="139.0" text="Price per Month (€)" GridPane.rowIndex="4">
+                        <Label prefHeight="25.0" prefWidth="150.0" text="Price per Month (€)*" GridPane.rowIndex="4">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <ChoiceBox fx:id="cityChoiceBox" disable="true" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ChoiceBox fx:id="cityChoiceBox" disable="true" prefHeight="25.0" prefWidth="176.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="pricePerMonthTextField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="roomNumberTextField" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <TextField fx:id="tenantDniTextField" disable="true" GridPane.columnIndex="3" />
-                  <Label text="Tenant DNI" textAlignment="RIGHT" GridPane.columnIndex="2">
+                  <Label text="Tenant DNI*" textAlignment="RIGHT" GridPane.columnIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -200,7 +200,7 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Signature date" textAlignment="RIGHT">
+                  <Label text="Signature date*" textAlignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
@@ -209,7 +209,7 @@
                      </font>
                   </Label>
                   <DatePicker fx:id="signatureDateDatePicker" disable="true" editable="true" GridPane.columnIndex="1" />
-                  <Label text="Starting date" GridPane.rowIndex="3">
+                  <Label text="Starting date*" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
                      </font>

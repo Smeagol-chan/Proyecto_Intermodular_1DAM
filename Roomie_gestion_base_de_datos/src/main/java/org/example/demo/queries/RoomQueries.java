@@ -28,8 +28,8 @@ public class RoomQueries
             while(result.next())
             {
                 int roomNumber = result.getInt("RoomNumber");
-                String address = result.getString("Address");
-                int cityID = result.getInt("CityID");
+                String address = result.getString("PropertyAddress");
+                int cityID = result.getInt("PropertyCityID");
                 String type = result.getString("Type");
                 String status = result.getString("Status");
                 double surface = result.getDouble("Surface");
@@ -97,7 +97,7 @@ public class RoomQueries
                 ", Status = '" + room.getStatus() +"'" +
                 ", Surface = " + room.getSurface() +
                 ", PricePerMonth = "+ room.getPricePerMonth() +
-                " WHERE Address = '"+ room.getPropertyAddress() +"'" +
+                " WHERE PropertyAddress = '"+ room.getPropertyAddress() +"'" +
                 " AND PropertyCityID = "+ room.getCityID() +
                 " AND RoomNumber = "+ room.getRoomNumber();
 
