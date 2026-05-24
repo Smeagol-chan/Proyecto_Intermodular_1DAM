@@ -53,7 +53,7 @@ public class TenantQueries
 
     public static void insert(Connection connection, Tenant tenant)
     {
-        String query = "INSERT INTO [USER] (Dni, Name, Surnames, Birthday, PhoneNumber, Email, Password)" +
+        String query1 = "INSERT INTO [USER] (Dni, Name, Surnames, Birthday, PhoneNumber, Email, Password)" +
                 " VALUES ('"+ tenant.getDni() +"'" +
                 ", '"+ tenant.getUserName() +"'" +
                 ", '"+ tenant.getSurnames() +"'" +
@@ -62,33 +62,19 @@ public class TenantQueries
                 ", '"+ tenant.getEmail() +"'" +
                 ", '"+ tenant.getPassword() +"')";
 
-        Statement stmt;
-
-        try
-        {
-            stmt = connection.createStatement();
-            stmt.executeUpdate(query);
-        }
-        catch(SQLException e)
-        {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        insertTenant(connection, tenant);
-    }
-
-    private static void insertTenant(Connection connection, Tenant tenant)
-    {
-        String query = "INSERT INTO TENANT (Dni, StudentLicense)" +
+        String query2 = "INSERT INTO TENANT (Dni, StudentLicense)" +
                 " VALUES ('"+ tenant.getDni() +"', '"+ tenant.getStudentLicense() +"')";
 
-        Statement stmt;
+        Statement stmt1;
+        Statement stmt2;
 
         try
         {
-            stmt = connection.createStatement();
-            stmt.executeUpdate(query);
+            stmt1 = connection.createStatement();
+            stmt1.executeUpdate(query1);
+
+            stmt2 = connection.createStatement();
+            stmt2.executeUpdate(query2);
         }
         catch(SQLException e)
         {

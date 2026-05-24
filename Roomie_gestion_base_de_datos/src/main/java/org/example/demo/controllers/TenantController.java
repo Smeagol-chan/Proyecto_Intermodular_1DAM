@@ -169,8 +169,8 @@ public class TenantController
     {
         String name = nameTextField.getText();
         String surnames = surnamesTextField.getText();
-        String phone = emailTextField.getText();
-        String email = phoneNumberTextField.getText();
+        String email = emailTextField.getText();
+        String phone = phoneNumberTextField.getText();
         String dni = tenantDniTextField.getText();
         LocalDate birth = birthdateDatePicker.getValue();
         String password = passwordPasswordField.getText();

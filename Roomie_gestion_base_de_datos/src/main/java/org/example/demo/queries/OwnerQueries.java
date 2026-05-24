@@ -55,7 +55,7 @@ public class OwnerQueries
 
     public static void insert(Connection connection, Owner owner)
     {
-        String query = "INSERT INTO [USER] (Dni, Name, Surnames, Birthday, PhoneNumber, Email, Password)" +
+        String query1 = "INSERT INTO [USER] (Dni, Name, Surnames, Birthday, PhoneNumber, Email, Password)" +
                 " VALUES ('"+ owner.getDni() +"'" +
                 ", '"+ owner.getUserName() +"'" +
                 ", '"+ owner.getSurnames() +"'" +
@@ -64,33 +64,19 @@ public class OwnerQueries
                 ", '"+ owner.getEmail() +"'" +
                 ", '"+ owner.getPassword() +"')";
 
-        Statement stmt;
-
-        try
-        {
-            stmt = connection.createStatement();
-            stmt.executeUpdate(query);
-        }
-        catch(SQLException e)
-        {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        insertOwner(connection, owner);
-    }
-
-    private static void insertOwner(Connection connection, Owner owner)
-    {
-        String query = "INSERT INTO [OWNER] (Dni)" +
+        String query2 = "INSERT INTO [OWNER] (Dni)" +
                 " VALUES ('"+ owner.getDni() +"')";
 
-        Statement stmt;
+        Statement stmt1;
+        Statement stmt2;
 
         try
         {
-            stmt = connection.createStatement();
-            stmt.executeUpdate(query);
+            stmt1 = connection.createStatement();
+            stmt1.executeUpdate(query1);
+
+            stmt2 = connection.createStatement();
+            stmt2.executeUpdate(query2);
         }
         catch(SQLException e)
         {

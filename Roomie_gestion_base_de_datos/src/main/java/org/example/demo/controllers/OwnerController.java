@@ -165,8 +165,8 @@ public class OwnerController
     {
         String name = nameTextField.getText();
         String surnames = surnamesTextField.getText();
-        String phone = emailTextField.getText();
-        String email = phoneNumberTextField.getText();
+        String email = emailTextField.getText();
+        String phone = phoneNumberTextField.getText();
         String dni = ownerDniTextField.getText();
         LocalDate birth = birthdateDatePicker.getValue();
         String password = passwordPasswordField.getText();
