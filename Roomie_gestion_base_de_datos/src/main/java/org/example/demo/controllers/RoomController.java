@@ -16,17 +16,35 @@ import org.example.demo.queries.RoomQueries;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Controller class for ROOM.
+ * All controllers have the same functionality besides the attributes and querie classes to use.
+ *
+ * @author Eric
+ */
 public class RoomController
 {
     private static Connection connection;
 
+    /**
+     * These two booleans mark if the user have clicked on modify (currentlyUpdating = true) or
+     * on insert (currentlyInserting = true).
+     *
+     * It is used for calling the right method on onConfirmClickButton and for enabling the correct data fields.
+     */
     private static boolean currentlyInserting = false;
     private static boolean currentlyUpdating = false;
 
+    /**
+     * ObservableLists to add data in the choice boxes. These contain static values; do not depend on de data stored in the database.
+     */
     private static final ObservableList<String> STATUS_LIST = FXCollections.observableArrayList("Shared Space", "Rented", "Available");
     private static final ObservableList<String> TYPE_LIST = FXCollections.observableArrayList("Storage Room", "Dinning Room", "Bedroom", "Hall",
             "Bathroom", "Balcony", "Living Room", "Kitchen");
 
+    /**
+     * Declarations for the table, its columns, labels, the action buttons and the data fields in the window.
+     */
     @FXML
     private TableView<Room> roomTableView;
 
@@ -93,6 +111,9 @@ public class RoomController
     @FXML
     private Button addFurnitureButton;
 
+    /**
+     * This procedure adds the data to the table and the choice boxes and displays it.
+     */
     @FXML
     private void initialize()
     {
@@ -106,13 +127,26 @@ public class RoomController
         statusTableColumn.setCellValueFactory(dato -> new SimpleStringProperty(dato.getValue().getStatus()));
         pricePerMonthTableColumn.setCellValueFactory(dato -> new SimpleDoubleProperty(dato.getValue().getPricePerMonth()).asObject());
 
+        // There are two ways to insert values to the choice boxes in this program:
+        // - cityChoiceBox depends on the data stored in the database, in CITY table. So to set its items, I invoke a function
+        // on CityQueries that returns all city names with its province name.
         cityChoiceBox.setItems(CityQueries.selectCitiesNameProvinceName(connection));
+        // - status and typeChoiceBox have fixed items and are declared at the begining of the class.
         statusChoiceBox.setItems(STATUS_LIST);
         typeChoiceBox.setItems(TYPE_LIST);
 
         roomTableView.setItems(RoomQueries.selectAll(connection));
     }
 
+    /**
+     * This method is for alter and see the data inside ROOM_FURNITURE table.
+     * The table is a many to many relationship between ROOM and FURNITURE. It is only accessible through room view.
+     * This kind of method is only present here and in property and institution views 'cause both tables have also a many to many relationship.
+     *
+     * The procedure redirects the user to room-furniture-view and filters the data on the table by showing only the furniture of the selected room.
+     *
+     * @throws IOException
+     */
     @FXML
     private void onAddFurnitureClickButton()throws IOException
     {
@@ -126,6 +160,9 @@ public class RoomController
         }
     }
 
+    /**
+     * Inserts the selected table item attributes on the filds bellow, dissabling those that form the PK, so the user can edit them.
+     */
     @FXML
     private void onModifyClickButton()
     {
@@ -152,6 +189,9 @@ public class RoomController
         }
     }
 
+    /**
+     * Deletes the selected table item from the database.
+     */
     @FXML
     private void onDeleteClickButton()
     {
@@ -172,6 +212,9 @@ public class RoomController
         }
     }
 
+    /**
+     * Enables all fields so the user can insert a new row into the database.
+     */
     @FXML
     private void onInsertClickButton()
     {
@@ -181,6 +224,10 @@ public class RoomController
         warningMessageLabel.setText("");
     }
 
+    /**
+     * The method retrieves the data of all fields and, depending on the values of currentlyInsering and currentlyUpdating,
+     * it invokes insert() or update() from the corresponding query class.
+     */
     @FXML
     private void onConfirmClickButton()
     {
@@ -231,6 +278,9 @@ public class RoomController
         }
     }
 
+    /**
+     * Resets all fields and labels and cancel all ongoing actions.
+     */
     @FXML
     private void onCancelClickButton()
     {
@@ -238,6 +288,7 @@ public class RoomController
         activateDataFields(false);
     }
 
+    // The following on click methods are for navegate the navegation menu and are the same for evey single class.
     @FXML
     private void onPropertiesClickMenuItem() throws IOException
     {
@@ -304,6 +355,14 @@ public class RoomController
         RoomieAplication.setRoot("login");
     }
 
+    /**
+     * Procedure that disables and enables the fields on command.
+     *
+     * activateDataFields(true) disables the table and modify, delete and insert button, enabling all fields and cancel and confirm buttons.
+     * activateDataFields(false) enables the table and modify, delete and insert button, disabling all fields and cancel and confirm buttons.
+     *
+     * @param isActive - Boolean that enables or disables every button and field depending on the process the user have selected.
+     */
     private void activateDataFields(boolean isActive)
     {
         modifyButton.setDisable(isActive);
@@ -323,6 +382,9 @@ public class RoomController
         addressTextField.setDisable(!currentlyInserting);
     }
 
+    /**
+     * Resets all fields and curruntlyUpdating and Inserting values to false.
+     */
     private void reset()
     {
         addressTextField.clear();
