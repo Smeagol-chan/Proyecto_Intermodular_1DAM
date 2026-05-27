@@ -5,7 +5,7 @@ let inq = usuario.tipo;
 let perfil = document.getElementById("perfil");
 let con = usuario.contrasenya
 
-//NAVEGADOR
+//Si no hay usuario, no se puede entrar a esta página
     if (!usuario) {
         window.location.href = "login.html";
     }
@@ -21,7 +21,7 @@ let con = usuario.contrasenya
         }
     })
 
-
+    //El botón de cerrar sesión quita el usuario del localStorage y manda al login
     document.getElementById("registro").addEventListener("click", () => {
         localStorage.removeItem('usuario');
         window.location.href = "login.html";
@@ -29,7 +29,9 @@ let con = usuario.contrasenya
 
 
 
-/* Crear las habitaciones que se ponen en el form y enseñarlas en un div*/   
+/* Crear las habitaciones que se ponen en el form y enseñarlas en un div
+Para la foto se crea un objeto URL si hay foto elegida, sino se coge la fotoplaceholder de la carpeta img
+*/   
 document.getElementById("boton-publicar").addEventListener("click", (e) =>{
     e.preventDefault();
 
@@ -54,7 +56,7 @@ document.getElementById("boton-publicar").addEventListener("click", (e) =>{
         publicar("img/placeholder.png");
     }
 
-
+    //Se crea el div tarjeta con la funcion crear habitacion y luego se introduce en el contenedro habitaciones con appendChild
     function publicar(fotoURL) {
         const tarjeta = crearHabitacion(titulo, direccion, zona, precio, tipo, descripcion, fotoURL);
         const contenedor = document.querySelector(".contenedor-habitaciones");
@@ -65,7 +67,7 @@ document.getElementById("boton-publicar").addEventListener("click", (e) =>{
 
 })
 
-//Funcion para crear el div
+//Funcion para crear el div que se va a insertar en el contenedor habitaciones
 function crearHabitacion(titulo, direccion, zona, precio, tipo, descripcion, fotoURL) {
 
     const div = document.createElement("div");
@@ -91,7 +93,7 @@ function crearHabitacion(titulo, direccion, zona, precio, tipo, descripcion, fot
         <button class="btn-eliminar-habitacion">Eliminar</button>
     `;
 
-    // Botón eliminar: quita la tarjeta del DOM
+    // Botón eliminar
     div.querySelector(".btn-eliminar-habitacion").addEventListener("click", () => {
         div.remove();
     });
@@ -99,7 +101,7 @@ function crearHabitacion(titulo, direccion, zona, precio, tipo, descripcion, fot
     return div;
 }
 
-//Datos personales y edicion de datos
+//Datos personales y edicion de datos igual que en perfilInq
 
 let contenedor = document.querySelector('.datos-perfil-user');
     contenedor.innerHTML = `
@@ -135,6 +137,8 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
     let nuevo_telefono = document.getElementById("nuevo_telefono").value;
 
     //Se compara con todos los usuarios menos consigo mismo para ver si el correo ya existe.
+    //some() devuelve true si encuentra un usuario en la lista del local storage con el mismo correo y no cuenta el correo propio actual
+    //Si es true no deja guardar los datos nuevos
     let correoExiste = listaExistente.some(user =>
         user.correo === nuevo_correo && user.correo !== usuario.correo
     );
@@ -143,6 +147,7 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
         return;
     }
 
+    //filter() devuelve un nuevo array con todos los elementos que no cumplan la condición, se queda con todos excepto el que tiene el correo nuevo
     //borro el usuario que estaba usando, y creo uno nuevo con el nuevo correo.
     listaExistente = listaExistente.filter(user => user.correo !== usuario.correo);
 

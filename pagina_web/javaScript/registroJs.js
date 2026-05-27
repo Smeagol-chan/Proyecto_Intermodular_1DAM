@@ -1,7 +1,6 @@
 //Cambio color cuando se pulsan los botones
 const botonInquilino = document.getElementById("botonInquilino")
 const botonArrendador = document.getElementById("botonArrendador")
-const crear1 = document.getElementById("crear");
 
 let soyInquilino = true;
 let soyArrendador = false;
@@ -21,7 +20,8 @@ botonArrendador.addEventListener("click", () => {
     botonArrendador.classList.toggle('botonPulsado')
 })
 
-//Valores formulario
+//Se recogen los valores del formulario para crear el usuario. Se comprueba que esté todo relleno, las contraseñas y que no exista ya un usuario con ese correo.
+//Si todo se cumple se crea el usuario y se mete en la lista
 const crear = document.getElementById("crear")
 
 crear.addEventListener("click",(e) => {

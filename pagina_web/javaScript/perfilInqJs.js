@@ -5,11 +5,10 @@ let inq = usuario.tipo;
 let con = usuario.contrasenya
 let perfil = document.getElementById("perfil");
 
+//Si no hay usuario, no se puede entrar a esta página
 if (!usuario) {
     window.location.href = "login.html";
 }
-
-
 
 perfil.innerHTML = `${usuario.nombre}`;
 
@@ -22,7 +21,7 @@ perfil.addEventListener("click", () => {
     }
 })
 
-
+//El botón de cerrar sesión quita el usuario del localStorage y manda al login
 document.getElementById("registro").addEventListener("click", () => {
     localStorage.removeItem('usuario');
     window.location.href = "login.html";
@@ -63,7 +62,9 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
     let nuevo_correo = document.getElementById("nuevo_correo").value;
     let nuevo_telefono = document.getElementById("nuevo_telefono").value;
 
-    //Se compara con todos los usuarios menos con sigo mismo para ver si el correo ya existe.
+    //Se compara con todos los usuarios menos consigo mismo para ver si el correo ya existe.
+    //some() devuelve true si encuentra un usuario en la lista del local storage con el mismo correo y no cuenta el correo propio actual
+    //Si es true no deja guardar los datos nuevos
     let correoExiste = listaExistente.some(user =>
         user.correo === nuevo_correo && user.correo !== usuario.correo
     );
@@ -72,6 +73,8 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
         return;
     }
 
+  
+    //filter() devuelve un nuevo array con todos los elementos que no cumplan la condición, se queda con todos excepto el que tiene el correo nuevo
     //borro el usuario que estaba usando, y creo uno nuevo con el nuevo correo.
     listaExistente = listaExistente.filter(user => user.correo !== usuario.correo);
 
@@ -98,7 +101,7 @@ guardar_datos_nuevos.addEventListener("click", (e) => {
     perfil.innerHTML = `${usuario.nombre}`;
     localStorage.setItem('usuario', JSON.stringify(usuario))
 
-    //meto el nuevo usuario con los nuevos datos
+    //meto el nuevo usuario con los nuevos datos en la lista actualizada
     listaExistente.push(usuario);
     localStorage.setItem('listaUsuarios', JSON.stringify(listaExistente));
 
@@ -118,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         contenedor.innerHTML += div;
     }
 
-    // Botón eliminar: quita la tarjeta del DOM
+    // Botón eliminar
     document.querySelector(".btn-eliminar-habitacion").addEventListener("click", () => {
         localStorage.removeItem('divHabitacion');
         location.reload();
