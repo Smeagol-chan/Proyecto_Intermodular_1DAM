@@ -80,6 +80,9 @@ public class PropertyController
     private Button confirmButton;
 
     @FXML
+    private Button checkInstitutionsButton;
+
+    @FXML
     private void initialize()
     {
         connection = Database.conexion();
@@ -288,6 +291,7 @@ public class PropertyController
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
         propertyTableView.setDisable(isActive);
+        checkInstitutionsButton.setDisable(isActive);
 
         ownerDniTextField.setDisable(!isActive);
         surfaceTextField.setDisable(!isActive);

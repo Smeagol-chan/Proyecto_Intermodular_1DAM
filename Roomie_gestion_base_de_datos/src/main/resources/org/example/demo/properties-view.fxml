@@ -102,7 +102,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Button>
-                  <Button mnemonicParsing="false" onAction="#onCheckInstitutionsClickButton" text="Check Institutions near by">
+                  <Button fx:id="checkInstitutionsButton" mnemonicParsing="false" onAction="#onCheckInstitutionsClickButton" text="Check Institutions near by">
                      <font>
                         <Font size="14.0" />
                      </font>

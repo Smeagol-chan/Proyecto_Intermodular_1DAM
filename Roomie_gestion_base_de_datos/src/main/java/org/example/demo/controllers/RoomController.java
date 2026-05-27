@@ -91,6 +91,9 @@ public class RoomController
     private Button confirmButton;
 
     @FXML
+    private Button addFurnitureButton;
+
+    @FXML
     private void initialize()
     {
         connection = Database.conexion();
@@ -307,6 +310,7 @@ public class RoomController
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
         roomTableView.setDisable(isActive);
+        addFurnitureButton.setDisable(isActive);
 
         typeChoiceBox.setDisable(!isActive);
         surfaceTextField.setDisable(!isActive);

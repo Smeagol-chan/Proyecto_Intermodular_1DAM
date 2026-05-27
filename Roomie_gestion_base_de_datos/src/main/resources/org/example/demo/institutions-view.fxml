@@ -100,7 +100,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Button>
-                  <Button mnemonicParsing="false" onAction="#onCheckPropertiesClickButton" text="Check Properties near by">
+                  <Button fx:id="checkPropertiesButton" mnemonicParsing="false" onAction="#onCheckPropertiesClickButton" text="Check Properties near by">
                      <font>
                         <Font size="14.0" />
                      </font>

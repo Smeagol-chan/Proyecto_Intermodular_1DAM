@@ -60,6 +60,9 @@ public class InstitutionController
     private Button confirmButton;
 
     @FXML
+    private Button checkPropertiesButton;
+
+    @FXML
     private void initialize()
     {
         connection = Database.conexion();
@@ -252,6 +255,7 @@ public class InstitutionController
         deleteButton.setDisable(isActive);
         insertButton.setDisable(isActive);
         institutionTableView.setDisable(isActive);
+        checkPropertiesButton.setDisable(isActive);
 
         institutionNameTextField.setDisable(!isActive);
         cancelButton.setDisable(!isActive);
