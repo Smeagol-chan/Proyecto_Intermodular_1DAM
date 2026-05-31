@@ -1,0 +1,178 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram name="Casos de Uso - Roomie" id="roomie-use-cases-v2">
+    <mxGraphModel dx="1750" dy="1010" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sys" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Sistema Roomie" vertex="1">
+          <mxGeometry height="980" width="960" x="150" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-registro" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Registrarse" vertex="1">
+          <mxGeometry height="45" width="140" x="370" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-login" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Iniciar sesión" vertex="1">
+          <mxGeometry height="45" width="140" x="370" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-logout" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Cerrar sesión" vertex="1">
+          <mxGeometry height="45" width="140" x="360" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-pub-anuncio" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Publicar anuncio&#xa;(Propiedad)" vertex="1">
+          <mxGeometry height="50" width="140" x="650" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-ver-propiedades" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Consultar propiedades" vertex="1">
+          <mxGeometry height="45" width="140" x="130" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-habitaciones" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar habitaciones" vertex="1">
+          <mxGeometry height="45" width="140" x="770" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-cambiar-estado-hab" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Cambiar estado&#xa;de habitación" vertex="1">
+          <mxGeometry height="50" width="140" x="540" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-mobiliario" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar mobiliario" vertex="1">
+          <mxGeometry height="45" width="140" x="560" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-solicitar-visita" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Solicitar visita" vertex="1">
+          <mxGeometry height="45" width="140" x="150" y="467.5" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-cancelar-reserva" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Cancelar reserva" vertex="1">
+          <mxGeometry height="45" width="140" x="170" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-enviar-datos" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Enviar datos personales" vertex="1">
+          <mxGeometry height="45" width="140" x="10" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-pagar-entrada" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Pagar entrada" vertex="1">
+          <mxGeometry height="45" width="140" x="330" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-revisar-informe" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Revisar informe&#xa;de daños/errores" vertex="1">
+          <mxGeometry height="50" width="140" x="550" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-inquilinos" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar inquilinos" vertex="1">
+          <mxGeometry height="45" width="140" x="590" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-arrendadores" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar arrendadores" vertex="1">
+          <mxGeometry height="45" width="140" x="600" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-provincias" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar provincias" vertex="1">
+          <mxGeometry height="45" width="140" x="580" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-ciudades" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar ciudades" vertex="1">
+          <mxGeometry height="45" width="140" x="570" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-gestionar-instituciones" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Gestionar instituciones&#xa;cercanas" vertex="1">
+          <mxGeometry height="50" width="140" x="610" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-ver-prop-cercanas" parent="sys" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" value="Ver propiedades&#xa;cercanas" vertex="1">
+          <mxGeometry height="50" width="140" x="130" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="e-inc1" edge="1" parent="sys" source="uc-solicitar-visita" style="dashed;endArrow=open;html=1;fontSize=10;" target="uc-pagar-entrada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-inc1-lbl" connectable="0" parent="e-inc1" style="edgeLabel;fontSize=10;" value="«extend»" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="25" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-inc2" edge="1" parent="sys" source="uc-solicitar-visita" style="dashed;endArrow=open;html=1;fontSize=10;dashed=1;" target="uc-enviar-datos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-inc2-lbl" connectable="0" parent="e-inc2" style="edgeLabel;fontSize=10;" value="«include»" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ext1" edge="1" parent="sys" source="uc-cancelar-reserva" style="dashed;endArrow=open;html=1;fontSize=10;" target="uc-solicitar-visita">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ext1-lbl" connectable="0" parent="e-ext1" style="edgeLabel;fontSize=10;" value="«extend»" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-inquilino" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;" value="Inquilino" vertex="1">
+          <mxGeometry height="65" width="35" x="80" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-arrendador" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;" value="Arrendador" vertex="1">
+          <mxGeometry height="65" width="35" x="1210" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="actor-admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;" value="Administrador" vertex="1">
+          <mxGeometry height="65" width="35" x="1210" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="a-inq-registro" edge="1" parent="1" source="actor-inquilino" style="endArrow=none;html=1;" target="uc-registro">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-inq-login" edge="1" parent="1" source="actor-inquilino" style="endArrow=none;html=1;" target="uc-login">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a-inq-logout" edge="1" parent="1" source="actor-inquilino" style="endArrow=none;html=1;" target="uc-logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-inq-visita" edge="1" parent="1" source="actor-inquilino" style="endArrow=none;html=1;" target="uc-solicitar-visita">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-inq-propiedades" edge="1" parent="1" source="actor-inquilino" style="endArrow=none;html=1;" target="uc-ver-propiedades">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-inq-cercanas" edge="1" parent="1" source="actor-inquilino" style="endArrow=none;html=1;" target="uc-ver-prop-cercanas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-arr-registro" edge="1" parent="1" source="actor-arrendador" style="endArrow=none;html=1;" target="uc-registro">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-arr-login" edge="1" parent="1" source="actor-arrendador" style="endArrow=none;html=1;" target="uc-login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-arr-logout" edge="1" parent="1" source="actor-arrendador" style="endArrow=none;html=1;" target="uc-logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-arr-pub" edge="1" parent="1" source="actor-arrendador" style="endArrow=none;html=1;" target="uc-pub-anuncio">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-arr-hab" edge="1" parent="1" source="actor-arrendador" style="endArrow=none;html=1;" target="uc-gestionar-habitaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-arr-estado" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-cambiar-estado-hab">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a-arr-mob" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-gestionar-mobiliario">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-adm-login" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-login">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="520" />
+              <mxPoint x="730" y="430" />
+              <mxPoint x="730" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a-adm-verificar" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;entryX=0.767;entryY=0.899;entryDx=0;entryDy=0;entryPerimeter=0;" target="uc-gestionar-habitaciones">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-adm-revisar" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-revisar-informe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-adm-inq" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-gestionar-inquilinos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-adm-arr" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-gestionar-arrendadores">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-adm-prov" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-gestionar-provincias">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a-adm-ciudad" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-gestionar-ciudades">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a-adm-inst" edge="1" parent="1" source="actor-admin" style="endArrow=none;html=1;" target="uc-gestionar-instituciones">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
