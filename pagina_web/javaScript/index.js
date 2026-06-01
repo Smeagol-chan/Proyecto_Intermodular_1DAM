@@ -50,3 +50,39 @@ boton.addEventListener("click", () => {
     localStorage.setItem("lugar", lugar);
     window.location.href = "buscar.html";
 })
+
+
+
+
+function enviarFormulario() {
+    console.log("¡Botón pulsado directamente!");
+
+    const nombre = document.getElementById("nombre");
+    const apellidos = document.getElementById("apellidos");
+    const email = document.getElementById("email");
+    const telefono = document.getElementById("telefono");
+    const mensaje = document.getElementById("mensaje");
+    const confirm = document.getElementById("confirm");
+    const mensajeExito = document.getElementById("mensajeExito");
+
+    if (nombre.value.trim() === "" || apellidos.value.trim() === "" || email.value.trim() === "" || telefono.value.trim() === "" || mensaje.value.trim() === "" || !confirm.checked) {
+        alert("Por favor, rellena todos los campos y acepta la política de privacidad.");
+        return;
+    }
+
+    if (mensajeExito) {
+        mensajeExito.textContent = "Gracias por rellenar el formulario, ¡nos pondremos en contacto contigo pronto!";
+        mensajeExito.style.color = "#3C7160"; 
+        mensajeExito.style.fontWeight = "bold";
+        mensajeExito.style.marginTop = "15px";
+        mensajeExito.style.display = "block";
+    }
+
+    nombre.value = "";
+    apellidos.value = "";
+    email.value = "";
+    telefono.value = "";
+    mensaje.value = "";
+    confirm.checked = false;
+    
+}

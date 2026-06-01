@@ -102,6 +102,16 @@ form input {
     font-size: 15px;
 }
 
+#mensaje {
+    border: solid rgb(184, 184, 184) 1px;
+    border-radius: 10px;
+    padding: 13px;
+    padding-left: 11px;
+    margin: 5px;
+    width: 450px;
+    font-size: 15px;
+}
+
 form input:focus {
     border: solid #3C7160 2px;
     box-shadow: #3C7160 0px 0px 5px 2px;
@@ -147,4 +157,15 @@ form input:focus {
     color: #3C7160;
     font-weight: bold;
     text-decoration: none;
+}
+
+#mensajeExito{
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #d2ebe2;
+    color: #3C7160;
+    text-align: center;
+    font-weight: bold;
 }

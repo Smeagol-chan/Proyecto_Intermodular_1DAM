@@ -1,29 +1,59 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/estilo_cont.css">
     <link rel="stylesheet" href="css/estilo_nav.css">
-    <link rel="stylesheet" href="css/estilo_index.css">
     <script src="javaScript/index.js" defer></script>
-    <title>Roomie - Encuentra tu habitación ideal</title>
+    <title>Roomie - Contacto</title>
 </head>
-
 <body>
 
     <div class="navegador">
-        <img src="img/logo.png" alt="Logo Roomie">
+        <img src="img/logo.png" alt="">
+
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="buscar.html">Buscar</a></li>
-            <li><a href="login.html" class="btn_inicio">Iniciar Sesión</a></li>
+            <li><a href="login.html" class="btn_inicio">Iniciar sesión</a></li>
             <li><a href="registro.html" class="btn_registro">Registrarse</a></li>
         </ul>
     </div>
 
-    + <!-- ========FOOTER=============  -->
+    <div class="contenedor">
+        <img src="img/logo.png" alt="">
+        <h1>Contáctanos</h1>
+        <p class="gris">¿Tienes preguntas o necesitas ayuda? Escríbenos.</p>
+        <br><br>
+
+        <div class="formu">
+            <form action="#" method="get">
+                <label for="">Nombre</label><br>
+                <input type="text" name="" id="nombre" placeholder="Tu nombre" required><br>
+
+                <label for="">Apellidos</label><br>
+                <input type="text" name="" id="apellidos" placeholder="Tus apellidos" required><br>
+
+                <label for="">Correo electrónico</label><br>
+                <input type="email" name="" id="email" placeholder="tu@email.com" required><br>
+
+                <label for="">Teléfono</label><br>
+                <input type="tel" name="" id="telefono" placeholder="+34 600 000 000" required><br>
+
+                <label for="">Mensaje</label><br>
+                <textarea name="" id="mensaje" placeholder="Cuéntanos cómo podemos ayudarte..." required></textarea>
+            </form>
+            <div class="politica">
+                <input type="checkbox" name="" id="confirm" required>
+                <label for="">Acepto los Términos y condiciones y la Política de privacidad</label>
+            </div>
+
+            <button id="crear" type="button" onclick="enviarFormulario()">Enviar mensaje</button>
+            <p id="mensajeExito"></p>
+        </div>
+
+    </div>
 
     <div class="footer-cont">
 
@@ -58,5 +88,4 @@
     </div>
 
 </body>
-
 </html>
